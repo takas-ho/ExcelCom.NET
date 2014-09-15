@@ -28,6 +28,16 @@ Namespace Core
                 TestUtil.AssertNotExistsExcelPropcess()
             End Sub
 
+            <Test()> Public Sub ActiveSheetが閉じられること()
+                sut.Workbooks.Add()
+                Dim activeSheet As Worksheet = sut.ActiveSheet
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
         End Class
 
         Public Class PropertyたちTest : Inherits ApplicationTest
@@ -46,6 +56,27 @@ Namespace Core
             <Test()> Public Sub Visible(<Values(True, False)> ByVal value As Boolean)
                 sut.Visible = value
                 Assert.That(sut.Visible, [Is].EqualTo(value))
+            End Sub
+
+        End Class
+
+        Public Class ActiveSheetTest : Inherits ApplicationTest
+
+            <Test()> Public Sub Bookを開いてないならnullを返す()
+                Dim sheet As Worksheet = sut.ActiveSheet
+                Assert.That(sheet, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub Bookを開いてれば_nullを返す()
+                sut.Workbooks.Add()
+                Dim sheet As Worksheet = sut.ActiveSheet
+                Assert.That(sheet, [Is].Not.Null)
+            End Sub
+
+            <Test()> Public Sub Cellsに書込める()
+                Dim workbook As Workbook = sut.Workbooks.Add()
+                sut.ActiveSheet.Cells(1, 1).Value = "abc"
+                Assert.That(workbook.Sheets(0).Cells(1, 1).Value, [Is].EqualTo("abc"))
             End Sub
 
         End Class

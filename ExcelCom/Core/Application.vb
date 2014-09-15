@@ -40,6 +40,14 @@ Namespace Core
             InvokeMethod("Quit")
         End Sub
 
+        Public Function ActiveSheet() As Worksheet
+            Dim comObject As Object = InvokeGetProperty("ActiveSheet")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Worksheet(Me, comObject)
+        End Function
+
         Private _workbooks As Workbooks
         Public Function Workbooks() As Workbooks
             If _workbooks Is Nothing Then
