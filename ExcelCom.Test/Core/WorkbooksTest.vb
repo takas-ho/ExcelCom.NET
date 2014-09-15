@@ -17,10 +17,33 @@ Namespace Core
             sut.Dispose()
         End Sub
 
+        Public Class たちTest : Inherits WorkbooksTest
+
+            <Test()> Public Sub Count_最初は0()
+                Assert.That(sut.Workbooks.Count, [Is].EqualTo(0))
+            End Sub
+
+            <Test()> Public Sub Count_Addすれば1になる()
+                sut.Workbooks.Add()
+                Assert.That(sut.Workbooks.Count, [Is].EqualTo(1))
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits WorkbooksTest
 
-            <Test()> Public Sub Workbookが閉じられること()
+            <Test()> Public Sub AddのWorkbookが閉じられること()
                 Dim workbook As Workbook = sut.Workbooks.Add
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub ItemのWorkbookが閉じられること()
+                sut.Workbooks.Add()
+                Dim workbook As Workbook = sut.Workbooks.Item(0)
 
                 sut.Dispose()
                 sut = Nothing
