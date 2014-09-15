@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AbstractExcelObjectTest.vb" />
+    <Compile Include="Core\ApplicationTest.vb" />
+    <Compile Include="Core\RangeTest.vb" />
     <Compile Include="LearningExcelComObjectTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -70,6 +72,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Core\SheetsTest.vb" />
+    <Compile Include="TestUtil.vb" />
+    <Compile Include="Core\WorkbooksTest.vb" />
+    <Compile Include="Core\WorkbookTest.vb" />
+    <Compile Include="Core\WorksheetTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
