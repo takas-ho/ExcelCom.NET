@@ -48,6 +48,14 @@ Namespace Core
             Return New Worksheet(Me, comObject)
         End Function
 
+        Public Function ActiveWorkbook() As Workbook
+            Dim comObject As Object = InvokeGetProperty("ActiveWorkbook")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Workbook(Me, comObject)
+        End Function
+
         Private _workbooks As Workbooks
         Public Function Workbooks() As Workbooks
             If _workbooks Is Nothing Then
