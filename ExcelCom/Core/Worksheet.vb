@@ -6,8 +6,8 @@
             MyBase.New(parent, comObject)
         End Sub
 
-        Public Function Cells(ByVal row As Integer, ByVal column As Integer) As Range
-            Return New Range(Me, InvokeGetProperty("Cells", RuleUtil.ConvIndexDotNET2VBA(row), RuleUtil.ConvIndexDotNET2VBA(column)))
+        Public Function Cells() As Range
+            Return New Range(Me, InvokeGetProperty("Cells"))
         End Function
 
         Public Function Columns() As Range

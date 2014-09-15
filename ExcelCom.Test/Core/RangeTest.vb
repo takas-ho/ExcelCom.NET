@@ -17,15 +17,15 @@ Namespace Core
             sut.Dispose()
         End Sub
 
-        Public Class HogeTest : Inherits RangeTest
+        Public Class CellsTest : Inherits RangeTest
 
-            <Test()> Public Sub Hoge()
+            <Test()> Public Sub A1のCells00をCells00と比較できる()
                 Dim workbook As Workbook = sut.Workbooks.Add
                 workbook.Sheets.Item(0).Range("A1").Cells(0, 0).Value = "aiueo"
                 Assert.That(workbook.Sheets.Item(0).Cells(0, 0).Value, [Is].EqualTo("aiueo"))
             End Sub
 
-            <Test()> Public Sub Hoge2()
+            <Test()> Public Sub D2のCells00をCells13と比較できる()
                 Dim workbook As Workbook = sut.Workbooks.Add
                 workbook.Sheets.Item(0).Range("D2").Cells(0, 0).Value = "xyz"
                 Assert.That(workbook.Sheets.Item(0).Cells(1, 3).Value, [Is].EqualTo("xyz"))
@@ -48,6 +48,26 @@ Namespace Core
             <Test()> Public Sub Rowsが閉じられること()
                 Dim workbook As Workbook = sut.Workbooks.Add
                 Dim rows As Range = workbook.Sheets.Item(0).Range("A1").Rows
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub Cellsが閉じられること()
+                Dim workbook As Workbook = sut.Workbooks.Add
+                Dim cells As Range = workbook.Sheets.Item(0).Range("A1").Cells
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub Itemが閉じられること()
+                Dim workbook As Workbook = sut.Workbooks.Add
+                Dim item As Range = workbook.Sheets.Item(0).Range("A1").Item(0, 0)
 
                 sut.Dispose()
                 sut = Nothing

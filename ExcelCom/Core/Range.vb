@@ -5,9 +5,15 @@
             MyBase.New(parent, comObject)
         End Sub
 
-        Public Function Cells(ByVal row As Integer, ByVal column As Integer) As Range
-            Return New Range(Me, InvokeGetProperty("Cells", RuleUtil.ConvIndexDotNET2VBA(row), RuleUtil.ConvIndexDotNET2VBA(column)))
+        Public Function Cells() As Range
+            Return New Range(Me, InvokeGetProperty("Cells"))
         End Function
+
+        Default Public ReadOnly Property Item(ByVal row As Integer, ByVal column As Integer) As Range
+            Get
+                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(row), RuleUtil.ConvIndexDotNET2VBA(column)))
+            End Get
+        End Property
 
         Public Function Columns() As Range
             Return New Range(Me, InvokeGetProperty("Columns"))
