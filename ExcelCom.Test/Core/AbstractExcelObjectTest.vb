@@ -61,6 +61,14 @@ Namespace Core
                 Assert.That(sut.DoMethod("Evaluate", "=2*3"), [Is].EqualTo(6))
             End Sub
 
+            <Test()> Public Sub InvokeMethod_NamedParameterで名前付き引数を指定できる()
+                Assert.That(sut.DoMethod("CheckSpelling", "ONE", New NamedParameter("IgnoreUppercase", True)), [Is].True)
+            End Sub
+
+            <Test()> Public Sub InvokeMethod_NamedParameterで名前付き引数を指定できる2()
+                Assert.That(sut.DoMethod("CheckSpelling", "ONEe", New NamedParameter("IgnoreUppercase", True)), [Is].False)
+            End Sub
+
         End Class
 
     End Class

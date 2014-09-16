@@ -65,11 +65,40 @@
         ''' </summary>
         ''' <typeparam name="T">戻り値型</typeparam>
         ''' <param name="name">プロパティ名</param>
-        ''' <param name="args">引数[]</param>
+        ''' <param name="args">引数[] ※NamedParameterクラスにて名前付き引数可</param>
         ''' <returns>戻り値</returns>
         ''' <remarks></remarks>
         Protected Friend Function InvokeMethod(Of T)(ByVal name As String, ByVal ParamArray args As Object()) As T
-            Dim value As Object = comType.InvokeMember(name, Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.Public, Nothing, ComObject, ResolveArgs(args))
+            Dim hasNamedParameter As Boolean = False
+            If args IsNot Nothing Then
+                For Each arg As Object In args
+                    If TypeOf arg Is NamedParameter Then
+                        hasNamedParameter = True
+                        Exit For
+                    End If
+                Next
+            End If
+            If Not hasNamedParameter Then
+                Dim value2 As Object = comType.InvokeMember(name, Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.Public, _
+                                                            Nothing, ComObject, ResolveArgs(args))
+                Return Cast(Of T)(value2)
+            End If
+
+            Dim paramValues As New List(Of Object)
+            Dim paramNames As New List(Of String)
+            Dim noNamedParameters As New List(Of Object)
+            For Each arg As Object In args
+                Dim param As NamedParameter = TryCast(arg, NamedParameter)
+                If param Is Nothing Then
+                    noNamedParameters.Add(arg)
+                Else
+                    paramValues.Add(param.Value)
+                    paramNames.Add(param.Name)
+                End If
+            Next
+            paramValues.AddRange(noNamedParameters)
+            Dim value As Object = comType.InvokeMember(name, Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.Public, _
+                                                       Nothing, ComObject, paramValues.ToArray, Nothing, Nothing, paramNames.ToArray)
             Return Cast(Of T)(value)
         End Function
 

@@ -52,6 +52,7 @@
     <Compile Include="Core\AbstractExcelObject.vb" />
     <Compile Include="Core\AbstractExcelSubObject.vb" />
     <Compile Include="Core\Application.vb" />
+    <Compile Include="Core\NamedParameter.vb" />
     <Compile Include="Excel.vb" />
     <Compile Include="Core\IExcelObject.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
