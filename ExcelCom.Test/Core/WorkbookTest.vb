@@ -1,4 +1,5 @@
-﻿Imports NUnit.Framework
+﻿Imports System.IO
+Imports NUnit.Framework
 
 Namespace Core
 
@@ -27,6 +28,37 @@ Namespace Core
                 sut = Nothing
 
                 TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+        End Class
+
+        Public Class その他細かいTest : Inherits WorkbookTest
+
+            <Test()> Public Sub CloseしたらBookが閉じる()
+                Dim workbook As Workbook = sut.Workbooks.Add
+                workbook.Close()
+
+                Assert.That(sut.Workbooks.Count, [Is].EqualTo(0))
+            End Sub
+
+            <Test()> Public Sub SaveAsで指定ファイル名に保存する()
+                Const FILE_NAME As String = "a.xls"
+                If File.Exists(FILE_NAME) Then
+                    File.Delete(FILE_NAME)
+                End If
+                Dim workbook As Workbook = sut.Workbooks.Add
+                workbook.Sheets(0).Cells(4, 4).Value = "ABc"
+                workbook.SaveAs(FILE_NAME)
+                Try
+                    workbook.Close()
+
+                    sut.Workbooks.Open(FILE_NAME)
+                    Assert.That(sut.Workbooks(0).Sheets(0).Cells(4, 4).Value, [Is].EqualTo("ABc"))
+
+                Finally
+                    File.Delete(FILE_NAME)
+                End Try
+
             End Sub
 
         End Class

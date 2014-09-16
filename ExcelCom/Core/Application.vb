@@ -15,6 +15,12 @@ Namespace Core
             ''' <summary>テーブル以外自動</summary>
             xlCalculationSemiautomatic = 2
         End Enum
+
+        Public Enum XlSaveAsAccessMode
+            xlExclusive = 3
+            xlNoChange = 1
+            xlShared = 2
+        End Enum
 #End Region
 
         Public Sub New()
