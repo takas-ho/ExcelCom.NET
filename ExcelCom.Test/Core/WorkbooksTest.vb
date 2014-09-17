@@ -17,7 +17,7 @@ Namespace Core
             sut.Dispose()
         End Sub
 
-        Public Class たちTest : Inherits WorkbooksTest
+        Public Class プロパティたちTest : Inherits WorkbooksTest
 
             <Test()> Public Sub Count_最初は0()
                 Assert.That(sut.Workbooks.Count, [Is].EqualTo(0))
