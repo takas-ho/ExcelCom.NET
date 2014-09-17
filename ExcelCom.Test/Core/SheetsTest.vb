@@ -17,6 +17,15 @@ Namespace Core
             sut.Dispose()
         End Sub
 
+        Public Class プロパティたちTest : Inherits SheetsTest
+
+            <Test()> Public Sub Count_最初は0超_シート数はローカルPCの設定で変わる()
+                Dim workbook As Workbook = sut.Workbooks.Add
+                Assert.That(workbook.Sheets.Count, [Is].GreaterThan(0))
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits SheetsTest
 
             <Test()> Public Sub Worksheetが閉じられること()

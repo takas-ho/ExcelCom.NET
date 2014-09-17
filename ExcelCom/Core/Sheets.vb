@@ -6,9 +6,9 @@
             MyBase.New(parent, comObject)
         End Sub
 
-        Public ReadOnly Property Count() As Long
+        Public ReadOnly Property Count() As Integer
             Get
-                Return InvokeGetProperty(Of Long)("Count")
+                Return InvokeGetProperty(Of Integer)("Count")
             End Get
         End Property
 
