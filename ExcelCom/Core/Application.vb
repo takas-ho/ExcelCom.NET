@@ -55,11 +55,14 @@ Namespace Core
         End Function
 
         Public Function ActiveWorkbook() As Workbook
-            Dim comObject As Object = InvokeGetProperty("ActiveWorkbook")
-            If comObject Is Nothing Then
-                Return Nothing
-            End If
-            Return New Workbook(Me, comObject)
+            Select Case Workbooks.Count
+                Case 0
+                    Return Nothing
+                Case 1
+                    Return Workbooks(0)
+                Case Else
+                    Throw New NotImplementedException("必要なら実装する")
+            End Select
         End Function
 
         Private _workbooks As Workbooks

@@ -2,8 +2,11 @@
 
     Public Class Workbook : Inherits AbstractExcelSubObject : Implements IExcelObject
 
-        Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
+        Private ReadOnly books As Workbooks
+
+        Public Sub New(ByVal parent As Workbooks, ByVal comObject As Object)
             MyBase.New(parent, comObject)
+            books = parent
         End Sub
 
         Public Sub Activate()
@@ -23,6 +26,9 @@
                 args.Add(New NamedParameter("Filename", filename))
             End If
             InvokeMethod("Close", args.ToArray)
+            If books.InternalItems.Contains(Me) Then
+                books.InternalItems.Remove(Me)
+            End If
         End Sub
 
         Private _sheets As Sheets
