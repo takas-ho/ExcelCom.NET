@@ -14,6 +14,15 @@
             Return New Range(Me, InvokeGetProperty("Columns"))
         End Function
 
+        Public Property Name() As String
+            Get
+                Return InvokeGetProperty(Of String)("Name")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("Name", value)
+            End Set
+        End Property
+
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)
         End Function
