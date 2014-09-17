@@ -63,6 +63,11 @@ Namespace Core
                 Assert.That(sut.DisplayAlerts, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub ScreenUpdating(<Values(True, False)> ByVal value As Boolean)
+                sut.ScreenUpdating = value
+                Assert.That(sut.ScreenUpdating, [Is].EqualTo(value))
+            End Sub
+
             <Test()> Public Sub Visible(<Values(True, False)> ByVal value As Boolean)
                 sut.Visible = value
                 Assert.That(sut.Visible, [Is].EqualTo(value))

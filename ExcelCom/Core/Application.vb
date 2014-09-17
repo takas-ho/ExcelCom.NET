@@ -90,6 +90,15 @@ Namespace Core
             End Set
         End Property
 
+        Public Property ScreenUpdating() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ScreenUpdating")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("ScreenUpdating", value)
+            End Set
+        End Property
+
         Public Property Visible() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("Visible")
