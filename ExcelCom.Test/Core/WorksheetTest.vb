@@ -5,9 +5,11 @@ Namespace Core
     Public MustInherit Class WorksheetTest
 
         Private sut As Application
+        Private workbook As Workbook
 
         <SetUp()> Public Sub SetUp()
             sut = New Application
+            workbook = sut.Workbooks.Add
         End Sub
 
         <TearDown()> Public Sub TearDown()
@@ -20,21 +22,18 @@ Namespace Core
         Public Class CellsTest : Inherits WorksheetTest
 
             <Test()> Public Sub Cellsの値をRangeと比較できる()
-                Dim workbook As Workbook = sut.Workbooks.Add
                 workbook.Sheets.Item(0).Cells(0, 1).Value = "abc"
 
                 Assert.That(workbook.Sheets.Item(0).Range("B1").Value, [Is].EqualTo("abc"))
             End Sub
 
             <Test()> Public Sub Cellsの値をRangeと比較できる2()
-                Dim workbook As Workbook = sut.Workbooks.Add
                 workbook.Sheets.Item(0).Cells(2, 0).Value = "aiueo"
 
                 Assert.That(workbook.Sheets.Item(0).Range("A3").Value, [Is].EqualTo("aiueo"))
             End Sub
 
             <Test()> Public Sub Hoge()
-                Dim workbook As Workbook = sut.Workbooks.Add
                 Dim start As Range = workbook.Sheets.Item(0).Cells(1, 1)
 
                 Dim target As Range = workbook.Sheets.Item(0).Range(start, start)
@@ -54,6 +53,19 @@ Namespace Core
                 sut = Nothing
 
                 TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+        End Class
+
+        Public Class PropertyたちTest : Inherits WorksheetTest
+
+            <Test()> Public Sub Visible(<Values(Worksheet.XlSheetVisibility.xlSheetHidden, Worksheet.XlSheetVisibility.xlSheetVeryHidden, Worksheet.XlSheetVisibility.xlSheetVisible)> ByVal value As Worksheet.XlSheetVisibility)
+                Dim sheet1 As Worksheet = workbook.Sheets.Add()
+                Dim sheet2 As Worksheet = workbook.Sheets.Add(after:=sheet1)
+                sheet2.Select()
+
+                workbook.Sheets(0).Visible = value
+                Assert.That(workbook.Sheets(0).Visible, [Is].EqualTo(value))
             End Sub
 
         End Class

@@ -2,6 +2,12 @@
 
     Public Class Worksheet : Inherits AbstractExcelSubObject : Implements IExcelObject
 
+        Public Enum XlSheetVisibility
+            xlSheetHidden = 0
+            xlSheetVeryHidden = 2
+            xlSheetVisible = -1
+        End Enum
+
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
             MyBase.New(parent, comObject)
         End Sub
@@ -53,6 +59,15 @@
         Public Sub [Select]()
             InvokeMethod("Select")
         End Sub
+
+        Public Property Visible() As XlSheetVisibility
+            Get
+                Return InvokeGetProperty(Of XlSheetVisibility)("Visible")
+            End Get
+            Set(ByVal value As XlSheetVisibility)
+                InvokeSetProperty("Visible", value)
+            End Set
+        End Property
 
     End Class
 End Namespace
