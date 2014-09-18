@@ -47,6 +47,14 @@ Namespace Core
         End Sub
 
         Public Function ActiveSheet() As Worksheet
+            Dim worksheet As Worksheet = InternalActiveSheet()
+            If worksheet Is Nothing Then
+                Return Nothing
+            End If
+            Return ActiveWorkbook.Sheets(worksheet.Index)
+        End Function
+
+        Private Function InternalActiveSheet() As Worksheet
             Dim comObject As Object = InvokeGetProperty("ActiveSheet")
             If comObject Is Nothing Then
                 Return Nothing

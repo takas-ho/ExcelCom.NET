@@ -14,6 +14,12 @@
             Return New Range(Me, InvokeGetProperty("Columns"))
         End Function
 
+        Public ReadOnly Property Index() As Integer
+            Get
+                Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Index"))
+            End Get
+        End Property
+
         Public Property Name() As String
             Get
                 Return InvokeGetProperty(Of String)("Name")

@@ -88,6 +88,12 @@ Namespace Core
                 Assert.That(sheet, [Is].Not.Null)
             End Sub
 
+            <Test()> Public Sub Sheetsのインスタンスと同じである()
+                Dim book As Workbook = sut.Workbooks.Add()
+                Dim sheet As Worksheet = sut.ActiveSheet
+                Assert.That(sheet, [Is].SameAs(book.Sheets(0)))
+            End Sub
+
             <Test()> Public Sub Cellsに書込める()
                 Dim workbook As Workbook = sut.Workbooks.Add()
                 sut.ActiveSheet.Cells(1, 1).Value = "abc"
