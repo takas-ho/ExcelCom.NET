@@ -109,6 +109,21 @@ Namespace Core
                 Assert.That(book, [Is].Not.Null)
             End Sub
 
+            <Test()> Public Sub Workbooksのインスタンスと同一である()
+                sut.Workbooks.Add()
+                Dim book As Workbook = sut.ActiveWorkbook
+                Assert.That(book, [Is].SameAs(sut.Workbooks(0)))
+            End Sub
+
+            <Test()> Public Sub Addしたインスタンスと同一である()
+                Dim book1 As Workbook = sut.Workbooks.Add()
+                Dim book2 As Workbook = sut.Workbooks.Add()
+
+                Dim activeBook As Workbook = sut.ActiveWorkbook
+
+                Assert.That(activeBook, [Is].SameAs(book2))
+            End Sub
+
         End Class
 
     End Class

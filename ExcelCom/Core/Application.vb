@@ -55,14 +55,32 @@ Namespace Core
         End Function
 
         Public Function ActiveWorkbook() As Workbook
-            Select Case Workbooks.Count
-                Case 0
-                    Return Nothing
-                Case 1
-                    Return Workbooks(0)
-                Case Else
-                    Throw New NotImplementedException("必要なら実装する")
-            End Select
+            ' InternalActiveWorkbookで作った Workbookは、#Workbooks値の内部Itemとインスタンス違いだから公開しちゃいけない
+            Dim index As Integer = DetectIndexOfActiveWorkbook()
+            If index < 0 Then
+                Return Nothing
+            End If
+            Return Workbooks(index)
+        End Function
+
+        Private Function InternalActiveWorkbook() As Workbook
+            Dim comObject As Object = InvokeGetProperty("ActiveWorkbook")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Workbook(Workbooks, comObject)
+        End Function
+
+        Private Function DetectIndexOfActiveWorkbook() As Integer
+            Dim workbook As Workbook = InternalActiveWorkbook()
+            If workbook IsNot Nothing Then
+                For i As Integer = 0 To Workbooks.Count - 1
+                    If workbook.Name.Equals(Workbooks(i).Name) Then
+                        Return i
+                    End If
+                Next
+            End If
+            Return -1
         End Function
 
         Private _workbooks As Workbooks
