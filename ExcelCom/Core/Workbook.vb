@@ -31,6 +31,12 @@
             End If
         End Sub
 
+        Public ReadOnly Property Name() As String
+            Get
+                Return InvokeGetProperty(Of String)("Name")
+            End Get
+        End Property
+
         Private _sheets As Sheets
         Public Function Sheets() As Sheets
             If _sheets Is Nothing Then

@@ -32,6 +32,22 @@ Namespace Core
 
         End Class
 
+        Public Class PropertyたちTest : Inherits WorkbookTest
+
+            <Test()> Public Sub Name_追加した直後はBook1()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.Name, [Is].EqualTo("Book1"))
+            End Sub
+
+            <Test()> Public Sub Name_3度追加すればBook3()
+                Dim book As Workbook = sut.Workbooks.Add
+                Dim book2 As Workbook = sut.Workbooks.Add
+                Dim book3 As Workbook = sut.Workbooks.Add
+                Assert.That(book3.Name, [Is].EqualTo("Book3"))
+            End Sub
+
+        End Class
+
         Public Class その他細かいTest : Inherits WorkbookTest
 
             <Test()> Public Sub CloseしたらBookが閉じる()
