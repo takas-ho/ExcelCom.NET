@@ -20,8 +20,33 @@
             If type IsNot Nothing Then
                 args.Add(New NamedParameter("Type", type))
             End If
-            Return New Worksheet(Me, InvokeMethod("Add", args.ToArray))
+
+            Dim result As Worksheet = New Worksheet(Me, InvokeMethod("Add", args.ToArray))
+
+            If before IsNot Nothing Then
+                InternalItems.Insert(before.Index, result)
+            ElseIf after IsNot Nothing Then
+                If after.Index < Me.Count - 1 Then
+                    InternalItems.Insert(after.Index + 1, result)
+                Else
+                    InternalItems.Add(result)
+                End If
+            Else
+                InternalItems.Insert(0, result)
+            End If
+            Return result
         End Function
+
+        Default Public Overloads ReadOnly Property Item(ByVal name As String) As Worksheet
+            Get
+                Dim comObject As Object = InvokeGetProperty("Item", name)
+                If comObject Is Nothing Then
+                    Return Nothing
+                End If
+                Dim worksheet As Worksheet = New Worksheet(Me, comObject)
+                Return MyBase.Item(worksheet.Index)
+            End Get
+        End Property
 
     End Class
 End Namespace

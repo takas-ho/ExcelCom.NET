@@ -41,13 +41,27 @@ Namespace Core
                 Assert.That(workbook.Sheets(0).Name, [Is].EqualTo("XyZ"))
             End Sub
 
-            <Test()> Public Sub Addすれば1増える222()
+            <Test()> Public Sub after引数を指定したら_指定sheetの後ろに追加する()
                 Dim firstSheet As Worksheet = workbook.Sheets.Add()
 
                 Dim actual As Worksheet = workbook.Sheets.Add(after:=firstSheet)
                 actual.Name = "ABC"
 
                 Assert.That(workbook.Sheets(1).Name, [Is].EqualTo("ABC"), "firstSheetの一つ後ろに追加")
+            End Sub
+
+        End Class
+
+        Public Class Item_Test : Inherits SheetsTest
+
+            <Test()> Public Sub AddしたSheetとName指定と同じインスタンスである()
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                Assert.That(workbook.Sheets(sheet.Name), [Is].SameAs(sheet))
+            End Sub
+
+            <Test()> Public Sub Nameとindexとで同じインスタンスである()
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                Assert.That(workbook.Sheets(sheet.Name), [Is].SameAs(workbook.Sheets(0)))
             End Sub
 
         End Class
