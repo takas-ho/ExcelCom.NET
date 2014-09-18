@@ -2,9 +2,9 @@
 
     Public Class Workbook : Inherits AbstractExcelSubObject : Implements IExcelObject
 
-        Private ReadOnly books As Workbooks
+        Private ReadOnly books As AbstractExcelSubCollection(Of Workbook)
 
-        Public Sub New(ByVal parent As Workbooks, ByVal comObject As Object)
+        Public Sub New(ByVal parent As AbstractExcelSubCollection(Of Workbook), ByVal comObject As Object)
             MyBase.New(parent, comObject)
             books = parent
         End Sub

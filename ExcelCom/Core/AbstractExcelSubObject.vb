@@ -1,6 +1,6 @@
 ﻿Namespace Core
 
-    Public Class AbstractExcelSubObject : Inherits AbstractExcelObject : Implements IExcelObject
+    Public MustInherit Class AbstractExcelSubObject : Inherits AbstractExcelObject : Implements IExcelObject
 
         Protected ReadOnly Parent As IExcelObject
 

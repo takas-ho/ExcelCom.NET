@@ -59,7 +59,7 @@ Namespace Core
             If comObject Is Nothing Then
                 Return Nothing
             End If
-            Return New Worksheet(Me, comObject)
+            Return New Worksheet(InternalActiveWorkbook.Sheets, comObject)
         End Function
 
         Public Function ActiveWorkbook() As Workbook

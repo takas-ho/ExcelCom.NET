@@ -39,6 +39,20 @@ Namespace Core
 
         End Class
 
+        Public Class Item_Test : Inherits WorkbooksTest
+
+            <Test()> Public Sub AddしたSheetとName指定と同じインスタンスである()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(sut.Workbooks(book.Name), [Is].SameAs(book))
+            End Sub
+
+            <Test()> Public Sub Nameとindexとで同じインスタンスである()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(sut.Workbooks(book.Name), [Is].SameAs(sut.Workbooks(0)))
+            End Sub
+
+        End Class
+
         Public Class プロパティたちTest : Inherits WorkbooksTest
 
             <Test()> Public Sub Count_最初は0()

@@ -37,16 +37,9 @@
             Return result
         End Function
 
-        Default Public Overloads ReadOnly Property Item(ByVal name As String) As Worksheet
-            Get
-                Dim comObject As Object = InvokeGetProperty("Item", name)
-                If comObject Is Nothing Then
-                    Return Nothing
-                End If
-                Dim worksheet As Worksheet = New Worksheet(Me, comObject)
-                Return MyBase.Item(worksheet.Index)
-            End Get
-        End Property
+        Protected Overrides Function DetectIndex(ByVal item As Worksheet) As Integer
+            Return item.Index
+        End Function
 
     End Class
 End Namespace

@@ -2,7 +2,7 @@
 
 Namespace Core
 
-    Public Class AbstractExcelSubCollection(Of T As AbstractExcelSubObject) : Inherits AbstractExcelSubObject : Implements IExcelObject
+    Public MustInherit Class AbstractExcelSubCollection(Of T As AbstractExcelSubObject) : Inherits AbstractExcelSubObject : Implements IExcelObject
 
         Private ReadOnly _items As List(Of T)
 
@@ -34,7 +34,7 @@ Namespace Core
         Default Public ReadOnly Property Item(ByVal index As Integer) As T
             Get
                 If _items(index) Is Nothing Then
-                    Dim constructorInfo As ConstructorInfo = GetType(T).GetConstructor(New System.Type() {GetType(IExcelObject), GetType(Object)})
+                    Dim constructorInfo As ConstructorInfo = GetType(T).GetConstructor(New System.Type() {GetType(AbstractExcelSubCollection(Of T)), GetType(Object)})
                     Dim comObject As Object = InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(index))
                     If comObject Is Nothing Then
                         Return Nothing
@@ -44,6 +44,24 @@ Namespace Core
                 Return _items(index)
             End Get
         End Property
+
+        Default Public ReadOnly Property Item(ByVal name As String) As T
+            Get
+                Dim constructorInfo As ConstructorInfo = GetType(T).GetConstructor(New System.Type() {GetType(AbstractExcelSubCollection(Of T)), GetType(Object)})
+                Dim comObject As Object = InvokeGetProperty("Item", name)
+                If comObject Is Nothing Then
+                    Return Nothing
+                End If
+                Dim value As T = DirectCast(constructorInfo.Invoke(New Object() {Me, comObject}), T)
+                Dim index As Integer = DetectIndex(value)
+                If index < 0 Then
+                    Return Nothing
+                End If
+                Return Item(index)
+            End Get
+        End Property
+
+        Protected MustOverride Function DetectIndex(ByVal item As T) As Integer
 
     End Class
 End Namespace
