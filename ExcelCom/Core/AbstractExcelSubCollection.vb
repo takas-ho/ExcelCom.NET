@@ -2,7 +2,7 @@
 
 Namespace Core
 
-    Public MustInherit Class AbstractExcelSubCollection(Of T As AbstractExcelSubObject) : Inherits AbstractExcelSubObject : Implements IExcelObject
+    Public MustInherit Class AbstractExcelSubCollection(Of T As IExcelObject) : Inherits AbstractExcelSubObject : Implements IExcelCollection(Of T)
 
         Private ReadOnly _items As List(Of T)
 
@@ -15,7 +15,7 @@ Namespace Core
             Next
         End Sub
 
-        Friend ReadOnly Property InternalItems() As List(Of T)
+        Friend ReadOnly Property InternalItems() As List(Of T) Implements IExcelCollection(Of T).InternalItems
             Get
                 Return _items
             End Get

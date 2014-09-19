@@ -8,7 +8,7 @@
             xlSheetVisible = -1
         End Enum
 
-        Public Sub New(ByVal parent As AbstractExcelSubCollection(Of Worksheet), ByVal comObject As Object)
+        Public Sub New(ByVal parent As IExcelCollection(Of Worksheet), ByVal comObject As Object)
             MyBase.New(parent, comObject)
         End Sub
 
