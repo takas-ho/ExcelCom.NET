@@ -21,6 +21,12 @@ Namespace Core
             xlNoChange = 1
             xlShared = 2
         End Enum
+
+        Public Enum XlCutCopyMode
+            [False] = 0
+            xlCopy = 1
+            xlCut = 2
+        End Enum
 #End Region
 
         Public Sub New()
@@ -107,6 +113,15 @@ Namespace Core
             End Get
             Set(ByVal value As XlCalculation)
                 InvokeSetProperty("Calculation", value)
+            End Set
+        End Property
+
+        Public Property CutCopyMode() As XlCutCopyMode
+            Get
+                Return InvokeGetProperty(Of XlCutCopyMode)("CutCopyMode")
+            End Get
+            Set(ByVal value As XlCutCopyMode)
+                InvokeSetProperty("CutCopyMode", value <> XlCutCopyMode.False)
             End Set
         End Property
 

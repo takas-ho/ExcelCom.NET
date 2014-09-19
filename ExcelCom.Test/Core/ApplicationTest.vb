@@ -58,6 +58,17 @@ Namespace Core
                 Assert.That(sut.Calculation, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub CutCopyMode_初期状態はFalse()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(sut.CutCopyMode, [Is].EqualTo(Application.XlCutCopyMode.False))
+            End Sub
+
+            <Test()> Public Sub CutCopyMode_CopyしたらXlCopy()
+                Dim book As Workbook = sut.Workbooks.Add
+                book.Sheets(0).Cells(0, 0).Copy()
+                Assert.That(sut.CutCopyMode, [Is].EqualTo(Application.XlCutCopyMode.xlCopy))
+            End Sub
+
             <Test()> Public Sub DisplayAlerts(<Values(True, False)> ByVal value As Boolean)
                 sut.DisplayAlerts = value
                 Assert.That(sut.DisplayAlerts, [Is].EqualTo(value))
