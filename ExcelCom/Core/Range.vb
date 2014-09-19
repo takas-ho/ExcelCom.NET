@@ -39,6 +39,14 @@
             End Get
         End Property
 
+        Public Function Delete(Optional ByVal shift As Object = Nothing) As Object
+            Dim args As New List(Of Object)
+            If shift IsNot Nothing Then
+                args.Add(New NamedParameter("Shift", shift))
+            End If
+            Return InvokeMethod("Delete", args.ToArray)
+        End Function
+
         Public Sub Insert(Optional ByVal shift As Object = Nothing)
             Dim args As New List(Of Object)
             If shift IsNot Nothing Then

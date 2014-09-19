@@ -69,6 +69,32 @@ Namespace Core
 
         End Class
 
+        Public Class DeleteTest : Inherits RangeTest
+
+            <Test()> Public Sub 列を削除できる()
+                workbook.Sheets(0).Cells(0, 1).Value = "a01"
+                workbook.Sheets(0).Cells(0, 2).Value = "b02"
+                workbook.Sheets(0).Cells(0, 3).Value = "c03"
+
+                workbook.Sheets(0).Columns(2).Delete()
+
+                Assert.That(workbook.Sheets(0).Cells(0, 1).Value, [Is].EqualTo("a01"))
+                Assert.That(workbook.Sheets(0).Cells(0, 2).Value, [Is].EqualTo("c03"), "b02の列が削除された")
+            End Sub
+
+            <Test()> Public Sub 行を削除できる()
+                workbook.Sheets(0).Cells(2, 0).Value = "a20"
+                workbook.Sheets(0).Cells(3, 0).Value = "b30"
+                workbook.Sheets(0).Cells(4, 0).Value = "c40"
+
+                workbook.Sheets(0).Rows(3).Delete()
+
+                Assert.That(workbook.Sheets(0).Cells(2, 0).Value, [Is].EqualTo("a20"))
+                Assert.That(workbook.Sheets(0).Cells(3, 0).Value, [Is].EqualTo("c40"), "b30の行が削除された")
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits RangeTest
 
             <Test()> Public Sub Columnsが閉じられること()
