@@ -5,13 +5,21 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Public Sub Copy(Optional ByVal destination As Object = Nothing)
+            Dim args As New List(Of Object)
+            If destination IsNot Nothing Then
+                args.Add(New NamedParameter("Destination", destination))
+            End If
+            InvokeMethod("Copy", args.ToArray)
+        End Sub
+
         Public Function Cells() As Range
             Return New Range(Me, InvokeGetProperty("Cells"))
         End Function
 
-        Default Public ReadOnly Property Item(ByVal row As Integer) As Range
+        Default Public ReadOnly Property Item(ByVal index As Integer) As Range
             Get
-                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(row)))
+                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(index)))
             End Get
         End Property
 

@@ -55,6 +55,18 @@ Namespace Core
                 Assert.That(workbook.Sheets(0).Cells(4, 0).Value, [Is].EqualTo("b30"), "行2と行3列の間に挿入したから")
             End Sub
 
+            <Test()> Public Sub コピー列を挿入できる()
+                workbook.Sheets(0).Cells(0, 1).Value = "a01"
+                workbook.Sheets(0).Cells(0, 2).Value = "b02"
+
+                workbook.Sheets(0).Columns(2).Copy()
+                workbook.Sheets(0).Columns(1).Insert()
+
+                Assert.That(workbook.Sheets(0).Cells(0, 1).Value, [Is].EqualTo("b02"), "列2だった値が挿入された")
+                Assert.That(workbook.Sheets(0).Cells(0, 2).Value, [Is].EqualTo("a01"))
+                Assert.That(workbook.Sheets(0).Cells(0, 3).Value, [Is].EqualTo("b02"))
+            End Sub
+
         End Class
 
         Public Class ExcelObjectたちTest : Inherits RangeTest
