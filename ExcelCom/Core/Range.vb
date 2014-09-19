@@ -9,6 +9,12 @@
             Return New Range(Me, InvokeGetProperty("Cells"))
         End Function
 
+        Default Public ReadOnly Property Item(ByVal row As Integer) As Range
+            Get
+                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(row)))
+            End Get
+        End Property
+
         Default Public ReadOnly Property Item(ByVal row As Integer, ByVal column As Integer) As Range
             Get
                 Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(row), RuleUtil.ConvIndexDotNET2VBA(column)))
@@ -24,6 +30,14 @@
                 Return InvokeGetProperty(Of Long)("Count")
             End Get
         End Property
+
+        Public Sub Insert(Optional ByVal shift As Object = Nothing)
+            Dim args As New List(Of Object)
+            If shift IsNot Nothing Then
+                args.Add(New NamedParameter("Shift", shift))
+            End If
+            InvokeMethod("Insert", args.ToArray)
+        End Sub
 
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)
