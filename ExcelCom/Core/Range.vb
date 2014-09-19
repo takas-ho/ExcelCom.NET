@@ -55,6 +55,15 @@
             InvokeMethod("Insert", args.ToArray)
         End Sub
 
+        Public Property NumberFormatLocal() As Object
+            Get
+                Return InvokeGetProperty("NumberFormatLocal")
+            End Get
+            Set(ByVal value As Object)
+                InvokeSetProperty("NumberFormatLocal", value)
+            End Set
+        End Property
+
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)
         End Function

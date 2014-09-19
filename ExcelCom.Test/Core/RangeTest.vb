@@ -135,5 +135,24 @@ Namespace Core
 
         End Class
 
+        Public Class PropertyたちTest : Inherits RangeTest
+
+            <Test()> Public Sub NumberFormatLocal_Valueへ文字列10を設定すると_Double値になる()
+
+                workbook.Sheets(0).Cells(0, 0).Value = "10"
+
+                Assert.That(workbook.Sheets(0).Cells(0, 0).Value, [Is].EqualTo(10D))
+            End Sub
+
+            <Test()> Public Sub NumberFormatLocal_Valueへ文字列10を設定すると_Double値になる_がNumberFormatLocal_at_にすれば文字列になる()
+
+                workbook.Sheets(0).Cells(0, 0).NumberFormatLocal = "@"
+                workbook.Sheets(0).Cells(0, 0).Value = "10"
+
+                Assert.That(workbook.Sheets(0).Cells(0, 0).Value, [Is].EqualTo("10"))
+            End Sub
+
+        End Class
+
     End Class
 End Namespace
