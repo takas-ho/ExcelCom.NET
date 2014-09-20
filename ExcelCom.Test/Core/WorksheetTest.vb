@@ -55,6 +55,15 @@ Namespace Core
                 TestUtil.AssertNotExistsExcelPropcess()
             End Sub
 
+            <Test()> Public Sub Shapesが閉じられること()
+                Dim shapes As Shapes = workbook.Sheets(0).Shapes
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
         End Class
 
         Public Class PropertyたちTest : Inherits WorksheetTest

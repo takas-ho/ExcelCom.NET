@@ -60,6 +60,14 @@
             InvokeMethod("Select")
         End Sub
 
+        Private _shapes As Shapes
+        Public Function Shapes() As Shapes
+            If _shapes Is Nothing Then
+                _shapes = New Shapes(Me, InvokeGetProperty("Shapes"))
+            End If
+            Return _shapes
+        End Function
+
         Public Property Visible() As XlSheetVisibility
             Get
                 Return InvokeGetProperty(Of XlSheetVisibility)("Visible")

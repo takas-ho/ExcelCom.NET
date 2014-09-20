@@ -1,0 +1,69 @@
+﻿Imports NUnit.Framework
+
+Namespace Core
+
+    Public MustInherit Class ShapesTest
+
+        Private sut As Application
+        Private workbook As Workbook
+
+        <SetUp()> Public Sub SetUp()
+            sut = New Application
+            workbook = sut.Workbooks.Add
+        End Sub
+
+        <TearDown()> Public Sub TearDown()
+            If sut Is Nothing Then
+                Return
+            End If
+            sut.Dispose()
+        End Sub
+
+        Public Class AddLineTest : Inherits ShapesTest
+
+            '<Test()> Public Sub Addすれば1増える()
+            '    Dim baseCount As Integer = workbook.Sheets(0).Shapes.Count
+            '    workbook.Sheets(0).Shapes.AddLine()
+            '    Assert.That(workbook.Sheets.Count, [Is].EqualTo(baseCount + 1))
+            'End Sub
+
+            '    <Test()> Public Sub Addしたら先頭に追加される()
+            '        Dim addedSheet As Worksheet = workbook.Sheets.Add()
+            '        addedSheet.Name = "XyZ"
+            '        Assert.That(workbook.Sheets(0).Name, [Is].EqualTo("XyZ"))
+            '    End Sub
+
+            '    <Test()> Public Sub after引数を指定したら_指定sheetの後ろに追加する()
+            '        Dim firstSheet As Worksheet = workbook.Sheets.Add()
+
+            '        Dim actual As Worksheet = workbook.Sheets.Add(after:=firstSheet)
+            '        actual.Name = "ABC"
+
+            '        Assert.That(workbook.Sheets(1).Name, [Is].EqualTo("ABC"), "firstSheetの一つ後ろに追加")
+            '    End Sub
+
+        End Class
+
+        Public Class ExcelObjectたちTest : Inherits ShapesTest
+
+            <Test()> Public Sub Lineが閉じられること()
+                Dim shape As Shape = workbook.Sheets(0).Shapes.AddLine(0, 10, 20, 30)
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+        End Class
+
+        'Public Class PropertyたちTest : Inherits ShapesTest
+
+        '    <Test()> Public Sub Count_最初は0超_シート数はローカルPCの設定で変わる()
+        '        Assert.That(workbook.Sheets.Count, [Is].GreaterThan(0))
+        '    End Sub
+
+        'End Class
+
+    End Class
+End Namespace
