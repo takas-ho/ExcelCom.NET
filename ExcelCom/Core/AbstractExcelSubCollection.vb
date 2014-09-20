@@ -31,7 +31,7 @@ Namespace Core
             Return _items.IndexOf(item)
         End Function
 
-        Default Public ReadOnly Property Item(ByVal index As Integer) As T
+        Default Public Overridable ReadOnly Property Item(ByVal index As Integer) As T
             Get
                 If _items(index) Is Nothing Then
                     Dim constructorInfo As ConstructorInfo = GetType(T).GetConstructor(New System.Type() {GetType(AbstractExcelSubCollection(Of T)), GetType(Object)})
@@ -45,7 +45,7 @@ Namespace Core
             End Get
         End Property
 
-        Default Public ReadOnly Property Item(ByVal name As String) As T
+        Default Public Overridable ReadOnly Property Item(ByVal name As String) As T
             Get
                 Dim constructorInfo As ConstructorInfo = GetType(T).GetConstructor(New System.Type() {GetType(AbstractExcelSubCollection(Of T)), GetType(Object)})
                 Dim comObject As Object = InvokeGetProperty("Item", name)
