@@ -24,6 +24,15 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Public Property ColumnWidth() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("ColumnWidth")
+            End Get
+            Set(ByVal value As Double)
+                InvokeSetProperty("ColumnWidth", value)
+            End Set
+        End Property
+
         Public Sub Copy(Optional ByVal destination As Object = Nothing)
             Dim args As New List(Of Object)
             If destination IsNot Nothing Then

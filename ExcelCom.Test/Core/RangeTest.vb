@@ -182,6 +182,11 @@ Namespace Core
                 Assert.That(workbook.Sheets(0).Cells(row, 0).Row, [Is].EqualTo(row))
             End Sub
 
+            <Test()> Public Sub ColumnWidth_(<Values(2, 34)> ByVal column As Integer)
+                sheet.Columns(column).ColumnWidth = 10.4R
+                Assert.That(sheet.Columns(column).ColumnWidth, [Is].EqualTo(10.43R), "10.4は10.43になる. 精度の問題")
+            End Sub
+
         End Class
 
     End Class
