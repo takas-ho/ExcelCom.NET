@@ -6,10 +6,12 @@ Namespace Core
 
         Private sut As Application
         Private workbook As Workbook
+        Private sheet As Worksheet
 
         <SetUp()> Public Sub SetUp()
             sut = New Application
             workbook = sut.Workbooks.Add
+            sheet = workbook.Sheets.Add
         End Sub
 
         <TearDown()> Public Sub TearDown()
@@ -29,6 +31,26 @@ Namespace Core
             <Test()> Public Sub D2のCells00をCells13と比較できる()
                 workbook.Sheets.Item(0).Range("D2").Cells(0, 0).Value = "xyz"
                 Assert.That(workbook.Sheets.Item(0).Cells(1, 3).Value, [Is].EqualTo("xyz"))
+            End Sub
+
+        End Class
+
+        Public Class FindTest : Inherits RangeTest
+
+            <Test()> Public Sub 見つけたセルを返す(<Values(0, 4, 100)> ByVal row As Integer, <Values(0, 34, 100)> ByVal column As Integer)
+                sheet.Cells(row, column).Value = "りんご"
+                Dim result As Range = sheet.Cells.Find("りんご")
+
+                Assert.That(result, [Is].Not.Null)
+                Assert.That(result.Row, [Is].EqualTo(row))
+                Assert.That(result.Column, [Is].EqualTo(column))
+            End Sub
+
+            <Test()> Public Sub 見つからなければnull()
+                sheet.Cells(3, 4).Value = "りんご"
+                Dim result As Range = sheet.Cells.Find("ばなな")
+
+                Assert.That(result, [Is].Null)
             End Sub
 
         End Class

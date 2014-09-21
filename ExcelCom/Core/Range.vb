@@ -1,6 +1,25 @@
 ﻿Namespace Core
     Public Class Range : Inherits AbstractExcelSubObject : Implements IExcelObject
 
+        Public Enum XlSearchDirection
+            xlNext = 1
+            xlPrevious = 2
+        End Enum
+        ''' <summary>検索方法</summary>
+        Public Enum XlLookAt
+            ''' <summary>全てが一致するセルを検索</summary>
+            xlWhole = 1
+            ''' <summary>一部が一致するセルを検索</summary>
+            xlPart = 2
+        End Enum
+        ''' <summary>検索方向</summary>
+        Public Enum XlSearchOrder
+            ''' <summary>行</summary>
+            xlByRows = 1
+            ''' <summary>列</summary>
+            xlByColumns = 2
+        End Enum
+
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
             MyBase.New(parent, comObject)
         End Sub
@@ -15,6 +34,36 @@
 
         Public Function Cells() As Range
             Return New Range(Me, InvokeGetProperty("Cells"))
+        End Function
+
+        Public Function Find(ByVal What As Object, Optional ByVal After As Range = Nothing, Optional ByVal LookIn As Object = Nothing, _
+                             Optional ByVal LookAt As XlLookAt = 0, Optional ByVal SearchOrder As XlSearchOrder = 0, _
+                             Optional ByVal SearchDirection As XlSearchDirection = 0, _
+                             Optional ByVal MatchCase As Boolean = False, Optional ByVal MatchByte As Boolean = False) As Range
+            Dim args As New List(Of Object)
+            args.Add(What)
+            If After IsNot Nothing Then
+                args.Add(New NamedParameter("After", After.ComObject))
+            End If
+            If LookIn IsNot Nothing Then
+                args.Add(New NamedParameter("LookIn", LookIn))
+            End If
+            If LookAt <> 0 Then
+                args.Add(New NamedParameter("LookAt", LookAt))
+            End If
+            If SearchOrder <> 0 Then
+                args.Add(New NamedParameter("SearchOrder", SearchOrder))
+            End If
+            If SearchDirection <> 0 Then
+                args.Add(New NamedParameter("SearchDirection", SearchDirection))
+            End If
+            args.Add(New NamedParameter("MatchCase", MatchCase))
+            args.Add(New NamedParameter("MatchByte", MatchByte))
+            Dim result As Object = InvokeMethod("Find", args.ToArray)
+            If result Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, result)
         End Function
 
         Default Public ReadOnly Property Item(ByVal index As Integer) As Range
