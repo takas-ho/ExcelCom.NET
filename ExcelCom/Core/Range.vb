@@ -24,6 +24,10 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Public Function AutoFit() As Object
+            Return InvokeMethod("AutoFit")
+        End Function
+
         Public Sub Copy(Optional ByVal destination As Object = Nothing)
             Dim args As New List(Of Object)
             If destination IsNot Nothing Then

@@ -117,6 +117,19 @@ Namespace Core
 
         End Class
 
+        Public Class AutoFitTest : Inherits RangeTest
+
+            <Test()> Public Sub aiueoの文字列をAutoFitしたら_初期幅より狭くなる()
+                Dim baseWidth As Double = sheet.Columns(2).ColumnWidth
+                sheet.Cells(2, 2).Value = "aiueo"
+
+                sheet.Columns(2).AutoFit()
+
+                Assert.That(sheet.Columns(2).ColumnWidth, [Is].LessThan(baseWidth))
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits RangeTest
 
             <Test()> Public Sub Columnsが閉じられること()
