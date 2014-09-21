@@ -15,6 +15,15 @@
             Return -1
         End Function
 
+        Protected Overrides Function DetectIndex(ByVal name As String) As Integer
+            For i As Integer = 0 To Me.Count - 1
+                If name.Equals(InternalItems(i).Name) Then
+                    Return i
+                End If
+            Next
+            Return -1
+        End Function
+
         Public Function Add() As Workbook
             Dim result As Workbook = New Workbook(Me, InvokeMethod("Add"))
             InternalItems.Add(result)

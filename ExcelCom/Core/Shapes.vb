@@ -14,22 +14,20 @@
             Return -1
         End Function
 
+        Protected Overrides Function DetectIndex(ByVal name As String) As Integer
+            For i As Integer = 0 To Count - 1
+                If name.Equals(InternalItems(i).Name) Then
+                    Return i
+                End If
+            Next
+            Return -1
+        End Function
+
         Public Function AddLine(ByVal BeginX As Single, ByVal BeginY As Single, ByVal EndX As Single, ByVal EndY As Single) As Shape
             Dim result As Shape = New Shape(Me, InvokeMethod("AddLine", BeginX, BeginY, EndX, EndY))
             InternalItems.Add(result)
             Return result
         End Function
-
-        Default Public Overrides ReadOnly Property Item(ByVal name As String) As Shape
-            Get
-                For i As Integer = 0 To Count - 1
-                    If name.Equals(Item(i).Name) Then
-                        Return Item(i)
-                    End If
-                Next
-                Return Nothing
-            End Get
-        End Property
 
     End Class
 End Namespace

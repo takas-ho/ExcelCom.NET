@@ -47,21 +47,16 @@ Namespace Core
 
         Default Public Overridable ReadOnly Property Item(ByVal name As String) As T
             Get
-                Dim constructorInfo As ConstructorInfo = GetType(T).GetConstructor(New System.Type() {GetType(AbstractExcelSubCollection(Of T)), GetType(Object)})
-                Dim comObject As Object = InvokeGetProperty("Item", name)
-                If comObject Is Nothing Then
-                    Return Nothing
-                End If
-                Dim value As T = DirectCast(constructorInfo.Invoke(New Object() {Me, comObject}), T)
-                Dim index As Integer = DetectIndex(value)
+                Dim index As Integer = DetectIndex(name)
                 If index < 0 Then
                     Return Nothing
                 End If
-                Return Item(index)
+                Return _items(index)
             End Get
         End Property
 
         Protected MustOverride Function DetectIndex(ByVal item As T) As Integer
+        Protected MustOverride Function DetectIndex(ByVal name As String) As Integer
 
     End Class
 End Namespace
