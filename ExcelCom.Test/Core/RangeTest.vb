@@ -184,7 +184,12 @@ Namespace Core
 
             <Test()> Public Sub ColumnWidth_(<Values(2, 34)> ByVal column As Integer)
                 sheet.Columns(column).ColumnWidth = 10.4R
-                Assert.That(sheet.Columns(column).ColumnWidth, [Is].EqualTo(10.43R), "10.4は10.43になる. 精度の問題")
+                Assert.That(sheet.Columns(column).ColumnWidth, [Is].EqualTo(10.43R), "10.4は10.43になる. Excel内部の問題")
+            End Sub
+
+            <Test()> Public Sub RowHeight_(<Values(2, 34)> ByVal column As Integer)
+                sheet.Rows(column).RowHeight = 12.3R
+                Assert.That(sheet.Rows(column).RowHeight, [Is].EqualTo(12.5R), "12.3は12.5になる. Excel内部の問題")
             End Sub
 
         End Class

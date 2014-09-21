@@ -24,15 +24,6 @@
             MyBase.New(parent, comObject)
         End Sub
 
-        Public Property ColumnWidth() As Double
-            Get
-                Return InvokeGetProperty(Of Double)("ColumnWidth")
-            End Get
-            Set(ByVal value As Double)
-                InvokeSetProperty("ColumnWidth", value)
-            End Set
-        End Property
-
         Public Sub Copy(Optional ByVal destination As Object = Nothing)
             Dim args As New List(Of Object)
             If destination IsNot Nothing Then
@@ -97,6 +88,15 @@
             Return New Range(Me, InvokeGetProperty("Columns"))
         End Function
 
+        Public Property ColumnWidth() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("ColumnWidth")
+            End Get
+            Set(ByVal value As Double)
+                InvokeSetProperty("ColumnWidth", value)
+            End Set
+        End Property
+
         Public ReadOnly Property Count() As Long
             Get
                 Return InvokeGetProperty(Of Long)("Count")
@@ -154,6 +154,15 @@
         Public Function Rows() As Range
             Return New Range(Me, InvokeGetProperty("Rows"))
         End Function
+
+        Public Property RowHeight() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("RowHeight")
+            End Get
+            Set(ByVal value As Double)
+                InvokeSetProperty("RowHeight", value)
+            End Set
+        End Property
 
         Public Sub [Select]()
             InvokeMethod("Select")
