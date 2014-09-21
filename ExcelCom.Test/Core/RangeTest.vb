@@ -152,6 +152,14 @@ Namespace Core
                 Assert.That(workbook.Sheets(0).Cells(0, 0).Value, [Is].EqualTo("10"))
             End Sub
 
+            <Test()> Public Sub Column_(<Values(4, 23)> ByVal column As Integer)
+                Assert.That(workbook.Sheets(0).Cells(0, column).Column, [Is].EqualTo(column))
+            End Sub
+
+            <Test()> Public Sub Row_(<Values(2, 34)> ByVal row As Integer)
+                Assert.That(workbook.Sheets(0).Cells(row, 0).Row, [Is].EqualTo(row))
+            End Sub
+
         End Class
 
     End Class

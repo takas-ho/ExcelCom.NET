@@ -27,24 +27,12 @@ Namespace Core
                 Assert.That(workbook.Sheets.Count, [Is].EqualTo(baseCount + 1))
             End Sub
 
-            <Test()> Public Sub Addしたら先頭に追加される_同じインスタンスである()
+            <Test()> Public Sub Addしたら最後に追加される_同じインスタンスである()
                 Dim line1 As Shape = workbook.Sheets(0).Shapes.AddLine(10, 20, 30, 40)
                 Dim line2 As Shape = workbook.Sheets(0).Shapes.AddLine(50, 60, 70, 80)
-                Assert.That(workbook.Sheets(0).Shapes(0).Name, [Is].EqualTo(line2.Name))
-
-                'Dim addedSheet As Worksheet = workbook.Sheets.Add()
-                'addedSheet.Name = "XyZ"
-                'Assert.That(workbook.Sheets(0).Name, [Is].EqualTo("XyZ"))
+                Assert.That(workbook.Sheets(0).Shapes(0).Name, [Is].EqualTo(line1.Name))
+                Assert.That(workbook.Sheets(0).Shapes(1).Name, [Is].EqualTo(line2.Name), "2番目に追加したら2番目にある")
             End Sub
-
-            '    <Test()> Public Sub after引数を指定したら_指定sheetの後ろに追加する()
-            '        Dim firstSheet As Worksheet = workbook.Sheets.Add()
-
-            '        Dim actual As Worksheet = workbook.Sheets.Add(after:=firstSheet)
-            '        actual.Name = "ABC"
-
-            '        Assert.That(workbook.Sheets(1).Name, [Is].EqualTo("ABC"), "firstSheetの一つ後ろに追加")
-            '    End Sub
 
         End Class
 

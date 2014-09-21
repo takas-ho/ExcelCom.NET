@@ -29,6 +29,12 @@
             End Get
         End Property
 
+        Public ReadOnly Property Column() As Integer
+            Get
+                Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Column"))
+            End Get
+        End Property
+
         Public Function Columns() As Range
             Return New Range(Me, InvokeGetProperty("Columns"))
         End Function
@@ -80,6 +86,12 @@
             Dim args As Object() = If(cell2 Is Nothing, New Object() {cell1}, New Object() {cell1, cell2})
             Return New Range(Me, InvokeGetProperty("Range", args))
         End Function
+
+        Public ReadOnly Property Row() As Integer
+            Get
+                Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Row"))
+            End Get
+        End Property
 
         Public Function Rows() As Range
             Return New Range(Me, InvokeGetProperty("Rows"))
