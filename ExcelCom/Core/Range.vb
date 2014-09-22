@@ -19,6 +19,39 @@
             ''' <summary>列</summary>
             xlByColumns = 2
         End Enum
+        ''' <summary>横配置</summary>
+        Public Enum XlHAlign
+            ''' <summary>標準</summary>
+            xlHAlignGeneral = 1
+            ''' <summary>繰り返し</summary>
+            xlHAlignFill = 5
+            ''' <summary>選択範囲内</summary>
+            xlHAlignCenterAcrossSelection = 7
+            ''' <summary>中央揃え</summary>
+            xlHAlignCenter = -4108
+            ''' <summary>均等割り付け</summary>
+            xlHAlignDistributed = -4117
+            ''' <summary>両端揃え</summary>
+            xlHAlignJustify = -4130
+            ''' <summary>左詰め</summary>
+            xlHAlignLeft = -4131
+            ''' <summary>右詰め</summary>
+            xlHAlignRight = -4152
+        End Enum
+
+        ''' <summary>縦配置</summary>
+        Public Enum XlVAlign
+            ''' <summary>下詰め</summary>
+            xlVAlignBottom = -4107
+            ''' <summary>中央揃え</summary>
+            xlVAlignCenter = -4108
+            ''' <summary>均等割り付け</summary>
+            xlVAlignDistributed = -4117
+            ''' <summary>両端揃え</summary>
+            xlVAlignJustify = -4130
+            ''' <summary>上詰め</summary>
+            xlVAlignTop = -4160
+        End Enum
 
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
             MyBase.New(parent, comObject)
@@ -115,6 +148,15 @@
             Return InvokeMethod("Delete", args.ToArray)
         End Function
 
+        Public Property HorizontalAlignment() As XlHAlign
+            Get
+                Return InvokeGetProperty(Of XlHAlign)("HorizontalAlignment")
+            End Get
+            Set(ByVal value As XlHAlign)
+                InvokeSetProperty("HorizontalAlignment", value)
+            End Set
+        End Property
+
         Public Sub Insert(Optional ByVal shift As Object = Nothing)
             Dim args As New List(Of Object)
             If shift IsNot Nothing Then
@@ -184,6 +226,15 @@
             End Get
             Set(ByVal value As Object)
                 InvokeSetProperty("Value", value)
+            End Set
+        End Property
+
+        Public Property VerticalAlignment() As XlVAlign
+            Get
+                Return InvokeGetProperty(Of XlVAlign)("VerticalAlignment")
+            End Get
+            Set(ByVal value As XlVAlign)
+                InvokeSetProperty("VerticalAlignment", value)
             End Set
         End Property
 

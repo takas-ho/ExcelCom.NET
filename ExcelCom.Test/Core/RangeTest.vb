@@ -205,6 +205,16 @@ Namespace Core
                 Assert.That(sheet.Rows(column).RowHeight, [Is].EqualTo(12.5R), "12.3は12.5になる. Excel内部の問題")
             End Sub
 
+            <Test()> Public Sub HorizontalAlignment_(<Values(Range.XlHAlign.xlHAlignCenter, Range.XlHAlign.xlHAlignCenterAcrossSelection, Range.XlHAlign.xlHAlignDistributed, Range.XlHAlign.xlHAlignFill, Range.XlHAlign.xlHAlignGeneral, Range.XlHAlign.xlHAlignJustify, Range.XlHAlign.xlHAlignLeft, Range.XlHAlign.xlHAlignRight)> ByVal value As Range.XlHAlign)
+                sheet.Cells(1, 2).HorizontalAlignment = value
+                Assert.That(sheet.Cells(1, 2).HorizontalAlignment, [Is].EqualTo(value))
+            End Sub
+
+            <Test()> Public Sub VerticalAlignment_(<Values(Range.XlVAlign.xlVAlignBottom, Range.XlVAlign.xlVAlignCenter, Range.XlVAlign.xlVAlignDistributed, Range.XlVAlign.xlVAlignJustify, Range.XlVAlign.xlVAlignTop)> ByVal value As Range.XlVAlign)
+                sheet.Cells(1, 2).VerticalAlignment = value
+                Assert.That(sheet.Cells(1, 2).VerticalAlignment, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class
