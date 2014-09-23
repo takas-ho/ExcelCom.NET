@@ -238,5 +238,14 @@
             End Set
         End Property
 
+        Public Property WrapText() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("WrapText")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("WrapText", value)
+            End Set
+        End Property
+
     End Class
 End Namespace

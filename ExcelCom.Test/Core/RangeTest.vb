@@ -215,6 +215,11 @@ Namespace Core
                 Assert.That(sheet.Cells(1, 2).VerticalAlignment, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub Wrap_(<Values(False, True)> ByVal value As Boolean)
+                sheet.Cells(1, 1).WrapText = value
+                Assert.That(sheet.Cells(1, 1).WrapText, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class
