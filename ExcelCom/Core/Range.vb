@@ -165,6 +165,15 @@
             InvokeMethod("Insert", args.ToArray)
         End Sub
 
+        Public Property MergeCells() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("MergeCells")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("MergeCells", value)
+            End Set
+        End Property
+
         Public Property NumberFormatLocal() As Object
             Get
                 Return InvokeGetProperty("NumberFormatLocal")

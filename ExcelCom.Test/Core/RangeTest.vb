@@ -225,6 +225,11 @@ Namespace Core
                 Assert.That(sheet.Cells(1, 1).ShrinkToFit, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub MergeCells_(<Values(False, True)> ByVal value As Boolean)
+                sheet.Range(sheet.Cells(1, 1), sheet.Cells(1, 3)).MergeCells = value
+                Assert.That(sheet.Range(sheet.Cells(1, 1), sheet.Cells(1, 3)).MergeCells, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class
