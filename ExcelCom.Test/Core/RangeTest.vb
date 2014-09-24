@@ -220,6 +220,11 @@ Namespace Core
                 Assert.That(sheet.Cells(1, 1).WrapText, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub ShrinkToFit_(<Values(False, True)> ByVal value As Boolean)
+                sheet.Cells(1, 1).ShrinkToFit = value
+                Assert.That(sheet.Cells(1, 1).ShrinkToFit, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class

@@ -214,6 +214,15 @@
             InvokeMethod("Select")
         End Sub
 
+        Public Property ShrinkToFit() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ShrinkToFit")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("ShrinkToFit", value)
+            End Set
+        End Property
+
         Public ReadOnly Property Text() As String
             Get
                 Return InvokeGetProperty(Of String)("Text")
