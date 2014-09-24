@@ -53,6 +53,7 @@
     <Compile Include="Core\AbstractExcelSubCollection.vb" />
     <Compile Include="Core\AbstractExcelSubObject.vb" />
     <Compile Include="Core\Application.vb" />
+    <Compile Include="Core\Font.vb" />
     <Compile Include="Core\IExcelCollection.vb" />
     <Compile Include="Core\NamedParameter.vb" />
     <Compile Include="Core\Shape.vb" />
