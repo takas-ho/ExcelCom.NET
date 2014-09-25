@@ -75,6 +75,16 @@ Namespace Core
                 Assert.That(sheet.Cells(4, 5).Font.Bold, [Is].EqualTo(bold))
             End Sub
 
+            <Test()> Public Sub Italic_(<Values(True, False)> ByVal italic As Boolean)
+                sheet.Cells(4, 5).Font.Italic = italic
+                Assert.That(sheet.Cells(4, 5).Font.Italic, [Is].EqualTo(italic))
+            End Sub
+
+            <Test()> Public Sub Shadow_(<Values(True, False)> ByVal shadow As Boolean)
+                sheet.Cells(4, 5).Font.Shadow = shadow
+                Assert.That(sheet.Cells(4, 5).Font.Shadow, [Is].EqualTo(shadow))
+            End Sub
+
         End Class
 
     End Class

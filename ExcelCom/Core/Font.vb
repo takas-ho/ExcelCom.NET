@@ -14,12 +14,30 @@
             End Set
         End Property
 
+        Public Property Italic() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Italic")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("Italic", value)
+            End Set
+        End Property
+
         Public Property Name() As String
             Get
                 Return InvokeGetProperty(Of String)("Name")
             End Get
             Set(ByVal value As String)
                 InvokeSetProperty("Name", value)
+            End Set
+        End Property
+
+        Public Property Shadow() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Shadow")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("Shadow", value)
             End Set
         End Property
 
