@@ -1,6 +1,15 @@
 ﻿Namespace Core
     Public Class Font : Inherits AbstractExcelSubObject : Implements IExcelObject
 
+#Region "Xl定数"
+        Public Enum XlUnderlineStyle
+            xlUnderlineStyleDouble = -4119
+            xlUnderlineStyleDoubleAccounting = 5
+            xlUnderlineStyleNon = -4142
+            xlUnderlineStyleSingle = 2
+            xlUnderlineStyleSingleAccounting = 4
+        End Enum
+#End Region
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
             MyBase.New(parent, comObject)
         End Sub
@@ -47,6 +56,15 @@
             End Get
             Set(ByVal value As Double)
                 InvokeSetProperty("Size", value)
+            End Set
+        End Property
+
+        Public Property Underline() As XlUnderlineStyle
+            Get
+                Return InvokeGetProperty(Of XlUnderlineStyle)("Underline")
+            End Get
+            Set(ByVal value As XlUnderlineStyle)
+                InvokeSetProperty("Underline", value)
             End Set
         End Property
 

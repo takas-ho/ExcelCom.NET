@@ -85,6 +85,11 @@ Namespace Core
                 Assert.That(sheet.Cells(4, 5).Font.Shadow, [Is].EqualTo(shadow))
             End Sub
 
+            <Test()> Public Sub Underline_(<Values(Font.XlUnderlineStyle.xlUnderlineStyleDouble, Font.XlUnderlineStyle.xlUnderlineStyleDoubleAccounting, Font.XlUnderlineStyle.xlUnderlineStyleNon, Font.XlUnderlineStyle.xlUnderlineStyleSingle, Font.XlUnderlineStyle.xlUnderlineStyleSingleAccounting)> ByVal underline As Font.XlUnderlineStyle)
+                sheet.Cells(4, 5).Font.Underline = underline
+                Assert.That(sheet.Cells(4, 5).Font.Underline, [Is].EqualTo(underline))
+            End Sub
+
         End Class
 
     End Class
