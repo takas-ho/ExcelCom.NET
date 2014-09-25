@@ -5,6 +5,15 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Public Property Bold() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Bold")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("Bold", value)
+            End Set
+        End Property
+
         Public Property Name() As String
             Get
                 Return InvokeGetProperty(Of String)("Name")

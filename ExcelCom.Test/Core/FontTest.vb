@@ -70,6 +70,11 @@ Namespace Core
                 Assert.That(sheet.Cells(2, 3).Font.Size, [Is].EqualTo(size))
             End Sub
 
+            <Test()> Public Sub Bold_(<Values(True, False)> ByVal bold As Boolean)
+                sheet.Cells(4, 5).Font.Bold = bold
+                Assert.That(sheet.Cells(4, 5).Font.Bold, [Is].EqualTo(bold))
+            End Sub
+
         End Class
 
     End Class
