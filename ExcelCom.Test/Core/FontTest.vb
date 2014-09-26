@@ -90,10 +90,15 @@ Namespace Core
                 Assert.That(sheet.Cells(4, 5).Font.Underline, [Is].EqualTo(underline))
             End Sub
 
-            '<Test()> Public Sub Color_(<Values(&H0, &HFFFFFF, &H880088, &H8888)> ByVal color As Integer)
-            '    sheet.Cells(4, 5).Font.Color = color
-            '    Assert.That(sheet.Cells(4, 5).Font.Color, [Is].EqualTo(color))
-            'End Sub
+            <Test()> Public Sub Color_( _
+                    <Values(0, 255, 128)> ByVal r As Integer, _
+                    <Values(0, 255, 128)> ByVal g As Integer, _
+                    <Values(0, 255, 128)> ByVal b As Integer)
+                Dim color1 As Integer = RGB(r, g, b)
+                sheet.Cells(4, 5).Value = "aa"
+                sheet.Cells(4, 5).Font.Color = color1
+                Assert.That(sheet.Cells(4, 5).Font.Color, [Is].EqualTo(color1))
+            End Sub
 
             <Test()> Public Sub Strikethrough_(<Values(True, False)> ByVal strikethrough As Boolean)
                 sheet.Cells(4, 5).Font.Strikethrough = strikethrough
