@@ -78,6 +78,16 @@
             End Set
         End Property
 
+        ''' <summary>下付き文字 on/off</summary>
+        Public Property Subscript() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Subscript")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("Subscript", value)
+            End Set
+        End Property
+
         Public Property Underline() As XlUnderlineStyle
             Get
                 Return InvokeGetProperty(Of XlUnderlineStyle)("Underline")

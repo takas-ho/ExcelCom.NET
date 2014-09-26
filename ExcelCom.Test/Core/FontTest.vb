@@ -100,6 +100,11 @@ Namespace Core
                 Assert.That(sheet.Cells(4, 5).Font.Strikethrough, [Is].EqualTo(strikethrough))
             End Sub
 
+            <Test()> Public Sub Subscript_(<Values(True, False)> ByVal subscript As Boolean)
+                sheet.Cells(4, 5).Font.Subscript = subscript
+                Assert.That(sheet.Cells(4, 5).Font.Subscript, [Is].EqualTo(subscript))
+            End Sub
+
         End Class
 
     End Class
