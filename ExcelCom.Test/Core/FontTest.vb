@@ -90,6 +90,16 @@ Namespace Core
                 Assert.That(sheet.Cells(4, 5).Font.Underline, [Is].EqualTo(underline))
             End Sub
 
+            '<Test()> Public Sub Color_(<Values(&H0, &HFFFFFF, &H880088, &H8888)> ByVal color As Integer)
+            '    sheet.Cells(4, 5).Font.Color = color
+            '    Assert.That(sheet.Cells(4, 5).Font.Color, [Is].EqualTo(color))
+            'End Sub
+
+            <Test()> Public Sub Strikethrough_(<Values(True, False)> ByVal strikethrough As Boolean)
+                sheet.Cells(4, 5).Font.Strikethrough = strikethrough
+                Assert.That(sheet.Cells(4, 5).Font.Strikethrough, [Is].EqualTo(strikethrough))
+            End Sub
+
         End Class
 
     End Class

@@ -23,6 +23,15 @@
             End Set
         End Property
 
+        'Public Property Color() As Integer
+        '    Get
+        '        Return Convert.ToInt32(InvokeGetProperty("Color"))
+        '    End Get
+        '    Set(ByVal value As Integer)
+        '        InvokeSetProperty("Color", value)
+        '    End Set
+        'End Property
+
         Public Property Italic() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("Italic")
@@ -56,6 +65,16 @@
             End Get
             Set(ByVal value As Double)
                 InvokeSetProperty("Size", value)
+            End Set
+        End Property
+
+        ''' <summary>取消線 on/off</summary>
+        Public Property Strikethrough() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Strikethrough")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("Strikethrough", value)
             End Set
         End Property
 
