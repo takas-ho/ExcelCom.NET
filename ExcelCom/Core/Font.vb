@@ -88,6 +88,16 @@
             End Set
         End Property
 
+        ''' <summary>上付き文字 on/off</summary>
+        Public Property Superscript() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Superscript")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("Superscript", value)
+            End Set
+        End Property
+
         Public Property Underline() As XlUnderlineStyle
             Get
                 Return InvokeGetProperty(Of XlUnderlineStyle)("Underline")

@@ -105,6 +105,11 @@ Namespace Core
                 Assert.That(sheet.Cells(4, 5).Font.Subscript, [Is].EqualTo(subscript))
             End Sub
 
+            <Test()> Public Sub Superscript(<Values(True, False)> ByVal superscript As Boolean)
+                sheet.Cells(4, 5).Font.Superscript = superscript
+                Assert.That(sheet.Cells(4, 5).Font.Superscript, [Is].EqualTo(superscript))
+            End Sub
+
         End Class
 
     End Class
