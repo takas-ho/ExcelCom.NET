@@ -32,6 +32,15 @@
         '    End Set
         'End Property
 
+        Public Property ColorIndex() As Integer
+            Get
+                Return Convert.ToInt32(InvokeGetProperty("ColorIndex"))
+            End Get
+            Set(ByVal value As Integer)
+                InvokeSetProperty("ColorIndex", value)
+            End Set
+        End Property
+
         Public Property Italic() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("Italic")

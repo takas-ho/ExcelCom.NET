@@ -90,10 +90,35 @@ Namespace Core
                 Assert.That(sheet.Cells(4, 5).Font.Underline, [Is].EqualTo(underline))
             End Sub
 
-            '<Test()> Public Sub Color_(<Values(&H0, &HFFFFFF, &H880088, &H8888)> ByVal color As Integer)
-            '    sheet.Cells(4, 5).Font.Color = color
-            '    Assert.That(sheet.Cells(4, 5).Font.Color, [Is].EqualTo(color))
+            '<Test()> Public Sub Color_( _
+            '        <Values(0, 255, 128)> ByVal r As Integer, _
+            '        <Values(0, 255, 128)> ByVal g As Integer, _
+            '        <Values(0, 255, 128)> ByVal b As Integer)
+            '    Dim color1 As Integer = g * 256 * 256 + b * 256 + r
+            '    'Assert.That(color1, [Is].EqualTo(g * 256 * 256 + b * 256 + r))
+            '    sheet.Cells(4, 5).Value = "aa"
+            '    sheet.Cells(4, 5).Font.Color = color1
+            '    Assert.That(sheet.Cells(4, 5).Font.Color, [Is].EqualTo(color1))
             'End Sub
+
+            'Public Function ConvHoge(ByVal color As Integer) As Integer
+            '    Dim r As Integer = color Mod 256
+            '    Dim g As Integer = CInt(Math.Floor(color / 256)) Mod 256
+            '    Dim b As Integer = CInt(Math.Floor(Math.Floor(color / 256) / 256)) Mod 256
+            '    Dim color2 As Integer = 256 * 256 * r + 256 * g + b
+            '    'Return color2.ToString("X6")
+            '    Return color2
+            'End Function
+
+            <Test()> Public Sub ColorIndex_(<Values(1, 49, 20, 30)> ByVal index As Integer)
+                sheet.Cells(4, 5).Font.ColorIndex = index
+                Assert.That(sheet.Cells(4, 5).Font.ColorIndex, [Is].EqualTo(index))
+            End Sub
+
+            <Test()> Public Sub ColorIndex_ゼロは指定できない_マイナス4105になる()
+                sheet.Cells(4, 5).Font.ColorIndex = 0
+                Assert.That(sheet.Cells(4, 5).Font.ColorIndex, [Is].EqualTo(-4105))
+            End Sub
 
             <Test()> Public Sub Strikethrough_(<Values(True, False)> ByVal strikethrough As Boolean)
                 sheet.Cells(4, 5).Font.Strikethrough = strikethrough
