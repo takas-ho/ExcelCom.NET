@@ -60,10 +60,10 @@ Namespace Core
 
         Public Class PropertyたちTest : Inherits InteriorTest
 
-            '<Test()> Public Sub Name_フォント名を設定する(<Values("MS P GOTHIC", "Arial", "Tahoma")> ByVal fontName As String)
-            '    sheet.Cells(2, 3).Font.Name = fontName
-            '    Assert.That(sheet.Cells(2, 3).Font.Name, [Is].EqualTo(fontName))
-            'End Sub
+            <Test()> Public Sub ColorIndex_(<Values(1, 49, 20, 30)> ByVal index As Integer)
+                sheet.Cells(4, 5).Interior.ColorIndex = index
+                Assert.That(sheet.Cells(4, 5).Interior.ColorIndex, [Is].EqualTo(index))
+            End Sub
 
         End Class
 
