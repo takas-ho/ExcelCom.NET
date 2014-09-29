@@ -169,6 +169,10 @@
             InvokeMethod("Insert", args.ToArray)
         End Sub
 
+        Public Function Interior() As Interior
+            Return New Interior(Me, InvokeGetProperty("Interior"))
+        End Function
+
         Public Property MergeCells() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("MergeCells")
