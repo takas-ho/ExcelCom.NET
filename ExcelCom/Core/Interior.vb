@@ -32,5 +32,14 @@
             End Set
         End Property
 
+        Public Property PatternColorIndex() As Integer
+            Get
+                Return Convert.ToInt32(InvokeGetProperty("PatternColorIndex"))
+            End Get
+            Set(ByVal value As Integer)
+                InvokeSetProperty("PatternColorIndex", value)
+            End Set
+        End Property
+
     End Class
 End Namespace
