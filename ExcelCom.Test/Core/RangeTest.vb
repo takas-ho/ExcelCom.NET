@@ -177,6 +177,15 @@ Namespace Core
                 TestUtil.AssertNotExistsExcelPropcess()
             End Sub
 
+            <Test()> Public Sub Interiorが閉じられること()
+                Dim item As Interior = sheet.Cells(2, 3).Interior
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
         End Class
 
         Public Class PropertyたちTest : Inherits RangeTest
