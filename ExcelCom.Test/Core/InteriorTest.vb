@@ -1,4 +1,6 @@
-﻿Imports NUnit.Framework
+﻿Imports System.Runtime.InteropServices
+Imports NUnit.Framework
+Imports System.Reflection
 
 Namespace Core
 
@@ -60,9 +62,23 @@ Namespace Core
 
         Public Class PropertyたちTest : Inherits InteriorTest
 
-            <Test()> Public Sub ColorIndex_(<Values(1, 49, 20, 30)> ByVal index As Integer)
+            <Test()> Public Sub Color_Excel2003以前は56色(<Values(&HFFFFCC, &H99CCFF)> ByVal color As Integer)
+                sheet.Cells(4, 5).Interior.Color = color
+                Assert.That(sheet.Cells(4, 5).Interior.Color, [Is].EqualTo(color))
+            End Sub
+
+            <Test()> Public Sub ColorIndex_(<Values(1, 56, 20, 30)> ByVal index As Integer)
                 sheet.Cells(4, 5).Interior.ColorIndex = index
                 Assert.That(sheet.Cells(4, 5).Interior.ColorIndex, [Is].EqualTo(index))
+            End Sub
+
+            <Test()> Public Sub ColorIndex_57以上はエラーになる(<Values(57, 100)> ByVal index As Integer)
+                Try
+                    sheet.Cells(4, 5).Interior.ColorIndex = index
+                    Assert.Fail()
+                Catch expected As TargetInvocationException
+                    Assert.That(expected.InnerException.Message, [Is].EqualTo("Interior クラスの ColorIndex プロパティを設定できません。"))
+                End Try
             End Sub
 
             <Test()> Public Sub PatternColorIndex_(<Values(1, 49, 20, 30)> ByVal index As Integer)

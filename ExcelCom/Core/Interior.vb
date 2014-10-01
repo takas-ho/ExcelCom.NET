@@ -14,14 +14,14 @@
         '    End Set
         'End Property
 
-        'Public Property Color() As Integer
-        '    Get
-        '        Return Convert.ToInt32(InvokeGetProperty("Color"))
-        '    End Get
-        '    Set(ByVal value As Integer)
-        '        InvokeSetProperty("Color", value)
-        '    End Set
-        'End Property
+        Public Property Color() As Integer
+            Get
+                Return Convert.ToInt32(InvokeGetProperty("Color"))
+            End Get
+            Set(ByVal value As Integer)
+                InvokeSetProperty("Color", value)
+            End Set
+        End Property
 
         Public Property ColorIndex() As Integer
             Get
