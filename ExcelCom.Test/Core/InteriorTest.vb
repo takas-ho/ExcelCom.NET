@@ -81,6 +81,11 @@ Namespace Core
                 End Try
             End Sub
 
+            <Test()> Public Sub PatternColor_Excel2003以前は56色(<Values(&HFFFFCC, &H99CCFF)> ByVal color As Integer)
+                sheet.Cells(4, 5).Interior.Color = color
+                Assert.That(sheet.Cells(4, 5).Interior.Color, [Is].EqualTo(color))
+            End Sub
+
             <Test()> Public Sub PatternColorIndex_(<Values(1, 49, 20, 30)> ByVal index As Integer)
                 sheet.Cells(4, 5).Interior.PatternColorIndex = index
                 Assert.That(sheet.Cells(4, 5).Interior.PatternColorIndex, [Is].EqualTo(index))
