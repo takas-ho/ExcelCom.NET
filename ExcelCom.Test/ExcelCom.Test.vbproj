@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Core\AbstractExcelObjectTest.vb" />
     <Compile Include="Core\ApplicationTest.vb" />
+    <Compile Include="Core\FontTest.vb" />
     <Compile Include="Core\RangeTest.vb" />
     <Compile Include="Core\ShapesTest.vb" />
     <Compile Include="Core\ShapeTest.vb" />

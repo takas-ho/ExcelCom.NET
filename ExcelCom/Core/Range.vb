@@ -148,6 +148,10 @@
             Return InvokeMethod("Delete", args.ToArray)
         End Function
 
+        Public Function Font() As Font
+            Return New Font(Me, InvokeGetProperty("Font"))
+        End Function
+
         Public Property HorizontalAlignment() As XlHAlign
             Get
                 Return InvokeGetProperty(Of XlHAlign)("HorizontalAlignment")
