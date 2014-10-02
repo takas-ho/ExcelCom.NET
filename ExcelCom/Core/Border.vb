@@ -41,6 +41,18 @@
             ''' <summary>線なし</summary>
             xlLineStyleNone = -4142
         End Enum
+
+        ''' <summary>罫線の太さ</summary>
+        Public Enum XlBorderWeight
+            ''' <summary>極細(最も細い罫線)</summary>
+            xlHairline = 1
+            ''' <summary>細い</summary>
+            xlThin = 2
+            ''' <summary>太い (最も太い罫線)</summary>
+            xlThick = 4
+            ''' <summary>中</summary>
+            xlMedium = -4138
+        End Enum
 #End Region
 
         Public Sub New(ByVal parent As IExcelCollection(Of Border), ByVal comObject As Object)
@@ -71,6 +83,15 @@
             End Get
             Set(ByVal value As XlLineStyle)
                 InvokeSetProperty("LineStyle", value)
+            End Set
+        End Property
+
+        Public Property Weight() As XlBorderWeight
+            Get
+                Return InvokeGetProperty(Of XlBorderWeight)("Weight")
+            End Get
+            Set(ByVal value As XlBorderWeight)
+                InvokeSetProperty("Weight", value)
             End Set
         End Property
 

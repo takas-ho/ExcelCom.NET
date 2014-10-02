@@ -97,6 +97,14 @@ Namespace Core
                 End Try
             End Sub
 
+            <Test()> Public Sub Weight_(<Values(Border.XlBorderWeight.xlHairline, Border.XlBorderWeight.xlMedium, Border.XlBorderWeight.xlThick, Border.XlBorderWeight.xlThin)> ByVal weight As Border.XlBorderWeight)
+                With sheet.Cells(4, 5).Borders(Border.XlBordersIndex.xlEdgeTop)
+                    .LineStyle = Border.XlLineStyle.xlContinuous
+                    .Weight = weight
+                    Assert.That(.Weight, [Is].EqualTo(weight))
+                End With
+            End Sub
+
         End Class
 
     End Class
