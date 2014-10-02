@@ -115,6 +115,10 @@
             End Get
         End Property
 
+        Public Function Borders() As Borders
+            Return New Borders(Me, InvokeGetProperty("Borders"))
+        End Function
+
         Public ReadOnly Property Column() As Integer
             Get
                 Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Column"))

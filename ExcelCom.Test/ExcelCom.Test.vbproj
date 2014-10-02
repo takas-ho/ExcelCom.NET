@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Core\AbstractExcelObjectTest.vb" />
     <Compile Include="Core\ApplicationTest.vb" />
+    <Compile Include="Core\BordersTest.vb" />
+    <Compile Include="Core\BorderTest.vb" />
     <Compile Include="Core\FontTest.vb" />
     <Compile Include="Core\InteriorTest.vb" />
     <Compile Include="Core\RangeTest.vb" />
