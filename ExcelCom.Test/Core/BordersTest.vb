@@ -34,13 +34,13 @@ Namespace Core
 
         End Class
 
-        'Public Class PropertyたちTest : Inherits ShapesTest
+        Public Class PropertyたちTest : Inherits BordersTest
 
-        '    <Test()> Public Sub Count_最初は0超_シート数はローカルPCの設定で変わる()
-        '        Assert.That(workbook.Sheets.Count, [Is].GreaterThan(0))
-        '    End Sub
+            <Test()> Public Sub Count_最初は0超()
+                Assert.That(sheet.Cells(3, 4).Borders.Count, [Is].GreaterThan(0))
+            End Sub
 
-        'End Class
+        End Class
 
     End Class
 End Namespace
