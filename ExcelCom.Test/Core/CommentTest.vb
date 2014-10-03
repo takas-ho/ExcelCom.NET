@@ -66,14 +66,15 @@ Namespace Core
 
         Public Class ExcelObjectたちTest : Inherits CommentTest
 
-            '<Test()> Public Sub Cellsが閉じられること()
-            '    Dim cells As Range = workbook.Sheets(0).Shapes
+            <Test()> Public Sub Shapeが閉じられること()
+                Dim aComment As Comment = sheet.Cells(5, 6).AddComment
+                Dim shape As Shape = aComment.Shape
 
-            '    sut.Dispose()
-            '    sut = Nothing
+                sut.Dispose()
+                sut = Nothing
 
-            '    TestUtil.AssertNotExistsExcelPropcess()
-            'End Sub
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
 
         End Class
 

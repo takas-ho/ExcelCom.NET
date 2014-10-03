@@ -19,5 +19,15 @@
             Return InvokeMethod(Of String)("Text", args.ToArray)
         End Function
 
+        Private _shape As Shape
+        Public ReadOnly Property Shape() As Shape
+            Get
+                If _shape Is Nothing Then
+                    _shape = New Shape(Me, InvokeGetProperty("Shape"))
+                End If
+                Return _shape
+            End Get
+        End Property
+
     End Class
 End Namespace
