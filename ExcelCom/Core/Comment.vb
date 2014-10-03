@@ -5,6 +5,12 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Public ReadOnly Property Author() As String
+            Get
+                Return InvokeGetProperty(Of String)("Author")
+            End Get
+        End Property
+
         Public Function Text(Optional ByVal aText As Object = Nothing, Optional ByVal start As Object = Nothing, Optional ByVal overwrite As Object = Nothing) As String
             Dim args As New List(Of Object)
             If aText IsNot Nothing Then

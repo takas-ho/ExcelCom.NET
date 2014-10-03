@@ -80,6 +80,11 @@ Namespace Core
 
         Public Class PropertyたちTest : Inherits CommentTest
 
+            <Test()> Public Sub Author_()
+                Dim author As String = sheet.Cells(5, 6).AddComment.Author
+                Assert.That(author, [Is].Not.Empty, "ログインユーザー名")
+            End Sub
+
         End Class
 
     End Class
