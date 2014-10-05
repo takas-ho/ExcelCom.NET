@@ -105,6 +105,31 @@ Namespace Core
             Return _workbooks
         End Function
 
+        Public Function ActiveWindow() As Window
+            ' InternalActiveWindowで作った Windowは、#Windows値の内部Itemとインスタンス違いだから公開しちゃいけない
+            Dim window As Window = InternalActiveWindow()
+            If window Is Nothing Then
+                Return Nothing
+            End If
+            Return Windows(window.Index)
+        End Function
+
+        Private Function InternalActiveWindow() As Window
+            Dim comObject As Object = InvokeGetProperty("ActiveWindow")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Window(Windows, comObject)
+        End Function
+
+        Private _windows As Windows
+        Public Function Windows() As Windows
+            If _windows Is Nothing Then
+                _windows = New Windows(Me, InvokeGetProperty("Windows"))
+            End If
+            Return _windows
+        End Function
+
         ''' <summary>計算方法</summary>
         ''' <remarks>※Workbookを開かないとエラー</remarks>
         Public Property Calculation() As XlCalculation

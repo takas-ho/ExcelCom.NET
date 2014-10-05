@@ -48,6 +48,25 @@ Namespace Core
                 TestUtil.AssertNotExistsExcelPropcess()
             End Sub
 
+            <Test()> Public Sub Windowsが閉じられること()
+                Dim windows As Windows = sut.Windows
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub ActiveWindowが閉じられること()
+                sut.Workbooks.Add()
+                Dim window As Window = sut.ActiveWindow
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
         End Class
 
         Public Class PropertyたちTest : Inherits ApplicationTest
@@ -139,6 +158,27 @@ Namespace Core
                 Dim activeBook As Workbook = sut.ActiveWorkbook
 
                 Assert.That(activeBook, [Is].SameAs(book2))
+            End Sub
+
+        End Class
+
+        Public Class ActiveWindowTest : Inherits ApplicationTest
+
+            <Test()> Public Sub Bookを開いてないならnullを返す()
+                Dim window As Window = sut.ActiveWindow
+                Assert.That(window, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub Bookを開いてれば_有効値を返す()
+                sut.Workbooks.Add()
+                Dim window As Window = sut.ActiveWindow
+                Assert.That(window, [Is].Not.Null)
+            End Sub
+
+            <Test()> Public Sub Windowsのインスタンスと同一である()
+                sut.Workbooks.Add()
+                Dim window As Window = sut.ActiveWindow
+                Assert.That(window, [Is].SameAs(sut.Windows(0)))
             End Sub
 
         End Class
