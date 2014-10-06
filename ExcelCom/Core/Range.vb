@@ -1,6 +1,8 @@
 ﻿Namespace Core
     Public Class Range : Inherits AbstractExcelSubObject : Implements IExcelObject
 
+#Region "Xl定数"
+
         Public Enum XlSearchDirection
             xlNext = 1
             xlPrevious = 2
@@ -52,6 +54,7 @@
             ''' <summary>上詰め</summary>
             xlVAlignTop = -4160
         End Enum
+#End Region
 
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
             MyBase.New(parent, comObject)
@@ -114,6 +117,18 @@
                 Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(row), RuleUtil.ConvIndexDotNET2VBA(column)))
             End Get
         End Property
+
+        Public Function AddComment(Optional ByVal text As String = Nothing) As Comment
+            Dim args As New List(Of Object)
+            If text IsNot Nothing Then
+                args.Add(New NamedParameter("Text", text))
+            End If
+            Dim comObject As Object = InvokeMethod("AddComment", args.ToArray)
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Comment(Me, comObject)
+        End Function
 
         Public Function Borders() As Borders
             Return New Borders(Me, InvokeGetProperty("Borders"))

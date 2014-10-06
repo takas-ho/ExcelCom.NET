@@ -195,6 +195,15 @@ Namespace Core
                 TestUtil.AssertNotExistsExcelPropcess()
             End Sub
 
+            <Test()> Public Sub AddCommentが閉じられること()
+                Dim item As Comment = sheet.Cells(2, 3).AddComment("aiueo")
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
         End Class
 
         Public Class PropertyたちTest : Inherits RangeTest

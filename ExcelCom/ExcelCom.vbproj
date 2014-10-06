@@ -55,6 +55,7 @@
     <Compile Include="Core\Application.vb" />
     <Compile Include="Core\Border.vb" />
     <Compile Include="Core\Borders.vb" />
+    <Compile Include="Core\Comment.vb" />
     <Compile Include="Core\Font.vb" />
     <Compile Include="Core\IExcelCollection.vb" />
     <Compile Include="Core\Interior.vb" />
