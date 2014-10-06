@@ -12,5 +12,14 @@
             End Get
         End Property
 
+        Public Property FreezePanes() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("FreezePanes")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("FreezePanes", value)
+            End Set
+        End Property
+
     End Class
 End Namespace

@@ -63,6 +63,7 @@
     <Compile Include="Core\RangeTest.vb" />
     <Compile Include="Core\ShapesTest.vb" />
     <Compile Include="Core\ShapeTest.vb" />
+    <Compile Include="Core\WindowTest.vb" />
     <Compile Include="LearningExcelComObjectTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
