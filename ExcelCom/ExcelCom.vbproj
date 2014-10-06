@@ -62,6 +62,8 @@
     <Compile Include="Core\NamedParameter.vb" />
     <Compile Include="Core\Shape.vb" />
     <Compile Include="Core\Shapes.vb" />
+    <Compile Include="Core\Window.vb" />
+    <Compile Include="Core\Windows.vb" />
     <Compile Include="Core\XlFileFormat.vb">
       <SubType>Code</SubType>
     </Compile>
