@@ -1,4 +1,6 @@
-﻿Imports NUnit.Framework
+﻿Imports System.Runtime.InteropServices
+Imports NUnit.Framework
+Imports System.Reflection
 
 Namespace Core
 
@@ -31,6 +33,24 @@ Namespace Core
             <Test()> Public Sub D2のCells00をCells13と比較できる()
                 workbook.Sheets.Item(0).Range("D2").Cells(0, 0).Value = "xyz"
                 Assert.That(workbook.Sheets.Item(0).Cells(1, 3).Value, [Is].EqualTo("xyz"))
+            End Sub
+
+        End Class
+
+        Public Class AutoFilterTest : Inherits RangeTest
+
+            <Test()> Public Sub AutoFilter呼出ができる()
+                sheet.Cells(0, 0).Value = "3"
+                sheet.Cells(0, 0).AutoFilter(columnIndex:=0, criteria1:="6")
+            End Sub
+
+            <Test()> Public Sub 値がないとエラーになる()
+                Try
+                    sheet.Cells(0, 0).AutoFilter(columnIndex:=0, criteria1:="6")
+                    Assert.Fail()
+                Catch expected As TargetInvocationException
+                    Assert.That(expected.InnerException.Message, [Is].EqualTo("Range クラスの AutoFilter メソッドが失敗しました。"))
+                End Try
             End Sub
 
         End Class

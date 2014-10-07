@@ -54,6 +54,15 @@
             ''' <summary>上詰め</summary>
             xlVAlignTop = -4160
         End Enum
+
+        Public Enum XlAutoFilterOperator
+            xlAnd = 1
+            xlOr = 2
+            xlBottom10Items = 4
+            xlBottom10Percent = 6
+            xlTop10Items = 3
+            xlTop10Percent = 5
+        End Enum
 #End Region
 
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
@@ -62,6 +71,24 @@
 
         Public Function AutoFit() As Object
             Return InvokeMethod("AutoFit")
+        End Function
+
+        Public Function AutoFilter(Optional ByVal columnIndex As Integer = -1, Optional ByVal criteria1 As String = Nothing, _
+                                   Optional ByVal [operator] As XlAutoFilterOperator = XlAutoFilterOperator.xlAnd, _
+                                   Optional ByVal criteria2 As String = Nothing, Optional ByVal visibleDropDown As Boolean = True) As Object
+            Dim args As New List(Of Object)
+            If 0 <= columnIndex Then
+                args.Add(New NamedParameter("Field", RuleUtil.ConvIndexDotNET2VBA(columnIndex)))
+            End If
+            If Not String.IsNullOrEmpty(criteria1) Then
+                args.Add(New NamedParameter("Criteria1", criteria1))
+            End If
+            args.Add(New NamedParameter("Operator", [operator]))
+            If Not String.IsNullOrEmpty(criteria2) Then
+                args.Add(New NamedParameter("Criteria2", criteria2))
+            End If
+            args.Add(New NamedParameter("VisibleDropDown", visibleDropDown))
+            Return InvokeMethod("AutoFilter", args.ToArray)
         End Function
 
         Public Sub Copy(Optional ByVal destination As Object = Nothing)
