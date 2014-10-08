@@ -6,10 +6,12 @@ Namespace Core
 
         Private sut As Application
         Private workbook As Workbook
+        Private sheet As Worksheet
 
         <SetUp()> Public Sub SetUp()
             sut = New Application
             workbook = sut.Workbooks.Add
+            sheet = workbook.Sheets.Add()
         End Sub
 
         <TearDown()> Public Sub TearDown()
@@ -58,14 +60,29 @@ Namespace Core
 
         Public Class PropertyたちTest : Inherits ShapeTest
 
-            '<Test()> Public Sub Visible(<Values(Worksheet.XlSheetVisibility.xlSheetHidden, Worksheet.XlSheetVisibility.xlSheetVeryHidden, Worksheet.XlSheetVisibility.xlSheetVisible)> ByVal value As Worksheet.XlSheetVisibility)
-            '    Dim sheet1 As Worksheet = workbook.Sheets.Add()
-            '    Dim sheet2 As Worksheet = workbook.Sheets.Add(after:=sheet1)
-            '    sheet2.Select()
+            <Test()> Public Sub Height_()
+                Dim shape As Shape = sheet.Shapes.AddLine(10.0F, 20.0F, 30.0F, 40.0F)
+                shape.Height = 20.0F
+                Assert.That(shape.Height, [Is].EqualTo(20.25F))
+            End Sub
 
-            '    workbook.Sheets(0).Visible = value
-            '    Assert.That(workbook.Sheets(0).Visible, [Is].EqualTo(value))
-            'End Sub
+            <Test()> Public Sub Width_()
+                Dim shape As Shape = sheet.Shapes.AddLine(10.0F, 20.0F, 30.0F, 40.0F)
+                shape.Width = 20.0F
+                Assert.That(shape.Width, [Is].EqualTo(20.25F))
+            End Sub
+
+            <Test()> Public Sub Top_()
+                Dim shape As Shape = sheet.Shapes.AddLine(10.0F, 20.0F, 30.0F, 40.0F)
+                shape.Top = 20.0F
+                Assert.That(shape.Top, [Is].EqualTo(20.25F))
+            End Sub
+
+            <Test()> Public Sub Left_()
+                Dim shape As Shape = sheet.Shapes.AddLine(10.0F, 20.0F, 30.0F, 40.0F)
+                shape.Left = 20.0F
+                Assert.That(shape.Left, [Is].EqualTo(20.25F))
+            End Sub
 
         End Class
 
