@@ -63,6 +63,21 @@
             xlTop10Items = 3
             xlTop10Percent = 5
         End Enum
+
+        ''' <summary>セルタイプ</summary>
+        Public Enum XlCellType
+            xlCellTypeAllFormatConditions = -4172
+            xlCellTypeAllValidation = -4174
+            xlCellTypeBlanks = 4
+            xlCellTypeComments = -4144
+            xlCellTypeConstants = 2
+            xlCellTypeFormulas = -4123
+            ''' <summary>データ入力最終セル</summary>
+            xlCellTypeLastCell = 11
+            xlCellTypeSameFormatConditions = -4173
+            xlCellTypeSameValidation = -4175
+            xlCellTypeVisible = 12
+        End Enum
 #End Region
 
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
@@ -285,6 +300,10 @@
                 InvokeSetProperty("ShrinkToFit", value)
             End Set
         End Property
+
+        Public Function SpecialCells(ByVal type As XlCellType, Optional ByVal value As Object = Nothing) As Range
+            Return New Range(Me, InvokeMethod("SpecialCells", type))
+        End Function
 
         Public ReadOnly Property Text() As String
             Get

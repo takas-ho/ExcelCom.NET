@@ -150,6 +150,18 @@ Namespace Core
 
         End Class
 
+        Public Class SpecialCellsTest : Inherits RangeTest
+
+            <Test()> Public Sub xlCellTypeLastCell_データ入力最終セルを返す()
+                sheet.Cells(2, 2).Value = "aaa"
+                sheet.Cells(3, 3).Value = "bbb"
+                Dim range As Range = sheet.Cells.SpecialCells(range.XlCellType.xlCellTypeLastCell)
+
+                Assert.That(range.Row, [Is].EqualTo(3))
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits RangeTest
 
             <Test()> Public Sub Columnsが閉じられること()
@@ -217,6 +229,16 @@ Namespace Core
 
             <Test()> Public Sub AddCommentが閉じられること()
                 Dim item As Comment = sheet.Cells(2, 3).AddComment("aiueo")
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub SpecialCellsのRangeが閉じられること()
+                sheet.Cells(2, 3).Value = "aaa"
+                Dim range As Range = sheet.Cells.SpecialCells(range.XlCellType.xlCellTypeLastCell)
 
                 sut.Dispose()
                 sut = Nothing
