@@ -35,6 +35,18 @@
             End Set
         End Property
 
+        Public Sub PrintOut(Optional ByVal printerName As String = Nothing, Optional ByVal preview As Boolean = False, _
+                            Optional ByVal copyCount As Integer = 1, Optional ByVal isCollate As Boolean = True)
+            Dim args As New List(Of Object)
+            If Not String.IsNullOrEmpty(printerName) Then
+                args.Add(New NamedParameter("ActivePrinter", printerName))
+            End If
+            args.Add(New NamedParameter("Preview", preview))
+            args.Add(New NamedParameter("Copies", copyCount))
+            args.Add(New NamedParameter("Collate", isCollate))
+            InvokeMethod("PrintOut", args.ToArray)
+        End Sub
+
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)
         End Function
