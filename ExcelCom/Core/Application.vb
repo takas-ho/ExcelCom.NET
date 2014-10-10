@@ -168,6 +168,12 @@ Namespace Core
             End Set
         End Property
 
+        Public ReadOnly Property Version() As String
+            Get
+                Return InvokeGetProperty(Of String)("Version")
+            End Get
+        End Property
+
         Public Property Visible() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("Visible")

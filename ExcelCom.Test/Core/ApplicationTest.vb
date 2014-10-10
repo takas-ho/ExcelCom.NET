@@ -103,6 +103,11 @@ Namespace Core
                 Assert.That(sut.Visible, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub Version()
+                ' Excel2003だと、"11.0"
+                Assert.That(sut.Version, [Is].Not.Empty)
+            End Sub
+
         End Class
 
         Public Class ActiveSheetTest : Inherits ApplicationTest
