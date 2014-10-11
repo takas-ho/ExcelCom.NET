@@ -5,6 +5,16 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Private _chart As Chart
+        Public ReadOnly Property Chart() As Chart
+            Get
+                If _chart Is Nothing Then
+                    _chart = New Chart(Me, InvokeGetProperty("Chart"))
+                End If
+                Return _chart
+            End Get
+        End Property
+
         Public ReadOnly Property Index() As Integer
             Get
                 Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Index"))
