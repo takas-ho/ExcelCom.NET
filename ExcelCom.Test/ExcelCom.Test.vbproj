@@ -59,6 +59,7 @@
     <Compile Include="Core\BorderTest.vb" />
     <Compile Include="Core\ChartObjectsTest.vb" />
     <Compile Include="Core\ChartObjectTest.vb" />
+    <Compile Include="Core\ChartTest.vb" />
     <Compile Include="Core\CommentTest.vb" />
     <Compile Include="Core\FontTest.vb" />
     <Compile Include="Core\InteriorTest.vb" />

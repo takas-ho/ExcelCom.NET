@@ -65,6 +65,8 @@
     <Compile Include="Core\IExcelCollection.vb" />
     <Compile Include="Core\Interior.vb" />
     <Compile Include="Core\NamedParameter.vb" />
+    <Compile Include="Core\Series.vb" />
+    <Compile Include="Core\SeriesCollection.vb" />
     <Compile Include="Core\Shape.vb" />
     <Compile Include="Core\Shapes.vb" />
     <Compile Include="Core\Window.vb" />

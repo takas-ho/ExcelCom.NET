@@ -5,5 +5,9 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Public Function SeriesCollection() As SeriesCollection
+            Return New SeriesCollection(Me, InvokeMethod("SeriesCollection"))
+        End Function
+
     End Class
 End Namespace
