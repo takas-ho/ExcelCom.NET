@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Core\ChartObject.vb" />
     <Compile Include="Core\ChartObjects.vb" />
+    <Compile Include="Core\Charts.vb" />
     <Compile Include="Core\Comment.vb" />
     <Compile Include="Core\Font.vb" />
     <Compile Include="Core\IExcelCollection.vb" />

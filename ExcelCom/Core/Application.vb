@@ -141,6 +141,16 @@ Namespace Core
             End Set
         End Property
 
+        Private _charts As Charts
+        Public ReadOnly Property Charts() As Charts
+            Get
+                If _charts Is Nothing Then
+                    _charts = New Charts(Me, InvokeGetProperty("Charts"))
+                End If
+                Return _charts
+            End Get
+        End Property
+
         Public Property CutCopyMode() As XlCutCopyMode
             Get
                 Return InvokeGetProperty(Of XlCutCopyMode)("CutCopyMode")
