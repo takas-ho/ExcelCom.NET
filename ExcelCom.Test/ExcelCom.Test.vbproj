@@ -64,6 +64,7 @@
     <Compile Include="Core\FontTest.vb" />
     <Compile Include="Core\InteriorTest.vb" />
     <Compile Include="Core\RangeTest.vb" />
+    <Compile Include="Core\SeriesCollectionTest.vb" />
     <Compile Include="Core\ShapesTest.vb" />
     <Compile Include="Core\ShapeTest.vb" />
     <Compile Include="Core\WindowTest.vb" />
