@@ -21,27 +21,28 @@ Namespace Core
             sut.Dispose()
         End Sub
 
-        'Public Class CellsTest : Inherits ChartTest
+        'Public Class LocationTest : Inherits ChartTest
 
         '    <Test()> Public Sub Cellsの値をRangeと比較できる()
-        '        workbook.Sheets.Item(0).Cells(0, 1).Value = "abc"
+        '        Dim chart As Chart = sut.Charts.Add
+        '        chart.Location(Core.Chart.XlChartLocation.xlLocationAsObject, name:="ほげ")
 
-        '        Assert.That(workbook.Sheets.Item(0).Range("B1").Value, [Is].EqualTo("abc"))
+        '        Assert.That(chart.Name, [Is].EqualTo("ほげ"))
         '    End Sub
 
-        '    <Test()> Public Sub Cellsの値をRangeと比較できる2()
-        '        workbook.Sheets.Item(0).Cells(2, 0).Value = "aiueo"
+        '    '<Test()> Public Sub Cellsの値をRangeと比較できる2()
+        '    '    workbook.Sheets.Item(0).Cells(2, 0).Value = "aiueo"
 
-        '        Assert.That(workbook.Sheets.Item(0).Range("A3").Value, [Is].EqualTo("aiueo"))
-        '    End Sub
+        '    '    Assert.That(workbook.Sheets.Item(0).Range("A3").Value, [Is].EqualTo("aiueo"))
+        '    'End Sub
 
-        '    <Test()> Public Sub Hoge()
-        '        Dim start As Range = workbook.Sheets.Item(0).Cells(1, 1)
+        '    '<Test()> Public Sub Hoge()
+        '    '    Dim start As Range = workbook.Sheets.Item(0).Cells(1, 1)
 
-        '        Dim target As Range = workbook.Sheets.Item(0).Range(start, start)
-        '        target.Value = "xyz"
-        '        Assert.That(workbook.Sheets.Item(0).Range("B2").Value, [Is].EqualTo("xyz"))
-        '    End Sub
+        '    '    Dim target As Range = workbook.Sheets.Item(0).Range(start, start)
+        '    '    target.Value = "xyz"
+        '    '    Assert.That(workbook.Sheets.Item(0).Range("B2").Value, [Is].EqualTo("xyz"))
+        '    'End Sub
 
         'End Class
 
@@ -60,11 +61,11 @@ Namespace Core
 
         Public Class PropertyたちTest : Inherits ChartTest
 
-            '<Test()> Public Sub Height_()
-            '    Dim shape As ChartObject = sheet.ChartObjects.Add(2, 3, 4, 5).Chart
-            '    shape.Height = 20.0F
-            '    Assert.That(shape.Height, [Is].EqualTo(20.25F))
-            'End Sub
+            <Test()> Public Sub HasLegend_(<Values(True, False)> ByVal value As Boolean)
+                Dim chart As Chart = sut.Charts.Add
+                chart.HasLegend = value
+                Assert.That(chart.HasLegend, [Is].EqualTo(value))
+            End Sub
 
         End Class
 

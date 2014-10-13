@@ -21,8 +21,18 @@ Namespace Core
             Return -1
         End Function
 
-        Public Function Add(ByVal Left As Double, ByVal Top As Double, ByVal Width As Double, ByVal Height As Double) As Chart
-            Dim comObject As Object = InvokeMethod("Add", Left, Top, Width, Height)
+        Public Function Add(Optional ByVal Before As Object = Nothing, Optional ByVal After As Object = Nothing, Optional ByVal Count As Object = Nothing) As Chart
+            Dim args As New List(Of Object)
+            If Before IsNot Nothing Then
+                args.Add(New NamedParameter("Before", Before))
+            End If
+            If After IsNot Nothing Then
+                args.Add(New NamedParameter("After", After))
+            End If
+            If Count IsNot Nothing Then
+                args.Add(New NamedParameter("Count", Count))
+            End If
+            Dim comObject As Object = InvokeMethod("Add", args.ToArray)
             If comObject Is Nothing Then
                 Return Nothing
             End If
