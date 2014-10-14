@@ -308,6 +308,11 @@ Namespace Core
                 Assert.That(sheet.Range(sheet.Cells(1, 1), sheet.Cells(1, 3)).MergeCells, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub FormulaR1C1_(<Values("=A1", "=SUM(A1:G1)")> ByVal value As String)
+                sheet.Cells(1, 1).FormulaR1C1 = value
+                Assert.That(sheet.Cells(1, 1).FormulaR1C1, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class

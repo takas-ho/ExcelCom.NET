@@ -213,6 +213,15 @@
             Return New Font(Me, InvokeGetProperty("Font"))
         End Function
 
+        Public Property FormulaR1C1() As String
+            Get
+                Return InvokeGetProperty(Of String)("FormulaR1C1")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("FormulaR1C1", value)
+            End Set
+        End Property
+
         Public Property HorizontalAlignment() As XlHAlign
             Get
                 Return InvokeGetProperty(Of XlHAlign)("HorizontalAlignment")
