@@ -67,6 +67,16 @@ Namespace Core
                 TestUtil.AssertNotExistsExcelPropcess()
             End Sub
 
+            <Test()> Public Sub Chartsが閉じられること()
+                sut.Workbooks.Add()
+                Dim value As Charts = sut.Charts
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
         End Class
 
         Public Class PropertyたちTest : Inherits ApplicationTest

@@ -16,6 +16,14 @@
             Return New Range(Me, InvokeGetProperty("Cells"))
         End Function
 
+        Private _chartObjects As ChartObjects
+        Public Function ChartObjects() As ChartObjects
+            If _chartObjects Is Nothing Then
+                _chartObjects = New ChartObjects(Me, InvokeGetProperty("ChartObjects"))
+            End If
+            Return _chartObjects
+        End Function
+
         Public Function Columns() As Range
             Return New Range(Me, InvokeGetProperty("Columns"))
         End Function
