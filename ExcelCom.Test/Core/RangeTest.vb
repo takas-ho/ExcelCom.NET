@@ -313,6 +313,11 @@ Namespace Core
                 Assert.That(sheet.Cells(1, 1).FormulaR1C1, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub FormulaR1C1Local_(<Values("=A1", "=SUM(A1:G1)")> ByVal value As String)
+                sheet.Cells(1, 1).FormulaR1C1Local = value
+                Assert.That(sheet.Cells(1, 1).FormulaR1C1Local, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class

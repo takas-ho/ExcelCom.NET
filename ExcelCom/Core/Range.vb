@@ -222,6 +222,15 @@
             End Set
         End Property
 
+        Public Property FormulaR1C1Local() As String
+            Get
+                Return InvokeGetProperty(Of String)("FormulaR1C1Local")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("FormulaR1C1Local", value)
+            End Set
+        End Property
+
         Public Property HorizontalAlignment() As XlHAlign
             Get
                 Return InvokeGetProperty(Of XlHAlign)("HorizontalAlignment")
