@@ -186,6 +186,13 @@ Namespace Core
                 Assert.That(sheet.Range("C3").MergeCells, [Is].False)
             End Sub
 
+            <Test()> Public Sub MergeAreaでセル結合範囲を取得できる_任意の一つのセルだけで取得できる()
+                sheet.Range("A1:C3").Merge()
+                Dim actual As Range = sheet.Range("A1").MergeArea
+                Assert.That(actual.Columns.Count, [Is].EqualTo(3))
+                Assert.That(actual.Rows.Count, [Is].EqualTo(3))
+            End Sub
+
         End Class
 
         Public Class ExcelObjectたちTest : Inherits RangeTest
@@ -265,6 +272,16 @@ Namespace Core
             <Test()> Public Sub SpecialCellsのRangeが閉じられること()
                 sheet.Cells(2, 3).Value = "aaa"
                 Dim range As Range = sheet.Cells.SpecialCells(range.XlCellType.xlCellTypeLastCell)
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub MergeAreaのRangeが閉じられること()
+                sheet.Range("A1:B5").Merge()
+                Dim value As Range = sheet.Range("A2").MergeArea
 
                 sut.Dispose()
                 sut = Nothing

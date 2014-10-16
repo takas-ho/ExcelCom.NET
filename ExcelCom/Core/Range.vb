@@ -211,7 +211,7 @@
 
         Public ReadOnly Property Count() As Long
             Get
-                Return InvokeGetProperty(Of Long)("Count")
+                Return InvokeGetProperty(Of Integer)("Count")
             End Get
         End Property
 
@@ -289,6 +289,14 @@
             args.Add(New NamedParameter("Across", across))
             InvokeMethod("Merge", args.ToArray)
         End Sub
+
+        Public Function MergeArea() As Range
+            Dim comObject As Object = InvokeGetProperty("MergeArea")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, comObject)
+        End Function
 
         Public Property MergeCells() As Boolean
             Get
