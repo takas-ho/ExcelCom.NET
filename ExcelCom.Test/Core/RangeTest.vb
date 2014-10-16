@@ -328,6 +328,11 @@ Namespace Core
                 Assert.That(sheet.Cells(1, 1).FormulaR1C1Local, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub Orientation_(<Values(Range.XlOrientation.xlDownward, Range.XlOrientation.xlHorizontal, Range.XlOrientation.xlUpward, Range.XlOrientation.xlVertical)> ByVal value As Range.XlOrientation)
+                sheet.Cells(1, 1).Orientation = value
+                Assert.That(sheet.Cells(1, 1).Orientation, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class

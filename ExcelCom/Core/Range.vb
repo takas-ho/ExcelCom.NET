@@ -78,6 +78,20 @@
             xlCellTypeSameValidation = -4175
             xlCellTypeVisible = 12
         End Enum
+
+        ''' <summary>
+        ''' 文字列の向きを指定します
+        ''' </summary>
+        Public Enum XlOrientation
+            ''' <summary>下向き</summary>
+            xlDownward = -4170
+            ''' <summary>水平</summary>
+            xlHorizontal = -4128
+            ''' <summary>上向き</summary>
+            xlUpward = -4171
+            ''' <summary>垂直 (縦書き)</summary>
+            xlVertical = -4166
+        End Enum
 #End Region
 
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
@@ -285,6 +299,15 @@
             End Get
             Set(ByVal value As Object)
                 InvokeSetProperty("NumberFormatLocal", value)
+            End Set
+        End Property
+
+        Public Property Orientation() As XlOrientation
+            Get
+                Return InvokeGetProperty(Of XlOrientation)("Orientation")
+            End Get
+            Set(ByVal value As XlOrientation)
+                InvokeSetProperty("Orientation", value)
             End Set
         End Property
 
