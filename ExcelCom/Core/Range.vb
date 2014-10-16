@@ -213,6 +213,24 @@
             Return New Font(Me, InvokeGetProperty("Font"))
         End Function
 
+        Public Property Formula() As String
+            Get
+                Return InvokeGetProperty(Of String)("Formula")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("Formula", value)
+            End Set
+        End Property
+
+        Public Property FormulaLocal() As String
+            Get
+                Return InvokeGetProperty(Of String)("FormulaLocal")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("FormulaLocal", value)
+            End Set
+        End Property
+
         Public Property FormulaR1C1() As String
             Get
                 Return InvokeGetProperty(Of String)("FormulaR1C1")

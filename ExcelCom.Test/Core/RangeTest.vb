@@ -308,12 +308,22 @@ Namespace Core
                 Assert.That(sheet.Range(sheet.Cells(1, 1), sheet.Cells(1, 3)).MergeCells, [Is].EqualTo(value))
             End Sub
 
-            <Test()> Public Sub FormulaR1C1_(<Values("=A1", "=SUM(A1:G1)")> ByVal value As String)
+            <Test()> Public Sub Formula_(<Values("=A1", "=SUM(A1:G1)")> ByVal value As String)
+                sheet.Cells(1, 1).Formula = value
+                Assert.That(sheet.Cells(1, 1).Formula, [Is].EqualTo(value))
+            End Sub
+
+            <Test()> Public Sub FormulaLocal_(<Values("=A1", "=SUM(A1:G1)")> ByVal value As String)
+                sheet.Cells(1, 1).FormulaLocal = value
+                Assert.That(sheet.Cells(1, 1).FormulaLocal, [Is].EqualTo(value))
+            End Sub
+
+            <Test()> Public Sub FormulaR1C1_(<Values("=R[3]C", "=R[1]C[2]")> ByVal value As String)
                 sheet.Cells(1, 1).FormulaR1C1 = value
                 Assert.That(sheet.Cells(1, 1).FormulaR1C1, [Is].EqualTo(value))
             End Sub
 
-            <Test()> Public Sub FormulaR1C1Local_(<Values("=A1", "=SUM(A1:G1)")> ByVal value As String)
+            <Test()> Public Sub FormulaR1C1Local_(<Values("=R[3]C", "=R[1]C[2]")> ByVal value As String)
                 sheet.Cells(1, 1).FormulaR1C1Local = value
                 Assert.That(sheet.Cells(1, 1).FormulaR1C1Local, [Is].EqualTo(value))
             End Sub
