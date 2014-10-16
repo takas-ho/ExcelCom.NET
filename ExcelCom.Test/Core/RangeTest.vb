@@ -162,6 +162,32 @@ Namespace Core
 
         End Class
 
+        Public Class MergeTest : Inherits RangeTest
+
+            <Test()> Public Sub Mergeでセル結合できる()
+                sheet.Range("A1:C3").Merge()
+                Assert.That(sheet.Range("A1:C3").MergeCells, [Is].True)
+                Assert.That(sheet.Range("A1").MergeCells, [Is].True)
+                Assert.That(sheet.Range("B2").MergeCells, [Is].True)
+                Assert.That(sheet.Range("C3").MergeCells, [Is].True)
+            End Sub
+
+            <Test()> Public Sub UnMergeでセル結合を解除する()
+                sheet.Range("A1:C3").Merge()
+                sheet.Range("A1:C3").UnMerge()
+                Assert.That(sheet.Range("A1:C3").MergeCells, [Is].False)
+            End Sub
+
+            <Test()> Public Sub UnMergeでセル結合を解除する_任意の一つのセルだけですべて解除される()
+                sheet.Range("A1:C3").Merge()
+                sheet.Range("A1").UnMerge()
+                Assert.That(sheet.Range("A1").MergeCells, [Is].False)
+                Assert.That(sheet.Range("B2").MergeCells, [Is].False)
+                Assert.That(sheet.Range("C3").MergeCells, [Is].False)
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits RangeTest
 
             <Test()> Public Sub Columnsが閉じられること()

@@ -284,6 +284,12 @@
             Return New Interior(Me, InvokeGetProperty("Interior"))
         End Function
 
+        Public Sub Merge(Optional ByVal across As Boolean = False)
+            Dim args As New List(Of Object)
+            args.Add(New NamedParameter("Across", across))
+            InvokeMethod("Merge", args.ToArray)
+        End Sub
+
         Public Property MergeCells() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("MergeCells")
@@ -369,6 +375,10 @@
                 Return InvokeGetProperty(Of String)("Text")
             End Get
         End Property
+
+        Public Sub UnMerge()
+            InvokeMethod("UnMerge")
+        End Sub
 
         Public Property Value() As Object
             Get
