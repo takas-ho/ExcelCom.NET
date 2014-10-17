@@ -376,6 +376,11 @@ Namespace Core
                 Assert.That(sheet.Cells(1, 1).Orientation, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub Hidden_(<Values(False, True)> ByVal value As Boolean)
+                sheet.Rows(3).Hidden = value
+                Assert.That(sheet.Rows(3).Hidden, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class

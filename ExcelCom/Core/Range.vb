@@ -263,6 +263,15 @@
             End Set
         End Property
 
+        Public Property Hidden() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Hidden")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("Hidden", value)
+            End Set
+        End Property
+
         Public Property HorizontalAlignment() As XlHAlign
             Get
                 Return InvokeGetProperty(Of XlHAlign)("HorizontalAlignment")
