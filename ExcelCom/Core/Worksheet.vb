@@ -82,6 +82,29 @@
             InvokeMethod("PrintOut", args.ToArray)
         End Sub
 
+        ''' <summary>
+        ''' 保護する
+        ''' </summary>
+        ''' <param name="password">パスワード</param>
+        ''' <param name="drawingObjects">描画オブジェクトを保護する場合、true</param>
+        ''' <param name="contents">シートの内容を保護する場合、true</param>
+        ''' <param name="scenarios">シナリオを保護する場合、true</param>
+        ''' <param name="userInterfaceOnly">マクロからの変更は可能にする場合、true</param>
+        ''' <remarks></remarks>
+        Public Sub Protect(Optional ByVal password As String = Nothing, Optional ByVal drawingObjects As Boolean = False, _
+                           Optional ByVal contents As Boolean = True, Optional ByVal scenarios As Boolean = True, _
+                           Optional ByVal userInterfaceOnly As Boolean = False)
+            Dim args As New List(Of Object)
+            If Not String.IsNullOrEmpty(password) Then
+                args.Add(New NamedParameter("Password", password))
+            End If
+            args.Add(New NamedParameter("DrawingObjects", drawingObjects))
+            args.Add(New NamedParameter("Contents", contents))
+            args.Add(New NamedParameter("Scenarios", scenarios))
+            args.Add(New NamedParameter("UserInterfaceOnly", userInterfaceOnly))
+            InvokeMethod("Protect", args.ToArray)
+        End Sub
+
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)
         End Function
@@ -114,6 +137,19 @@
             End If
             Return _shapes
         End Function
+
+        ''' <summary>
+        ''' 保護解除する
+        ''' </summary>
+        ''' <param name="password">パスワード</param>
+        ''' <remarks></remarks>
+        Public Sub Unprotect(Optional ByVal password As String = Nothing)
+            Dim args As New List(Of Object)
+            If Not String.IsNullOrEmpty(password) Then
+                args.Add(New NamedParameter("Password", password))
+            End If
+            InvokeMethod("Unprotect", args.ToArray)
+        End Sub
 
         Public Property Visible() As XlSheetVisibility
             Get

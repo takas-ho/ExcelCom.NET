@@ -1,4 +1,5 @@
 ﻿Imports NUnit.Framework
+Imports System.Reflection
 
 Namespace Core
 
@@ -110,6 +111,33 @@ Namespace Core
                 Assert.That(sut.ActiveWorkbook, [Is].Not.SameAs(workbook), "新bookになる")
                 Assert.That(sut.ActiveWorkbook.Sheets.Count, [Is].EqualTo(1), "コピーしたシートだけ")
                 Assert.That(sut.ActiveWorkbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+            End Sub
+
+        End Class
+
+        Public Class ProtectTest : Inherits WorksheetTest
+
+            <Test()> Public Sub 保護すると変更は出来ない()
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet.Cells(2, 2).Value = "a"
+                sheet.Protect()
+                Try
+                    sheet.Cells(2, 2).Value = "b"
+                    Assert.Fail()
+                Catch ex As TargetInvocationException
+                    Assert.That(ex.InnerException.Message, [Is].StringContaining("変更しようとしているセルまたはグラフは保護されているため"))
+                End Try
+            End Sub
+
+            <Test()> Public Sub 保護解除すれば_無事に変更できる()
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet.Cells(2, 2).Value = "a"
+                sheet.Protect()
+                sheet.Unprotect()
+
+                sheet.Cells(2, 2).Value = "b"
+
+                Assert.That(sheet.Cells(2, 2).Value, [Is].EqualTo("b"))
             End Sub
 
         End Class
