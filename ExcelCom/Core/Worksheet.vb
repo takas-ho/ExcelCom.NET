@@ -8,8 +8,11 @@
             xlSheetVisible = -1
         End Enum
 
+        Private Shadows ReadOnly parent As IExcelCollection(Of Worksheet)
+
         Public Sub New(ByVal parent As IExcelCollection(Of Worksheet), ByVal comObject As Object)
             MyBase.New(parent, comObject)
+            Me.parent = parent
         End Sub
 
         Public Function Cells() As Range
@@ -27,6 +30,30 @@
         Public Function Columns() As Range
             Return New Range(Me, InvokeGetProperty("Columns"))
         End Function
+
+        Public Sub Copy(Optional ByVal before As Worksheet = Nothing, Optional ByVal after As Worksheet = Nothing)
+            Dim args As New List(Of Object)
+            If before IsNot Nothing Then
+                args.Add(New NamedParameter("Before", before.ComObject))
+            End If
+            If after IsNot Nothing Then
+                args.Add(New NamedParameter("After", after.ComObject))
+            End If
+            InvokeMethod("Copy", args.ToArray)
+
+            If before IsNot Nothing Then
+                Dim index As Integer = parent.InternalItems.IndexOf(before)
+                If 0 <= index Then
+                    parent.InternalItems.Insert(index, Nothing)
+                End If
+            End If
+            If after IsNot Nothing Then
+                Dim index As Integer = parent.InternalItems.IndexOf(after)
+                If 0 <= index AndAlso index < parent.InternalItems.Count - 1 Then
+                    parent.InternalItems.Insert(index + 1, Nothing)
+                End If
+            End If
+        End Sub
 
         Public ReadOnly Property Index() As Integer
             Get

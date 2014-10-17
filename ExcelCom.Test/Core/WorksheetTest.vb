@@ -43,6 +43,77 @@ Namespace Core
 
         End Class
 
+        Public Class CopyTest : Inherits WorksheetTest
+
+            <Test()> Public Sub 引数一つなら_そのシートの手前にコピー挿入する()
+                workbook.Sheets(0).Cells(2, 3).Value = "opq"
+                Dim sheet2 As Worksheet = workbook.Sheets.Add
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet2.Cells(2, 3).Value = "xyz"
+                sheet.Cells(2, 3).Value = "abc"
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("opq"))
+
+                sheet.Copy(sheet2)
+
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(3).Cells(2, 3).Value, [Is].EqualTo("opq"))
+            End Sub
+
+            <Test()> Public Sub After引数なら_そのシートの後ろにコピー挿入する()
+                workbook.Sheets(0).Cells(2, 3).Value = "opq"
+                Dim sheet2 As Worksheet = workbook.Sheets.Add
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet2.Cells(2, 3).Value = "xyz"
+                sheet.Cells(2, 3).Value = "abc"
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("opq"))
+
+                sheet.Copy(after:=sheet2)
+
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(3).Cells(2, 3).Value, [Is].EqualTo("opq"))
+            End Sub
+
+            <Test()> Public Sub After引数なら_そのシートの後ろにコピー挿入する_境界()
+                workbook.Sheets(0).Cells(2, 3).Value = "opq"
+                Dim sheet2 As Worksheet = workbook.Sheets.Add
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet2.Cells(2, 3).Value = "xyz"
+                sheet.Cells(2, 3).Value = "abc"
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("opq"))
+
+                sheet.Copy(after:=workbook.Sheets(2))
+
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("opq"))
+                Assert.That(workbook.Sheets(3).Cells(2, 3).Value, [Is].EqualTo("abc"))
+            End Sub
+
+            <Test()> Public Sub 引数なしなら_新Bookにコピーされる()
+                Dim sheet2 As Worksheet = workbook.Sheets.Add
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet2.Cells(2, 3).Value = "xyz"
+                sheet.Cells(2, 3).Value = "abc"
+
+                sheet.Copy()
+
+                Assert.That(sut.ActiveWorkbook, [Is].Not.SameAs(workbook), "新bookになる")
+                Assert.That(sut.ActiveWorkbook.Sheets.Count, [Is].EqualTo(1), "コピーしたシートだけ")
+                Assert.That(sut.ActiveWorkbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits WorksheetTest
 
             <Test()> Public Sub Cellsが閉じられること()

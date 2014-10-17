@@ -33,12 +33,15 @@ Namespace Core
 
         Default Public Overridable ReadOnly Property Item(ByVal index As Integer) As T
             Get
-                If _items(index) Is Nothing Then
+                If _items.Count <= index OrElse _items(index) Is Nothing Then
                     Dim constructorInfo As ConstructorInfo = GetType(T).GetConstructor(New System.Type() {GetType(AbstractExcelSubCollection(Of T)), GetType(Object)})
                     Dim comObject As Object = InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(index))
                     If comObject Is Nothing Then
                         Return Nothing
                     End If
+                    While _items.Count <= index
+                        _items.Add(Nothing)
+                    End While
                     _items(index) = DirectCast(constructorInfo.Invoke(New Object() {Me, comObject}), T)
                 End If
                 Return _items(index)
