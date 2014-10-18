@@ -132,6 +132,22 @@
             Return New Range(Me, InvokeGetProperty("Cells"))
         End Function
 
+        Public Function EntireColumn() As Range
+            Dim comObject As Object = InvokeGetProperty("EntireColumn")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, comObject)
+        End Function
+
+        Public Function EntireRow() As Range
+            Dim comObject As Object = InvokeGetProperty("EntireRow")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, comObject)
+        End Function
+
         Public Function Find(ByVal What As Object, Optional ByVal After As Range = Nothing, Optional ByVal LookIn As Object = Nothing, _
                              Optional ByVal LookAt As XlLookAt = 0, Optional ByVal SearchOrder As XlSearchOrder = 0, _
                              Optional ByVal SearchDirection As XlSearchDirection = 0, _

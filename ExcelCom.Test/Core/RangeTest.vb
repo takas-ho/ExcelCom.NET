@@ -1,5 +1,4 @@
-﻿Imports System.Runtime.InteropServices
-Imports NUnit.Framework
+﻿Imports NUnit.Framework
 Imports System.Reflection
 
 Namespace Core
@@ -282,6 +281,24 @@ Namespace Core
             <Test()> Public Sub MergeAreaのRangeが閉じられること()
                 sheet.Range("A1:B5").Merge()
                 Dim value As Range = sheet.Range("A2").MergeArea
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub EntireColumnのRangeが閉じられること()
+                Dim value As Range = sheet.Range("C5").EntireColumn()
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub EntireRowのRangeが閉じられること()
+                Dim value As Range = sheet.Range("C5").EntireRow()
 
                 sut.Dispose()
                 sut = Nothing
