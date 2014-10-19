@@ -45,6 +45,9 @@ Namespace Core
         End Sub
 
         Public Sub AddToManager(ByVal comObject As Object) Implements IExcelObject.AddToManager
+            If Not comObject.GetType.Name.Contains("ComObject") Then
+                Throw New ArgumentException("ComObject型じゃない", "comObject")
+            End If
             comObjects.Add(comObject)
         End Sub
 

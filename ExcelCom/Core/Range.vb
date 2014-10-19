@@ -92,6 +92,18 @@
             ''' <summary>垂直 (縦書き)</summary>
             xlVertical = -4166
         End Enum
+
+        Public Enum XlBorderWeight
+            xlHairline = 1
+            xlMedium = -4138
+            xlThick = 4
+            xlThin = 2
+        End Enum
+
+        Public Enum XlColorIndex
+            xlColorIndexAutomatic = -4105
+            xlColorIndexNone = -4142
+        End Enum
 #End Region
 
         Public Sub New(ByVal parent As IExcelObject, ByVal comObject As Object)
@@ -118,6 +130,20 @@
             End If
             args.Add(New NamedParameter("VisibleDropDown", visibleDropDown))
             Return InvokeMethod("AutoFilter", args.ToArray)
+        End Function
+
+        Public Function BorderAround(Optional ByVal LineStyle As Object = Nothing, Optional ByVal Weight As XlBorderWeight = XlBorderWeight.xlThin, _
+                                     Optional ByVal ColorIndex As XlColorIndex = XlColorIndex.xlColorIndexAutomatic, Optional ByVal Color As Object = Nothing) As Boolean
+            Dim args As New List(Of Object)
+            If LineStyle IsNot Nothing Then
+                args.Add(New NamedParameter("LineStyle", LineStyle))
+            End If
+            args.Add(New NamedParameter("Weight", Weight))
+            args.Add(New NamedParameter("ColorIndex", ColorIndex))
+            If Color IsNot Nothing Then
+                args.Add(New NamedParameter("Color", Color))
+            End If
+            Return InvokeMethod(Of Boolean)("BorderAround", args.ToArray)
         End Function
 
         Public Sub Copy(Optional ByVal destination As Object = Nothing)

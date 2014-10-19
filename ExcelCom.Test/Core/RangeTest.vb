@@ -194,6 +194,14 @@ Namespace Core
 
         End Class
 
+        Public Class BorderAroundTest : Inherits RangeTest
+
+            <Test()> Public Sub 設定できたらtrueになる()
+                Assert.That(sheet.Range("A1:C3").BorderAround(Weight:=Range.XlBorderWeight.xlMedium), [Is].True)
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits RangeTest
 
             <Test()> Public Sub Columnsが閉じられること()
