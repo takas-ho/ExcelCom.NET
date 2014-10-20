@@ -202,6 +202,16 @@ Namespace Core
 
         End Class
 
+        Public Class ClearContentsTest : Inherits RangeTest
+
+            <Test()> Public Sub 数式文字列をクリア(<Values("aaaa", "=D4")> ByVal value As String)
+                sheet.Cells(2, 2).Value = value
+                Assert.That(sheet.Range("A1:C3").ClearContents, [Is].True)
+                Assert.That(sheet.Cells(2, 2).Value, [Is].Null)
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits RangeTest
 
             <Test()> Public Sub Columnsが閉じられること()

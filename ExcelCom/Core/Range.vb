@@ -146,6 +146,10 @@
             Return InvokeMethod(Of Boolean)("BorderAround", args.ToArray)
         End Function
 
+        Public Function ClearContents() As Boolean
+            Return InvokeMethod(Of Boolean)("ClearContents")
+        End Function
+
         Public Sub Copy(Optional ByVal destination As Object = Nothing)
             Dim args As New List(Of Object)
             If destination IsNot Nothing Then
