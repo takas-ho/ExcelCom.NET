@@ -53,6 +53,22 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\AbstractExcelObjectTest.vb" />
+    <Compile Include="Core\ApplicationTest.vb" />
+    <Compile Include="Core\BordersTest.vb" />
+    <Compile Include="Core\BorderTest.vb" />
+    <Compile Include="Core\ChartObjectsTest.vb" />
+    <Compile Include="Core\ChartObjectTest.vb" />
+    <Compile Include="Core\ChartTest.vb" />
+    <Compile Include="Core\CommentTest.vb" />
+    <Compile Include="Core\FontTest.vb" />
+    <Compile Include="Core\InteriorTest.vb" />
+    <Compile Include="Core\RangeTest.vb" />
+    <Compile Include="Core\SeriesCollectionTest.vb" />
+    <Compile Include="Core\ShapesTest.vb" />
+    <Compile Include="Core\ShapeTest.vb" />
+    <Compile Include="Core\WindowTest.vb" />
+    <Compile Include="LearningExcelComObjectTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -68,6 +84,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Core\SheetsTest.vb" />
+    <Compile Include="TestUtil.vb" />
+    <Compile Include="Core\WorkbooksTest.vb" />
+    <Compile Include="Core\WorkbookTest.vb" />
+    <Compile Include="Core\WorksheetTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
