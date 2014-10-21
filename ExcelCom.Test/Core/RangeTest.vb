@@ -204,7 +204,13 @@ Namespace Core
 
         Public Class ClearContentsTest : Inherits RangeTest
 
-            <Test()> Public Sub 数式文字列をクリア(<Values("aaaa", "=D4")> ByVal value As String)
+            <Test()> Public Sub Clear_数式文字列装飾をクリア(<Values("aaaa", "=D4")> ByVal value As String)
+                sheet.Cells(2, 2).Value = value
+                Assert.That(sheet.Range("A1:C3").ClearContents, [Is].True)
+                Assert.That(sheet.Cells(2, 2).Value, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub ClearContents_数式文字列をクリア(<Values("aaaa", "=D4")> ByVal value As String)
                 sheet.Cells(2, 2).Value = value
                 Assert.That(sheet.Range("A1:C3").ClearContents, [Is].True)
                 Assert.That(sheet.Cells(2, 2).Value, [Is].Null)

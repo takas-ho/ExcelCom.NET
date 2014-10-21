@@ -146,6 +146,10 @@
             Return InvokeMethod(Of Boolean)("BorderAround", args.ToArray)
         End Function
 
+        Public Function Clear() As Boolean
+            Return InvokeMethod(Of Boolean)("Clear")
+        End Function
+
         Public Function ClearContents() As Boolean
             Return InvokeMethod(Of Boolean)("ClearContents")
         End Function
