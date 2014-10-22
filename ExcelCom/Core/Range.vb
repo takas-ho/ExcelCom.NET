@@ -150,9 +150,9 @@
             Return InvokeMethod(Of Boolean)("Clear")
         End Function
 
-        'Public Function ClearComments() As Boolean
-        '    Return InvokeMethod(Of Boolean)("ClearComments")
-        'End Function
+        Public Sub ClearComments()
+            InvokeMethod("ClearComments")
+        End Sub
 
         Public Function ClearContents() As Boolean
             Return InvokeMethod(Of Boolean)("ClearContents")

@@ -210,11 +210,11 @@ Namespace Core
                 Assert.That(sheet.Cells(2, 2).Value, [Is].Null)
             End Sub
 
-            '<Test()> Public Sub ClearComments_数式文字列装飾をクリア(<Values("aaaa", "=D4")> ByVal value As String)
-            '    sheet.Cells(2, 2).AddComment("aiueo")
-            '    Assert.That(sheet.Range("A1:C3").ClearComments, [Is].True)
-            '    Assert.That(sheet.Cells(2, 2).c, [Is].Null)
-            'End Sub
+            <Test()> Public Sub ClearComments_数式文字列装飾をクリア(<Values("aaaa")> ByVal value As String)
+                sheet.Cells(2, 2).AddComment(value)
+                sheet.Cells(2, 2).ClearComments()
+                Assert.That(sheet.Cells(2, 2).Comment, [Is].Null)
+            End Sub
 
             <Test()> Public Sub ClearContents_数式文字列をクリア(<Values("aaaa", "=D4")> ByVal value As String)
                 sheet.Cells(2, 2).Value = value
