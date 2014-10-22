@@ -206,9 +206,15 @@ Namespace Core
 
             <Test()> Public Sub Clear_数式文字列装飾をクリア(<Values("aaaa", "=D4")> ByVal value As String)
                 sheet.Cells(2, 2).Value = value
-                Assert.That(sheet.Range("A1:C3").ClearContents, [Is].True)
+                Assert.That(sheet.Range("A1:C3").Clear, [Is].True)
                 Assert.That(sheet.Cells(2, 2).Value, [Is].Null)
             End Sub
+
+            '<Test()> Public Sub ClearComments_数式文字列装飾をクリア(<Values("aaaa", "=D4")> ByVal value As String)
+            '    sheet.Cells(2, 2).AddComment("aiueo")
+            '    Assert.That(sheet.Range("A1:C3").ClearComments, [Is].True)
+            '    Assert.That(sheet.Cells(2, 2).c, [Is].Null)
+            'End Sub
 
             <Test()> Public Sub ClearContents_数式文字列をクリア(<Values("aaaa", "=D4")> ByVal value As String)
                 sheet.Cells(2, 2).Value = value
@@ -323,6 +329,25 @@ Namespace Core
 
             <Test()> Public Sub EntireRowのRangeが閉じられること()
                 Dim value As Range = sheet.Range("C5").EntireRow()
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub AddCommentのCommentが閉じられること()
+                Dim value As Comment = sheet.Cells(2, 3).AddComment("aiueo")
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub CommentのCommentが閉じられること()
+                sheet.Cells(2, 3).AddComment("aiueo")
+                Dim value As Comment = sheet.Cells(2, 3).Comment
 
                 sut.Dispose()
                 sut = Nothing

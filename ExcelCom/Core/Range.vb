@@ -150,8 +150,20 @@
             Return InvokeMethod(Of Boolean)("Clear")
         End Function
 
+        'Public Function ClearComments() As Boolean
+        '    Return InvokeMethod(Of Boolean)("ClearComments")
+        'End Function
+
         Public Function ClearContents() As Boolean
             Return InvokeMethod(Of Boolean)("ClearContents")
+        End Function
+
+        Public Function Comment() As Comment
+            Dim comObject = InvokeGetProperty("Comment")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Comment(Me, comObject)
         End Function
 
         Public Sub Copy(Optional ByVal destination As Object = Nothing)
