@@ -110,6 +110,18 @@
             MyBase.New(parent, comObject)
         End Sub
 
+        Public Function AddComment(Optional ByVal text As String = Nothing) As Comment
+            Dim args As New List(Of Object)
+            If text IsNot Nothing Then
+                args.Add(New NamedParameter("Text", text))
+            End If
+            Dim comObject As Object = InvokeMethod("AddComment", args.ToArray)
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Comment(Me, comObject)
+        End Function
+
         Public Function AutoFit() As Object
             Return InvokeMethod("AutoFit")
         End Function
@@ -132,6 +144,10 @@
             Return InvokeMethod("AutoFilter", args.ToArray)
         End Function
 
+        Public Function Borders() As Borders
+            Return New Borders(Me, InvokeGetProperty("Borders"))
+        End Function
+
         Public Function BorderAround(Optional ByVal LineStyle As Object = Nothing, Optional ByVal Weight As XlBorderWeight = XlBorderWeight.xlThin, _
                                      Optional ByVal ColorIndex As XlColorIndex = XlColorIndex.xlColorIndexAutomatic, Optional ByVal Color As Object = Nothing) As Boolean
             Dim args As New List(Of Object)
@@ -146,6 +162,10 @@
             Return InvokeMethod(Of Boolean)("BorderAround", args.ToArray)
         End Function
 
+        Public Function Cells() As Range
+            Return New Range(Me, InvokeGetProperty("Cells"))
+        End Function
+
         Public Function Clear() As Boolean
             Return InvokeMethod(Of Boolean)("Clear")
         End Function
@@ -157,6 +177,25 @@
         Public Function ClearContents() As Boolean
             Return InvokeMethod(Of Boolean)("ClearContents")
         End Function
+
+        Public ReadOnly Property Column() As Integer
+            Get
+                Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Column"))
+            End Get
+        End Property
+
+        Public Function Columns() As Range
+            Return New Range(Me, InvokeGetProperty("Columns"))
+        End Function
+
+        Public Property ColumnWidth() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("ColumnWidth")
+            End Get
+            Set(ByVal value As Double)
+                InvokeSetProperty("ColumnWidth", value)
+            End Set
+        End Property
 
         Public Function Comment() As Comment
             Dim comObject = InvokeGetProperty("Comment")
@@ -174,8 +213,18 @@
             InvokeMethod("Copy", args.ToArray)
         End Sub
 
-        Public Function Cells() As Range
-            Return New Range(Me, InvokeGetProperty("Cells"))
+        Public ReadOnly Property Count() As Long
+            Get
+                Return InvokeGetProperty(Of Integer)("Count")
+            End Get
+        End Property
+
+        Public Function Delete(Optional ByVal shift As Object = Nothing) As Object
+            Dim args As New List(Of Object)
+            If shift IsNot Nothing Then
+                args.Add(New NamedParameter("Shift", shift))
+            End If
+            Return InvokeMethod("Delete", args.ToArray)
         End Function
 
         Public Function EntireColumn() As Range
@@ -222,67 +271,6 @@
                 Return Nothing
             End If
             Return New Range(Me, result)
-        End Function
-
-        Default Public ReadOnly Property Item(ByVal index As Integer) As Range
-            Get
-                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(index)))
-            End Get
-        End Property
-
-        Default Public ReadOnly Property Item(ByVal row As Integer, ByVal column As Integer) As Range
-            Get
-                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(row), RuleUtil.ConvIndexDotNET2VBA(column)))
-            End Get
-        End Property
-
-        Public Function AddComment(Optional ByVal text As String = Nothing) As Comment
-            Dim args As New List(Of Object)
-            If text IsNot Nothing Then
-                args.Add(New NamedParameter("Text", text))
-            End If
-            Dim comObject As Object = InvokeMethod("AddComment", args.ToArray)
-            If comObject Is Nothing Then
-                Return Nothing
-            End If
-            Return New Comment(Me, comObject)
-        End Function
-
-        Public Function Borders() As Borders
-            Return New Borders(Me, InvokeGetProperty("Borders"))
-        End Function
-
-        Public ReadOnly Property Column() As Integer
-            Get
-                Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Column"))
-            End Get
-        End Property
-
-        Public Function Columns() As Range
-            Return New Range(Me, InvokeGetProperty("Columns"))
-        End Function
-
-        Public Property ColumnWidth() As Double
-            Get
-                Return InvokeGetProperty(Of Double)("ColumnWidth")
-            End Get
-            Set(ByVal value As Double)
-                InvokeSetProperty("ColumnWidth", value)
-            End Set
-        End Property
-
-        Public ReadOnly Property Count() As Long
-            Get
-                Return InvokeGetProperty(Of Integer)("Count")
-            End Get
-        End Property
-
-        Public Function Delete(Optional ByVal shift As Object = Nothing) As Object
-            Dim args As New List(Of Object)
-            If shift IsNot Nothing Then
-                args.Add(New NamedParameter("Shift", shift))
-            End If
-            Return InvokeMethod("Delete", args.ToArray)
         End Function
 
         Public Function Font() As Font
@@ -354,6 +342,18 @@
         Public Function Interior() As Interior
             Return New Interior(Me, InvokeGetProperty("Interior"))
         End Function
+
+        Default Public ReadOnly Property Item(ByVal index As Integer) As Range
+            Get
+                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(index)))
+            End Get
+        End Property
+
+        Default Public ReadOnly Property Item(ByVal row As Integer, ByVal column As Integer) As Range
+            Get
+                Return New Range(Me, InvokeGetProperty("Item", RuleUtil.ConvIndexDotNET2VBA(row), RuleUtil.ConvIndexDotNET2VBA(column)))
+            End Get
+        End Property
 
         Public Sub Merge(Optional ByVal across As Boolean = False)
             Dim args As New List(Of Object)
