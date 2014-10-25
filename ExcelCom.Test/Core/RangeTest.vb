@@ -222,6 +222,14 @@ Namespace Core
                 Assert.That(sheet.Cells(2, 2).Value, [Is].Null)
             End Sub
 
+            <Test()> Public Sub ClearFormats_書式のクリア()
+                sheet.Cells(2, 2).Value = "aaaa"
+                sheet.Cells(2, 2).Font.Bold = True
+                Assert.That(sheet.Range("A1:C3").ClearFormats, [Is].True)
+                Assert.That(sheet.Cells(2, 2).Value, [Is].EqualTo("aaaa"))
+                Assert.That(sheet.Cells(2, 3).Font.Bold, [Is].False, "書式がクリアされる")
+            End Sub
+
         End Class
 
         Public Class ExcelObjectたちTest : Inherits RangeTest

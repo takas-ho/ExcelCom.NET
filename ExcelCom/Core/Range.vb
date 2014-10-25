@@ -178,6 +178,10 @@
             Return InvokeMethod(Of Boolean)("ClearContents")
         End Function
 
+        Public Function ClearFormats() As Boolean
+            Return InvokeMethod(Of Boolean)("ClearFormats")
+        End Function
+
         Public ReadOnly Property Column() As Integer
             Get
                 Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Column"))
