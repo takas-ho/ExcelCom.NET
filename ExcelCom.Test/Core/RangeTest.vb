@@ -455,6 +455,12 @@ Namespace Core
                 Assert.That(sheet.Rows(3).Hidden, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub HasFormula_()
+                sheet.Cells(3, 3).Formula = "=C3+D3"
+                Assert.That(sheet.Cells(3, 3).HasFormula, [Is].True)
+                Assert.That(sheet.Cells(1, 1).HasFormula, [Is].False)
+            End Sub
+
         End Class
 
     End Class

@@ -317,6 +317,12 @@
             End Set
         End Property
 
+        Public ReadOnly Property HasFormula() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("HasFormula")
+            End Get
+        End Property
+
         Public Property Hidden() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("Hidden")
