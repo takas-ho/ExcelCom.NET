@@ -118,6 +118,11 @@ Namespace Core
                 Assert.That(sut.Version, [Is].Not.Empty)
             End Sub
 
+            <Test()> Public Sub StandardFontSize()
+                ' Excelの初期フォントサイズ 10とか11とか
+                Assert.That(sut.StandardFontSize, [Is].GreaterThan(0.0R))
+            End Sub
+
         End Class
 
         Public Class ActiveSheetTest : Inherits ApplicationTest

@@ -181,6 +181,15 @@ Namespace Core
             End Set
         End Property
 
+        Public Property StandardFontSize() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("StandardFontSize")
+            End Get
+            Set(ByVal value As Double)
+                InvokeSetProperty("StandardFontSize", value)
+            End Set
+        End Property
+
         Public ReadOnly Property Version() As String
             Get
                 Return InvokeGetProperty(Of String)("Version")
