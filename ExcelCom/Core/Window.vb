@@ -12,6 +12,15 @@
             End Get
         End Property
 
+        Public Property DisplayGridlines() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("DisplayGridlines")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("DisplayGridlines", value)
+            End Set
+        End Property
+
         Public Property FreezePanes() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("FreezePanes")
