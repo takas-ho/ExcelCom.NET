@@ -118,6 +118,10 @@ Namespace Core
                 Assert.That(sut.Version, [Is].Not.Empty)
             End Sub
 
+            <Test()> Public Sub Value()
+                Assert.That(sut.Value, [Is].EqualTo("Microsoft Excel"))
+            End Sub
+
             <Test()> Public Sub StandardFontSize()
                 ' Excelの初期フォントサイズ 10とか11とか
                 Assert.That(sut.StandardFontSize, [Is].GreaterThan(0.0R))

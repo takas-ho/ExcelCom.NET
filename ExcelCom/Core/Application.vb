@@ -213,6 +213,12 @@ Namespace Core
             End Get
         End Property
 
+        Public ReadOnly Property Value() As String
+            Get
+                Return InvokeGetProperty(Of String)("Value")
+            End Get
+        End Property
+
         Public ReadOnly Property Version() As String
             Get
                 Return InvokeGetProperty(Of String)("Version")
