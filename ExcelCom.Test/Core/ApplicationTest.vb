@@ -123,6 +123,10 @@ Namespace Core
                 Assert.That(sut.StandardFontSize, [Is].GreaterThan(0.0R))
             End Sub
 
+            <Test()> Public Sub StandardFont()
+                Assert.That(sut.StandardFont, [Is].Not.Empty)
+            End Sub
+
         End Class
 
         Public Class ActiveSheetTest : Inherits ApplicationTest
