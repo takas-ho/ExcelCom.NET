@@ -127,6 +127,10 @@ Namespace Core
                 Assert.That(sut.StandardFont, [Is].Not.Empty)
             End Sub
 
+            <Test()> Public Sub StartupPath()
+                Assert.That(sut.StartupPath, [Is].Not.Empty)
+            End Sub
+
         End Class
 
         Public Class ActiveSheetTest : Inherits ApplicationTest

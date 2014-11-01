@@ -199,6 +199,12 @@ Namespace Core
             End Set
         End Property
 
+        Public ReadOnly Property StartupPath() As String
+            Get
+                Return InvokeGetProperty(Of String)("StartupPath")
+            End Get
+        End Property
+
         Public ReadOnly Property Version() As String
             Get
                 Return InvokeGetProperty(Of String)("Version")
