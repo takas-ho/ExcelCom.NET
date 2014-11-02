@@ -133,6 +133,21 @@ Namespace Core
 
         End Class
 
+        Public Class ActiveCellTest : Inherits ApplicationTest
+
+            <Test()> Public Sub Bookを開いてないならnullを返す()
+                Dim cell As Range = sut.ActiveCell
+                Assert.That(cell, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub Bookを開いてれば_有効値を返す()
+                sut.Workbooks.Add()
+                Dim cell As Range = sut.ActiveCell
+                Assert.That(cell, [Is].Not.Null)
+            End Sub
+
+        End Class
+
         Public Class ActiveSheetTest : Inherits ApplicationTest
 
             <Test()> Public Sub Bookを開いてないならnullを返す()

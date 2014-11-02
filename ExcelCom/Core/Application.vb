@@ -55,6 +55,14 @@ Namespace Core
             InvokeMethod("Quit")
         End Sub
 
+        Public Function ActiveCell() As Range
+            Dim comObject As Object = InvokeGetProperty("ActiveCell")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, comObject)
+        End Function
+
         Public Function ActiveSheet() As Worksheet
             Dim worksheet As Worksheet = InternalActiveSheet()
             If worksheet Is Nothing Then
