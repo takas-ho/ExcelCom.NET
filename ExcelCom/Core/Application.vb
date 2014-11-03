@@ -213,6 +213,15 @@ Namespace Core
             End Get
         End Property
 
+        Public Property UserName() As String
+            Get
+                Return InvokeGetProperty(Of String)("UserName")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("UserName", value)
+            End Set
+        End Property
+
         Public ReadOnly Property Value() As String
             Get
                 Return InvokeGetProperty(Of String)("Value")

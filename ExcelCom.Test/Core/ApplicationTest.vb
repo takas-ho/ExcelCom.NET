@@ -135,6 +135,11 @@ Namespace Core
                 Assert.That(sut.StartupPath, [Is].Not.Empty)
             End Sub
 
+            <Test()> Public Sub UserName(<Values("a", "hoge")> ByVal value As String)
+                sut.UserName = value
+                Assert.That(sut.UserName, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest
