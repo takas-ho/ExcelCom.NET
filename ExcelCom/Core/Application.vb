@@ -180,6 +180,12 @@ Namespace Core
             End Set
         End Property
 
+        Public ReadOnly Property ProductCode() As String
+            Get
+                Return InvokeGetProperty(Of String)("ProductCode")
+            End Get
+        End Property
+
         Public Property ScreenUpdating() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("ScreenUpdating")

@@ -140,6 +140,10 @@ Namespace Core
                 Assert.That(sut.UserName, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub ProductCode()
+                Assert.That(sut.ProductCode, [Is].Not.Empty, "こんなやつ→{90110411-6000-11D3-8CFE-0150048383C9}")
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest
