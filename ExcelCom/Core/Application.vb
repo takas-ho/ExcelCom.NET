@@ -152,6 +152,15 @@ Namespace Core
             End Set
         End Property
 
+        Public Property Caption() As String
+            Get
+                Return InvokeGetProperty(Of String)("Caption")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("Caption", value)
+            End Set
+        End Property
+
         Private _charts As Charts
         Public ReadOnly Property Charts() As Charts
             Get

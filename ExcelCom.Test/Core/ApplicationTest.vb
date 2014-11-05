@@ -144,6 +144,10 @@ Namespace Core
                 Assert.That(sut.ProductCode, [Is].Not.Empty, "こんなやつ→{90110411-6000-11D3-8CFE-0150048383C9}")
             End Sub
 
+            <Test()> Public Sub Caption()
+                Assert.That(sut.Caption, [Is].EqualTo("Microsoft Excel"))
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest
