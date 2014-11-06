@@ -135,9 +135,8 @@ Namespace Core
                 Assert.That(sut.StartupPath, [Is].Not.Empty)
             End Sub
 
-            <Test()> Public Sub UserName(<Values("a", "hoge")> ByVal value As String)
-                sut.UserName = value
-                Assert.That(sut.UserName, [Is].EqualTo(value))
+            <Test()> Public Sub UserName()
+                Assert.That(sut.UserName, [Is].Not.Empty, "ツール | オプション | 全般タブ のユーザー名 ex.'山田 太郎'")
             End Sub
 
             <Test()> Public Sub ProductCode()
