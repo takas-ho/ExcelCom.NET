@@ -478,6 +478,15 @@
             End Set
         End Property
 
+        Public Property Value2() As Object
+            Get
+                Return InvokeGetProperty("Value2")
+            End Get
+            Set(ByVal value As Object)
+                InvokeSetProperty("Value2", value)
+            End Set
+        End Property
+
         Public Property VerticalAlignment() As XlVAlign
             Get
                 Return InvokeGetProperty(Of XlVAlign)("VerticalAlignment")

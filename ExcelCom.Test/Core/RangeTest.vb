@@ -382,6 +382,13 @@ Namespace Core
                 Assert.That(workbook.Sheets(0).Cells(0, 0).Value, [Is].EqualTo("10"))
             End Sub
 
+            <Test()> Public Sub Value2_日付のシリアル値を取得できる()
+
+                sheet.Cells(0, 0).Value = "2014/1/1"
+
+                Assert.That(sheet.Cells(0, 0).Value2, [Is].EqualTo(41640.0R))
+            End Sub
+
             <Test()> Public Sub Column_(<Values(4, 23)> ByVal column As Integer)
                 Assert.That(workbook.Sheets(0).Cells(0, column).Column, [Is].EqualTo(column))
             End Sub
