@@ -468,6 +468,17 @@ Namespace Core
                 Assert.That(sheet.Cells(1, 1).HasFormula, [Is].False)
             End Sub
 
+            <Test()> Public Sub Width_()
+                Const EPSILON As Double = 0.001
+                If Math.Abs(sut.StandardFontSize - 10.0R) < EPSILON Then
+                    Assert.That(sheet.Cells(3, 3).Width, [Is].EqualTo(48.0R))
+                ElseIf Math.Abs(sut.StandardFontSize - 11.0R) < EPSILON Then
+                    Assert.That(sheet.Cells(3, 3).Width, [Is].EqualTo(54.0R))
+                Else
+                    Assert.Fail("フォントサイズ" & sut.StandardFontSize & " は未対応")
+                End If
+            End Sub
+
         End Class
 
     End Class

@@ -496,6 +496,12 @@
             End Set
         End Property
 
+        Public ReadOnly Property Width() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("Width")
+            End Get
+        End Property
+
         Public Property WrapText() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("WrapText")
