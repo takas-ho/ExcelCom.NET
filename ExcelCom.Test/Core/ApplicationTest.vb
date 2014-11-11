@@ -147,6 +147,10 @@ Namespace Core
                 Assert.That(sut.Caption, [Is].EqualTo("Microsoft Excel"))
             End Sub
 
+            <Test()> Public Sub Name()
+                Assert.That(sut.Name, [Is].EqualTo("Microsoft Excel"))
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest

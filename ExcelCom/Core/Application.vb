@@ -189,6 +189,12 @@ Namespace Core
             End Set
         End Property
 
+        Public ReadOnly Property Name() As String
+            Get
+                Return InvokeGetProperty(Of String)("Name")
+            End Get
+        End Property
+
         Public ReadOnly Property ProductCode() As String
             Get
                 Return InvokeGetProperty(Of String)("ProductCode")
