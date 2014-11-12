@@ -151,6 +151,10 @@ Namespace Core
                 Assert.That(sut.Name, [Is].EqualTo("Microsoft Excel"))
             End Sub
 
+            <Test()> Public Sub Path()
+                Assert.That(sut.Path, [Is].Not.Empty, "こんなやつ→ C:\\Program Files\\Microsoft Office\\OFFICE11")
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest
