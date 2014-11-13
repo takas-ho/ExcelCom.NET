@@ -155,6 +155,10 @@ Namespace Core
                 Assert.That(sut.Path, [Is].Not.Empty, "こんなやつ→ C:\\Program Files\\Microsoft Office\\OFFICE11")
             End Sub
 
+            <Test()> Public Sub TemplatesPath()
+                Assert.That(sut.TemplatesPath, [Is].Not.Empty, "こんなやつ→ C:\\Documents and Settings\\tkyt011\\Application Data\\Microsoft\\...")
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest

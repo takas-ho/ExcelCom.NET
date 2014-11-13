@@ -240,6 +240,12 @@ Namespace Core
             End Get
         End Property
 
+        Public ReadOnly Property TemplatesPath() As String
+            Get
+                Return InvokeGetProperty(Of String)("TemplatesPath")
+            End Get
+        End Property
+
         Public Property UserName() As String
             Get
                 Return InvokeGetProperty(Of String)("UserName")
