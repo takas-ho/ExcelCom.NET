@@ -201,6 +201,12 @@ Namespace Core
             End Get
         End Property
 
+        Public ReadOnly Property PathSeparator() As String
+            Get
+                Return InvokeGetProperty(Of String)("PathSeparator")
+            End Get
+        End Property
+
         Public ReadOnly Property ProductCode() As String
             Get
                 Return InvokeGetProperty(Of String)("ProductCode")

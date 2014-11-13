@@ -152,11 +152,15 @@ Namespace Core
             End Sub
 
             <Test()> Public Sub Path()
-                Assert.That(sut.Path, [Is].Not.Empty, "こんなやつ→ C:\\Program Files\\Microsoft Office\\OFFICE11")
+                Assert.That(sut.Path, [Is].Not.Empty, "こんなやつ→ C:\Program Files\Microsoft Office\OFFICE11")
+            End Sub
+
+            <Test()> Public Sub PathSeparator()
+                Assert.That(sut.PathSeparator, [Is].EqualTo("\"))
             End Sub
 
             <Test()> Public Sub TemplatesPath()
-                Assert.That(sut.TemplatesPath, [Is].Not.Empty, "こんなやつ→ C:\\Documents and Settings\\tkyt011\\Application Data\\Microsoft\\...")
+                Assert.That(sut.TemplatesPath, [Is].Not.Empty, "こんなやつ→ C:\Documents and Settings\tkyt011\Application Data\Microsoft\...")
             End Sub
 
         End Class
