@@ -177,6 +177,14 @@ Namespace Core
             End Get
         End Property
 
+        Public Function Cells() As Range
+            Dim comObject As Object = InvokeGetProperty("Cells")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, comObject)
+        End Function
+
         Public Property CutCopyMode() As XlCutCopyMode
             Get
                 Return InvokeGetProperty(Of XlCutCopyMode)("CutCopyMode")

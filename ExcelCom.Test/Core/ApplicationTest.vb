@@ -1,4 +1,5 @@
 ﻿Imports NUnit.Framework
+Imports System.Reflection
 
 Namespace Core
 
@@ -179,6 +180,25 @@ Namespace Core
             <Test()> Public Sub Bookを開いてれば_有効値を返す()
                 sut.Workbooks.Add()
                 Dim cell As Range = sut.ActiveCell
+                Assert.That(cell, [Is].Not.Null)
+            End Sub
+
+        End Class
+
+        Public Class CellsTest : Inherits ApplicationTest
+
+            <Test()> Public Sub Bookを開いてないと_例外になる()
+                Try
+                    Dim cell As Range = sut.Cells
+                    Assert.Fail()
+                Catch expected As TargetInvocationException
+                    Assert.That(expected.InnerException.Message, [Is].EqualTo("HRESULT からの例外: 0x800A03EC"))
+                End Try
+            End Sub
+
+            <Test()> Public Sub Bookを開いてれば_有効値を返す()
+                sut.Workbooks.Add()
+                Dim cell As Range = sut.Cells
                 Assert.That(cell, [Is].Not.Null)
             End Sub
 
