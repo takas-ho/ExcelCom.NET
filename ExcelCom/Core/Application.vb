@@ -141,6 +141,12 @@ Namespace Core
             Return _windows
         End Function
 
+        Public ReadOnly Property Build() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("Build")
+            End Get
+        End Property
+
         ''' <summary>計算方法</summary>
         ''' <remarks>※Workbookを開かないとエラー</remarks>
         Public Property Calculation() As XlCalculation

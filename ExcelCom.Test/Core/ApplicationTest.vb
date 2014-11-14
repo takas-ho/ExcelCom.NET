@@ -163,6 +163,10 @@ Namespace Core
                 Assert.That(sut.TemplatesPath, [Is].Not.Empty, "こんなやつ→ C:\Documents and Settings\tkyt011\Application Data\Microsoft\...")
             End Sub
 
+            <Test()> Public Sub Build()
+                Assert.That(sut.Build, [Is].GreaterThan(0.0R), "Excel2000 だと 6627.0")
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest
