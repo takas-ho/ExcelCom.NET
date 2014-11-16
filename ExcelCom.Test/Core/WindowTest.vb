@@ -67,6 +67,11 @@ Namespace Core
                 Assert.That(sut.ActiveWindow.FreezePanes, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub DisplayGridlines_(<Values(True, False)> ByVal value As Boolean)
+                sut.ActiveWindow.DisplayGridlines = value
+                Assert.That(sut.ActiveWindow.DisplayGridlines, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
     End Class

@@ -55,6 +55,14 @@ Namespace Core
             InvokeMethod("Quit")
         End Sub
 
+        Public Function ActiveCell() As Range
+            Dim comObject As Object = InvokeGetProperty("ActiveCell")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, comObject)
+        End Function
+
         Public Function ActiveSheet() As Worksheet
             Dim worksheet As Worksheet = InternalActiveSheet()
             If worksheet Is Nothing Then
@@ -133,6 +141,12 @@ Namespace Core
             Return _windows
         End Function
 
+        Public ReadOnly Property Build() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("Build")
+            End Get
+        End Property
+
         ''' <summary>計算方法</summary>
         ''' <remarks>※Workbookを開かないとエラー</remarks>
         Public Property Calculation() As XlCalculation
@@ -141,6 +155,15 @@ Namespace Core
             End Get
             Set(ByVal value As XlCalculation)
                 InvokeSetProperty("Calculation", value)
+            End Set
+        End Property
+
+        Public Property Caption() As String
+            Get
+                Return InvokeGetProperty(Of String)("Caption")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("Caption", value)
             End Set
         End Property
 
@@ -154,12 +177,29 @@ Namespace Core
             End Get
         End Property
 
+        Public Function Cells() As Range
+            Dim comObject As Object = InvokeGetProperty("Cells")
+            If comObject Is Nothing Then
+                Return Nothing
+            End If
+            Return New Range(Me, comObject)
+        End Function
+
         Public Property CutCopyMode() As XlCutCopyMode
             Get
                 Return InvokeGetProperty(Of XlCutCopyMode)("CutCopyMode")
             End Get
             Set(ByVal value As XlCutCopyMode)
                 InvokeSetProperty("CutCopyMode", value <> XlCutCopyMode.False)
+            End Set
+        End Property
+
+        Public Property DefaultFilePath() As String
+            Get
+                Return InvokeGetProperty(Of String)("DefaultFilePath")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("DefaultFilePath", value)
             End Set
         End Property
 
@@ -172,6 +212,30 @@ Namespace Core
             End Set
         End Property
 
+        Public ReadOnly Property Name() As String
+            Get
+                Return InvokeGetProperty(Of String)("Name")
+            End Get
+        End Property
+
+        Public ReadOnly Property Path() As String
+            Get
+                Return InvokeGetProperty(Of String)("Path")
+            End Get
+        End Property
+
+        Public ReadOnly Property PathSeparator() As String
+            Get
+                Return InvokeGetProperty(Of String)("PathSeparator")
+            End Get
+        End Property
+
+        Public ReadOnly Property ProductCode() As String
+            Get
+                Return InvokeGetProperty(Of String)("ProductCode")
+            End Get
+        End Property
+
         Public Property ScreenUpdating() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("ScreenUpdating")
@@ -179,6 +243,51 @@ Namespace Core
             Set(ByVal value As Boolean)
                 InvokeSetProperty("ScreenUpdating", value)
             End Set
+        End Property
+
+        Public Property StandardFont() As String
+            Get
+                Return InvokeGetProperty(Of String)("StandardFont")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("StandardFont", value)
+            End Set
+        End Property
+
+        Public Property StandardFontSize() As Double
+            Get
+                Return InvokeGetProperty(Of Double)("StandardFontSize")
+            End Get
+            Set(ByVal value As Double)
+                InvokeSetProperty("StandardFontSize", value)
+            End Set
+        End Property
+
+        Public ReadOnly Property StartupPath() As String
+            Get
+                Return InvokeGetProperty(Of String)("StartupPath")
+            End Get
+        End Property
+
+        Public ReadOnly Property TemplatesPath() As String
+            Get
+                Return InvokeGetProperty(Of String)("TemplatesPath")
+            End Get
+        End Property
+
+        Public Property UserName() As String
+            Get
+                Return InvokeGetProperty(Of String)("UserName")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("UserName", value)
+            End Set
+        End Property
+
+        Public ReadOnly Property Value() As String
+            Get
+                Return InvokeGetProperty(Of String)("Value")
+            End Get
         End Property
 
         Public ReadOnly Property Version() As String

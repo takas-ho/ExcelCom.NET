@@ -204,10 +204,30 @@ Namespace Core
 
         Public Class ClearContentsTest : Inherits RangeTest
 
-            <Test()> Public Sub 数式文字列をクリア(<Values("aaaa", "=D4")> ByVal value As String)
+            <Test()> Public Sub Clear_数式文字列装飾をクリア(<Values("aaaa", "=D4")> ByVal value As String)
+                sheet.Cells(2, 2).Value = value
+                Assert.That(sheet.Range("A1:C3").Clear, [Is].True)
+                Assert.That(sheet.Cells(2, 2).Value, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub ClearComments_数式文字列装飾をクリア(<Values("aaaa")> ByVal value As String)
+                sheet.Cells(2, 2).AddComment(value)
+                sheet.Cells(2, 2).ClearComments()
+                Assert.That(sheet.Cells(2, 2).Comment, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub ClearContents_数式文字列をクリア(<Values("aaaa", "=D4")> ByVal value As String)
                 sheet.Cells(2, 2).Value = value
                 Assert.That(sheet.Range("A1:C3").ClearContents, [Is].True)
                 Assert.That(sheet.Cells(2, 2).Value, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub ClearFormats_書式のクリア()
+                sheet.Cells(2, 2).Value = "aaaa"
+                sheet.Cells(2, 2).Font.Bold = True
+                Assert.That(sheet.Range("A1:C3").ClearFormats, [Is].True)
+                Assert.That(sheet.Cells(2, 2).Value, [Is].EqualTo("aaaa"))
+                Assert.That(sheet.Cells(2, 3).Font.Bold, [Is].False, "書式がクリアされる")
             End Sub
 
         End Class
@@ -324,6 +344,25 @@ Namespace Core
                 TestUtil.AssertNotExistsExcelPropcess()
             End Sub
 
+            <Test()> Public Sub AddCommentのCommentが閉じられること()
+                Dim value As Comment = sheet.Cells(2, 3).AddComment("aiueo")
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
+            <Test()> Public Sub CommentのCommentが閉じられること()
+                sheet.Cells(2, 3).AddComment("aiueo")
+                Dim value As Comment = sheet.Cells(2, 3).Comment
+
+                sut.Dispose()
+                sut = Nothing
+
+                TestUtil.AssertNotExistsExcelPropcess()
+            End Sub
+
         End Class
 
         Public Class PropertyたちTest : Inherits RangeTest
@@ -341,6 +380,13 @@ Namespace Core
                 workbook.Sheets(0).Cells(0, 0).Value = "10"
 
                 Assert.That(workbook.Sheets(0).Cells(0, 0).Value, [Is].EqualTo("10"))
+            End Sub
+
+            <Test()> Public Sub Value2_日付のシリアル値を取得できる()
+
+                sheet.Cells(0, 0).Value = "2014/1/1"
+
+                Assert.That(sheet.Cells(0, 0).Value2, [Is].EqualTo(41640.0R))
             End Sub
 
             <Test()> Public Sub Column_(<Values(4, 23)> ByVal column As Integer)
@@ -414,6 +460,23 @@ Namespace Core
             <Test()> Public Sub Hidden_(<Values(False, True)> ByVal value As Boolean)
                 sheet.Rows(3).Hidden = value
                 Assert.That(sheet.Rows(3).Hidden, [Is].EqualTo(value))
+            End Sub
+
+            <Test()> Public Sub HasFormula_()
+                sheet.Cells(3, 3).Formula = "=C3+D3"
+                Assert.That(sheet.Cells(3, 3).HasFormula, [Is].True)
+                Assert.That(sheet.Cells(1, 1).HasFormula, [Is].False)
+            End Sub
+
+            <Test()> Public Sub Width_()
+                Const EPSILON As Double = 0.001
+                If Math.Abs(sut.StandardFontSize - 10.0R) < EPSILON Then
+                    Assert.That(sheet.Cells(3, 3).Width, [Is].EqualTo(48.0R))
+                ElseIf Math.Abs(sut.StandardFontSize - 11.0R) < EPSILON Then
+                    Assert.That(sheet.Cells(3, 3).Width, [Is].EqualTo(54.0R))
+                Else
+                    Assert.Fail("フォントサイズ" & sut.StandardFontSize & " は未対応")
+                End If
             End Sub
 
         End Class

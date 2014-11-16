@@ -1,4 +1,5 @@
 ﻿Imports NUnit.Framework
+Imports System.Reflection
 
 Namespace Core
 
@@ -116,6 +117,93 @@ Namespace Core
             <Test()> Public Sub Version()
                 ' Excel2003だと、"11.0"
                 Assert.That(sut.Version, [Is].Not.Empty)
+            End Sub
+
+            <Test()> Public Sub Value()
+                Assert.That(sut.Value, [Is].EqualTo("Microsoft Excel"))
+            End Sub
+
+            <Test()> Public Sub StandardFontSize()
+                ' Excelの初期フォントサイズ 10とか11とか
+                Assert.That(sut.StandardFontSize, [Is].GreaterThan(0.0R))
+            End Sub
+
+            <Test()> Public Sub StandardFont()
+                Assert.That(sut.StandardFont, [Is].Not.Empty)
+            End Sub
+
+            <Test()> Public Sub StartupPath()
+                Assert.That(sut.StartupPath, [Is].Not.Empty)
+            End Sub
+
+            <Test()> Public Sub UserName()
+                Assert.That(sut.UserName, [Is].Not.Empty, "ツール | オプション | 全般タブ のユーザー名 ex.'山田 太郎'")
+            End Sub
+
+            <Test()> Public Sub ProductCode()
+                Assert.That(sut.ProductCode, [Is].Not.Empty, "こんなやつ→{90110411-6000-11D3-8CFE-0150048383C9}")
+            End Sub
+
+            <Test()> Public Sub Caption()
+                Assert.That(sut.Caption, [Is].EqualTo("Microsoft Excel"))
+            End Sub
+
+            <Test()> Public Sub Name()
+                Assert.That(sut.Name, [Is].EqualTo("Microsoft Excel"))
+            End Sub
+
+            <Test()> Public Sub Path()
+                Assert.That(sut.Path, [Is].Not.Empty, "こんなやつ→ C:\Program Files\Microsoft Office\OFFICE11")
+            End Sub
+
+            <Test()> Public Sub PathSeparator()
+                Assert.That(sut.PathSeparator, [Is].EqualTo("\"))
+            End Sub
+
+            <Test()> Public Sub TemplatesPath()
+                Assert.That(sut.TemplatesPath, [Is].Not.Empty, "こんなやつ→ C:\Documents and Settings\tkyt011\Application Data\Microsoft\...")
+            End Sub
+
+            <Test()> Public Sub Build()
+                Assert.That(sut.Build, [Is].GreaterThan(0.0R), "Excel2000 だと 6627.0")
+            End Sub
+
+            <Test()> Public Sub DefaultFilePath()
+                Assert.That(sut.DefaultFilePath, [Is].Not.Empty, "こんな感じ→ C:\Users\yamada\Documents")
+            End Sub
+
+        End Class
+
+        Public Class ActiveCellTest : Inherits ApplicationTest
+
+            <Test()> Public Sub Bookを開いてないならnullを返す()
+                Dim cell As Range = sut.ActiveCell
+                Assert.That(cell, [Is].Null)
+            End Sub
+
+            <Test()> Public Sub Bookを開いてれば_有効値を返す()
+                sut.Workbooks.Add()
+                Dim cell As Range = sut.ActiveCell
+                Assert.That(cell, [Is].Not.Null)
+            End Sub
+
+        End Class
+
+        Public Class CellsTest : Inherits ApplicationTest
+
+            <Test()> Public Sub Bookを開いてないと_例外になる()
+                Try
+                    Dim cell As Range = sut.Cells
+                    Assert.Fail()
+                Catch expected As TargetInvocationException
+                    Assert.That(expected.InnerException.Message, [Is].EqualTo("HRESULT からの例外: 0x800A03EC"))
+                End Try
+            End Sub
+
+            <Test()> Public Sub Bookを開いてれば_有効値を返す()
+                sut.Workbooks.Add()
+                Dim cell As Range = sut.Cells
+                Assert.That(cell, [Is].Not.Null)
             End Sub
 
         End Class
