@@ -194,6 +194,15 @@ Namespace Core
             End Set
         End Property
 
+        Public Property DefaultFilePath() As String
+            Get
+                Return InvokeGetProperty(Of String)("DefaultFilePath")
+            End Get
+            Set(ByVal value As String)
+                InvokeSetProperty("DefaultFilePath", value)
+            End Set
+        End Property
+
         Public Property DisplayAlerts() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("DisplayAlerts")

@@ -168,6 +168,10 @@ Namespace Core
                 Assert.That(sut.Build, [Is].GreaterThan(0.0R), "Excel2000 だと 6627.0")
             End Sub
 
+            <Test()> Public Sub DefaultFilePath()
+                Assert.That(sut.DefaultFilePath, [Is].Not.Empty, "こんな感じ→ C:\Users\yamada\Documents")
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest
