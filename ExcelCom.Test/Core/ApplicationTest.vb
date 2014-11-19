@@ -286,5 +286,14 @@ Namespace Core
 
         End Class
 
+        Public Class Calculate : Inherits ApplicationTest
+
+            <Test()> Public Sub Calculateの実行テスト()
+                Dim workbook As Workbook = sut.Workbooks.Add()
+                sut.Calculate()
+            End Sub
+
+        End Class
+
     End Class
 End Namespace

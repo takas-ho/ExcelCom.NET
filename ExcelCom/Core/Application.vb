@@ -158,6 +158,10 @@ Namespace Core
             End Set
         End Property
 
+        Public Sub Calculate()
+            InvokeMethod("Calculate")
+        End Sub
+
         Public Property Caption() As String
             Get
                 Return InvokeGetProperty(Of String)("Caption")
