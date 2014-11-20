@@ -15,6 +15,10 @@
             Me.parent = parent
         End Sub
 
+        Public Sub Calculate()
+            InvokeMethod("Calculate")
+        End Sub
+
         Public Function Cells() As Range
             Return New Range(Me, InvokeGetProperty("Cells"))
         End Function

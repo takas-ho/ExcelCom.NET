@@ -142,6 +142,15 @@ Namespace Core
 
         End Class
 
+        Public Class CalculateTest : Inherits WorksheetTest
+
+            <Test()> Public Sub Calculateの実行テスト()
+                Dim sheet As Worksheet = workbook.Sheets.add
+                sheet.Calculate()
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits WorksheetTest
 
             <Test()> Public Sub Cellsが閉じられること()
