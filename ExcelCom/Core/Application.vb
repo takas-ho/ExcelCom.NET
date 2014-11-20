@@ -162,6 +162,17 @@ Namespace Core
             InvokeMethod("Calculate")
         End Sub
 
+        ''' <summary>保存前に再計算する場合、true</summary>
+        ''' <remarks>※Workbookを開かないとエラー</remarks>
+        Public Property CalculateBeforeSave() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("CalculateBeforeSave")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("CalculateBeforeSave", value)
+            End Set
+        End Property
+
         Public Property Caption() As String
             Get
                 Return InvokeGetProperty(Of String)("Caption")
