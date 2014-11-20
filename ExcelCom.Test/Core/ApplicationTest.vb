@@ -299,6 +299,11 @@ Namespace Core
                 sut.Calculate()
             End Sub
 
+            <Test()> Public Sub CalculateFullの実行テスト()
+                Dim workbook As Workbook = sut.Workbooks.Add()
+                sut.CalculateFull()
+            End Sub
+
         End Class
 
     End Class

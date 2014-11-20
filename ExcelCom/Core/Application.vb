@@ -173,6 +173,14 @@ Namespace Core
             End Set
         End Property
 
+        ''' <summary>
+        ''' 開いている全ブックの再計算をする
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public Sub CalculateFull()
+            InvokeMethod("CalculateFull")
+        End Sub
+
         Public Property Caption() As String
             Get
                 Return InvokeGetProperty(Of String)("Caption")
