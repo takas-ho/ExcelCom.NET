@@ -31,6 +31,12 @@
             Return _chartObjects
         End Function
 
+        Public ReadOnly Property CodeName() As String
+            Get
+                Return InvokeGetProperty(Of String)("CodeName")
+            End Get
+        End Property
+
         Public Function Columns() As Range
             Return New Range(Me, InvokeGetProperty("Columns"))
         End Function

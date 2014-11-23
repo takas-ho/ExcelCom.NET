@@ -194,6 +194,11 @@ Namespace Core
                 Assert.That(workbook.Sheets(0).Visible, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub CodeName()
+                Dim sheet1 As Worksheet = workbook.Sheets.Add()
+                Assert.That(sheet1.CodeName, [Is].EqualTo(""), "追加したシートのコード名は空文字")
+            End Sub
+
         End Class
 
     End Class
