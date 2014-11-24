@@ -65,11 +65,46 @@
             End If
         End Sub
 
+        'Public Property DisplayPageBreaks() As Boolean
+        '    Get
+        '        Return InvokeGetProperty(Of Boolean)("DisplayPageBreaks")
+        '    End Get
+        '    Set(ByVal value As Boolean)
+        '        InvokeSetProperty("DisplayPageBreaks", value)
+        '    End Set
+        'End Property
+
         Public ReadOnly Property Index() As Integer
             Get
                 Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Index"))
             End Get
         End Property
+
+        Public Sub Move(Optional ByVal before As Worksheet = Nothing, Optional ByVal after As Worksheet = Nothing)
+            Dim args As New List(Of Object)
+            If before IsNot Nothing Then
+                args.Add(New NamedParameter("Before", before.ComObject))
+            End If
+            If after IsNot Nothing Then
+                args.Add(New NamedParameter("After", after.ComObject))
+            End If
+            InvokeMethod("Move", args.ToArray)
+
+            If before IsNot Nothing Then
+                Dim index As Integer = parent.InternalItems.IndexOf(before)
+                If 0 <= index Then
+                    parent.InternalItems.Remove(Me)
+                    parent.InternalItems.Insert(parent.InternalItems.IndexOf(before), Me)
+                End If
+            End If
+            If after IsNot Nothing Then
+                Dim index As Integer = parent.InternalItems.IndexOf(after)
+                If 0 <= index AndAlso index < parent.InternalItems.Count - 1 Then
+                    parent.InternalItems.Remove(Me)
+                    parent.InternalItems.Insert(parent.InternalItems.IndexOf(after) + 1, Me)
+                End If
+            End If
+        End Sub
 
         Public Property Name() As String
             Get

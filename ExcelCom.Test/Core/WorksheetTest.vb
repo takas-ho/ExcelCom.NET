@@ -115,6 +115,54 @@ Namespace Core
 
         End Class
 
+        Public Class MoveTest : Inherits WorksheetTest
+
+            <Test()> Public Sub 引数一つなら_そのシートの手前に移動する()
+                Dim sheet3 As Worksheet = workbook.Sheets(0)
+                Dim sheet2 As Worksheet = workbook.Sheets.Add
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet3.Cells(2, 3).Value = "opq"
+                sheet2.Cells(2, 3).Value = "xyz"
+                sheet.Cells(2, 3).Value = "abc"
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("opq"))
+
+                sheet3.Move(sheet2)
+
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("opq"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+
+                Assert.That(workbook.Sheets(0), [Is].SameAs(sheet))
+                Assert.That(workbook.Sheets(1), [Is].SameAs(sheet3))
+                Assert.That(workbook.Sheets(2), [Is].SameAs(sheet2))
+            End Sub
+
+            <Test()> Public Sub After引数なら_そのシートの後ろに移動する()
+                Dim sheet3 As Worksheet = workbook.Sheets(0)
+                Dim sheet2 As Worksheet = workbook.Sheets.Add
+                Dim sheet As Worksheet = workbook.Sheets.Add
+                sheet3.Cells(2, 3).Value = "opq"
+                sheet2.Cells(2, 3).Value = "xyz"
+                sheet.Cells(2, 3).Value = "abc"
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("opq"))
+
+                sheet.Move(after:=sheet2)
+
+                Assert.That(workbook.Sheets(0).Cells(2, 3).Value, [Is].EqualTo("xyz"))
+                Assert.That(workbook.Sheets(1).Cells(2, 3).Value, [Is].EqualTo("abc"))
+                Assert.That(workbook.Sheets(2).Cells(2, 3).Value, [Is].EqualTo("opq"))
+
+                Assert.That(workbook.Sheets(0), [Is].SameAs(sheet2))
+                Assert.That(workbook.Sheets(1), [Is].SameAs(sheet))
+                Assert.That(workbook.Sheets(2), [Is].SameAs(sheet3))
+            End Sub
+
+        End Class
+
         Public Class ProtectTest : Inherits WorksheetTest
 
             <Test()> Public Sub 保護すると変更は出来ない()
@@ -198,6 +246,12 @@ Namespace Core
                 Dim sheet1 As Worksheet = workbook.Sheets.Add()
                 Assert.That(sheet1.CodeName, [Is].EqualTo(""), "追加したシートのコード名は空文字")
             End Sub
+
+            '<Test()> Public Sub DisplayPageBreaks(<Values(True, False)> ByVal value As Boolean)
+            '    Dim sheet1 As Worksheet = workbook.Sheets.Add()
+            '    sheet1.DisplayPageBreaks = value
+            '    Assert.That(sheet1.DisplayPageBreaks, [Is].EqualTo(value))
+            'End Sub
 
         End Class
 
