@@ -247,11 +247,11 @@ Namespace Core
                 Assert.That(sheet1.CodeName, [Is].EqualTo(""), "追加したシートのコード名は空文字")
             End Sub
 
-            '<Test()> Public Sub DisplayPageBreaks(<Values(True, False)> ByVal value As Boolean)
-            '    Dim sheet1 As Worksheet = workbook.Sheets.Add()
-            '    sheet1.DisplayPageBreaks = value
-            '    Assert.That(sheet1.DisplayPageBreaks, [Is].EqualTo(value))
-            'End Sub
+            <Test()> Public Sub DisplayPageBreaks(<Values(True, False)> ByVal value As Boolean)
+                Dim sheet1 As Worksheet = workbook.Sheets.Add()
+                sheet1.DisplayPageBreaks = value
+                Assert.That(sheet1.DisplayPageBreaks, [Is].EqualTo(value))
+            End Sub
 
         End Class
 

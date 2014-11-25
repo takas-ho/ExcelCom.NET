@@ -65,14 +65,14 @@
             End If
         End Sub
 
-        'Public Property DisplayPageBreaks() As Boolean
-        '    Get
-        '        Return InvokeGetProperty(Of Boolean)("DisplayPageBreaks")
-        '    End Get
-        '    Set(ByVal value As Boolean)
-        '        InvokeSetProperty("DisplayPageBreaks", value)
-        '    End Set
-        'End Property
+        Public Property DisplayPageBreaks() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("DisplayPageBreaks")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("DisplayPageBreaks", value)
+            End Set
+        End Property
 
         Public ReadOnly Property Index() As Integer
             Get
