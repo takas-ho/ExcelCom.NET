@@ -150,6 +150,12 @@
             InvokeMethod("Protect", args.ToArray)
         End Sub
 
+        Public ReadOnly Property ProtectContents() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ProtectContents")
+            End Get
+        End Property
+
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)
         End Function

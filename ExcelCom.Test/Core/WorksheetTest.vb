@@ -253,6 +253,11 @@ Namespace Core
                 Assert.That(sheet1.DisplayPageBreaks, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub ProtectContents()
+                Dim sheet1 As Worksheet = workbook.Sheets.Add()
+                Assert.That(sheet1.ProtectContents, [Is].False, "追加直後はfalse")
+            End Sub
+
         End Class
 
     End Class
