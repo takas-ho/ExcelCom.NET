@@ -156,6 +156,12 @@
             End Get
         End Property
 
+        Public ReadOnly Property ProtectDrawingObjects() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ProtectDrawingObjects")
+            End Get
+        End Property
+
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)
         End Function
