@@ -37,6 +37,12 @@
             End Get
         End Property
 
+        Public ReadOnly Property Path() As String
+            Get
+                Return InvokeGetProperty(Of String)("Path")
+            End Get
+        End Property
+
         Private _sheets As Sheets
         Public Function Sheets() As Sheets
             If _sheets Is Nothing Then

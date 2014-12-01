@@ -46,6 +46,11 @@ Namespace Core
                 Assert.That(book3.Name, [Is].EqualTo("Book3"))
             End Sub
 
+            <Test()> Public Sub Path()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.Path, [Is].EqualTo(""), "追加したbookのパスは空")
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest
