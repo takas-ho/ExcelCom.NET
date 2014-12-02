@@ -31,6 +31,12 @@
             End If
         End Sub
 
+        Public ReadOnly Property MultiUserEditing() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("MultiUserEditing")
+            End Get
+        End Property
+
         Public ReadOnly Property Name() As String
             Get
                 Return InvokeGetProperty(Of String)("Name")
