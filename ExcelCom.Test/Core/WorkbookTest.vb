@@ -56,6 +56,11 @@ Namespace Core
                 Assert.That(book.Path, [Is].EqualTo(""), "追加したbookのパスは空")
             End Sub
 
+            <Test()> Public Sub [ReadOnly]()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.ReadOnly, [Is].False, "追加したbookのReadOnlyはfalse")
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest
