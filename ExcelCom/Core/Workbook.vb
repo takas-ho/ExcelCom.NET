@@ -31,6 +31,12 @@
             End If
         End Sub
 
+        Public ReadOnly Property HasPassword() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("HasPassword")
+            End Get
+        End Property
+
         Public ReadOnly Property MultiUserEditing() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("MultiUserEditing")
