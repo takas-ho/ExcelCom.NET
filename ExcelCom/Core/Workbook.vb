@@ -55,6 +55,12 @@
             End Get
         End Property
 
+        Public ReadOnly Property ProtectWindows() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ProtectWindows")
+            End Get
+        End Property
+
         Public ReadOnly Property [ReadOnly]() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("ReadOnly")

@@ -66,6 +66,11 @@ Namespace Core
                 Assert.That(book.HasPassword, [Is].False, "追加したbookのHasPasswordはfalse")
             End Sub
 
+            <Test()> Public Sub ProtectWindows()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.ProtectWindows, [Is].False, "追加したbookのProtectWindowsはfalse")
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest
