@@ -74,6 +74,12 @@
             End Set
         End Property
 
+        Public ReadOnly Property FilterMode() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("FilterMode")
+            End Get
+        End Property
+
         Public ReadOnly Property Index() As Integer
             Get
                 Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Index"))

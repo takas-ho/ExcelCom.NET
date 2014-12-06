@@ -263,6 +263,11 @@ Namespace Core
                 Assert.That(sheet1.ProtectDrawingObjects, [Is].False, "追加直後はfalse")
             End Sub
 
+            <Test()> Public Sub FilterMode()
+                Dim sheet1 As Worksheet = workbook.Sheets.Add()
+                Assert.That(sheet1.FilterMode, [Is].False, "追加直後はfalse")
+            End Sub
+
         End Class
 
     End Class
