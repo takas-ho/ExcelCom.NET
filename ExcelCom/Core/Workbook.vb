@@ -67,6 +67,12 @@
             End Get
         End Property
 
+        Public ReadOnly Property RevisionNumber() As Integer
+            Get
+                Return InvokeGetProperty(Of Integer)("RevisionNumber")
+            End Get
+        End Property
+
         Private _sheets As Sheets
         Public Function Sheets() As Sheets
             If _sheets Is Nothing Then

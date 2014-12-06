@@ -71,6 +71,11 @@ Namespace Core
                 Assert.That(book.ProtectWindows, [Is].False, "追加したbookのProtectWindowsはfalse")
             End Sub
 
+            <Test()> Public Sub RevisionNumber()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.RevisionNumber, [Is].EqualTo(0), "追加したbookのRevisionNumberは0")
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest
