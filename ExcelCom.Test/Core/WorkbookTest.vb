@@ -46,6 +46,36 @@ Namespace Core
                 Assert.That(book3.Name, [Is].EqualTo("Book3"))
             End Sub
 
+            <Test()> Public Sub MultiUserEditing()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.MultiUserEditing, [Is].False, "追加したbookはfalse")
+            End Sub
+
+            <Test()> Public Sub Path()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.Path, [Is].EqualTo(""), "追加したbookのパスは空")
+            End Sub
+
+            <Test()> Public Sub [ReadOnly]()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.ReadOnly, [Is].False, "追加したbookのReadOnlyはfalse")
+            End Sub
+
+            <Test()> Public Sub HasPassword()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.HasPassword, [Is].False, "追加したbookのHasPasswordはfalse")
+            End Sub
+
+            <Test()> Public Sub ProtectWindows()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.ProtectWindows, [Is].False, "追加したbookのProtectWindowsはfalse")
+            End Sub
+
+            <Test()> Public Sub RevisionNumber()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.RevisionNumber, [Is].EqualTo(0), "追加したbookのRevisionNumberは0")
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest

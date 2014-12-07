@@ -172,6 +172,12 @@ Namespace Core
                 Assert.That(sut.DefaultFilePath, [Is].Not.Empty, "こんな感じ→ C:\Users\yamada\Documents")
             End Sub
 
+            <Test()> Public Sub CalculateBeforeSave(<Values(True, False)> ByVal value As Boolean)
+                Dim book As Workbook = sut.Workbooks.Add
+                sut.CalculateBeforeSave = value
+                Assert.That(sut.CalculateBeforeSave, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
         Public Class ActiveCellTest : Inherits ApplicationTest
@@ -282,6 +288,20 @@ Namespace Core
                 sut.Workbooks.Add()
                 Dim window As Window = sut.ActiveWindow
                 Assert.That(window, [Is].SameAs(sut.Windows(0)))
+            End Sub
+
+        End Class
+
+        Public Class Calculate : Inherits ApplicationTest
+
+            <Test()> Public Sub Calculateの実行テスト()
+                Dim workbook As Workbook = sut.Workbooks.Add()
+                sut.Calculate()
+            End Sub
+
+            <Test()> Public Sub CalculateFullの実行テスト()
+                Dim workbook As Workbook = sut.Workbooks.Add()
+                sut.CalculateFull()
             End Sub
 
         End Class

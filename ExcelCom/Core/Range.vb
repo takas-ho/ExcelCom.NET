@@ -162,6 +162,10 @@
             Return InvokeMethod(Of Boolean)("BorderAround", args.ToArray)
         End Function
 
+        Public Function Calculate() As Object
+            Return InvokeMethod("Calculate")
+        End Function
+
         Public Function Cells() As Range
             Return New Range(Me, InvokeGetProperty("Cells"))
         End Function

@@ -232,6 +232,14 @@ Namespace Core
 
         End Class
 
+        Public Class CalculateTest : Inherits RangeTest
+
+            <Test()> Public Sub Calculateの実行テスト()
+                sheet.Range("A1:C3").Calculate()
+            End Sub
+
+        End Class
+
         Public Class ExcelObjectたちTest : Inherits RangeTest
 
             <Test()> Public Sub Columnsが閉じられること()

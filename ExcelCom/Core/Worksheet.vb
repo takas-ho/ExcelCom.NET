@@ -15,6 +15,10 @@
             Me.parent = parent
         End Sub
 
+        Public Sub Calculate()
+            InvokeMethod("Calculate")
+        End Sub
+
         Public Function Cells() As Range
             Return New Range(Me, InvokeGetProperty("Cells"))
         End Function
@@ -26,6 +30,12 @@
             End If
             Return _chartObjects
         End Function
+
+        Public ReadOnly Property CodeName() As String
+            Get
+                Return InvokeGetProperty(Of String)("CodeName")
+            End Get
+        End Property
 
         Public Function Columns() As Range
             Return New Range(Me, InvokeGetProperty("Columns"))
@@ -55,11 +65,52 @@
             End If
         End Sub
 
+        Public Property DisplayPageBreaks() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("DisplayPageBreaks")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("DisplayPageBreaks", value)
+            End Set
+        End Property
+
+        Public ReadOnly Property FilterMode() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("FilterMode")
+            End Get
+        End Property
+
         Public ReadOnly Property Index() As Integer
             Get
                 Return RuleUtil.ConvIndexVBA2DotNET(InvokeGetProperty(Of Integer)("Index"))
             End Get
         End Property
+
+        Public Sub Move(Optional ByVal before As Worksheet = Nothing, Optional ByVal after As Worksheet = Nothing)
+            Dim args As New List(Of Object)
+            If before IsNot Nothing Then
+                args.Add(New NamedParameter("Before", before.ComObject))
+            End If
+            If after IsNot Nothing Then
+                args.Add(New NamedParameter("After", after.ComObject))
+            End If
+            InvokeMethod("Move", args.ToArray)
+
+            If before IsNot Nothing Then
+                Dim index As Integer = parent.InternalItems.IndexOf(before)
+                If 0 <= index Then
+                    parent.InternalItems.Remove(Me)
+                    parent.InternalItems.Insert(parent.InternalItems.IndexOf(before), Me)
+                End If
+            End If
+            If after IsNot Nothing Then
+                Dim index As Integer = parent.InternalItems.IndexOf(after)
+                If 0 <= index AndAlso index < parent.InternalItems.Count - 1 Then
+                    parent.InternalItems.Remove(Me)
+                    parent.InternalItems.Insert(parent.InternalItems.IndexOf(after) + 1, Me)
+                End If
+            End If
+        End Sub
 
         Public Property Name() As String
             Get
@@ -104,6 +155,18 @@
             args.Add(New NamedParameter("UserInterfaceOnly", userInterfaceOnly))
             InvokeMethod("Protect", args.ToArray)
         End Sub
+
+        Public ReadOnly Property ProtectContents() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ProtectContents")
+            End Get
+        End Property
+
+        Public ReadOnly Property ProtectDrawingObjects() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ProtectDrawingObjects")
+            End Get
+        End Property
 
         Public Function Range(ByVal rangeStr As String) As Range
             Return InternalRange(rangeStr)

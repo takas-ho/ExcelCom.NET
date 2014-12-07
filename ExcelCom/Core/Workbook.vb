@@ -31,9 +31,45 @@
             End If
         End Sub
 
+        Public ReadOnly Property HasPassword() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("HasPassword")
+            End Get
+        End Property
+
+        Public ReadOnly Property MultiUserEditing() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("MultiUserEditing")
+            End Get
+        End Property
+
         Public ReadOnly Property Name() As String
             Get
                 Return InvokeGetProperty(Of String)("Name")
+            End Get
+        End Property
+
+        Public ReadOnly Property Path() As String
+            Get
+                Return InvokeGetProperty(Of String)("Path")
+            End Get
+        End Property
+
+        Public ReadOnly Property ProtectWindows() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ProtectWindows")
+            End Get
+        End Property
+
+        Public ReadOnly Property [ReadOnly]() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("ReadOnly")
+            End Get
+        End Property
+
+        Public ReadOnly Property RevisionNumber() As Integer
+            Get
+                Return InvokeGetProperty(Of Integer)("RevisionNumber")
             End Get
         End Property
 
