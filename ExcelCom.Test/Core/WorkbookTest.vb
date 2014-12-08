@@ -76,6 +76,13 @@ Namespace Core
                 Assert.That(book.RevisionNumber, [Is].EqualTo(0), "追加したbookのRevisionNumberは0")
             End Sub
 
+            <Test()> Public Sub UpdateRemoteReferences(<Values(False, True)> ByVal value As Boolean)
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.UpdateRemoteReferences, [Is].True, "追加したbookのUpdateRemoteReferencesはtrue")
+                book.UpdateRemoteReferences = value
+                Assert.That(book.UpdateRemoteReferences, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest

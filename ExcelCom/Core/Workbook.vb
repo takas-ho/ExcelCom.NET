@@ -105,5 +105,14 @@
             InvokeMethod("SaveAs", args.ToArray)
         End Sub
 
+        Public Property UpdateRemoteReferences() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("UpdateRemoteReferences")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("UpdateRemoteReferences", value)
+            End Set
+        End Property
+
     End Class
 End Namespace
