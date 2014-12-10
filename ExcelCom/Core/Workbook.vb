@@ -31,6 +31,12 @@
             End If
         End Sub
 
+        Public ReadOnly Property CreateBackup() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("CreateBackup")
+            End Get
+        End Property
+
         Public ReadOnly Property HasPassword() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("HasPassword")

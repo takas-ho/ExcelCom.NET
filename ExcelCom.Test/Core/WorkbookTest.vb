@@ -83,6 +83,11 @@ Namespace Core
                 Assert.That(book.UpdateRemoteReferences, [Is].EqualTo(value))
             End Sub
 
+            <Test()> Public Sub CreateBackup()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.CreateBackup, [Is].False, "追加したbookのCreateBackupはfalse")
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest
