@@ -79,13 +79,11 @@
             End Get
         End Property
 
-        Private _sheets As Sheets
-        Public Function Sheets() As Sheets
-            If _sheets Is Nothing Then
-                _sheets = New Sheets(Me, InvokeGetProperty("Sheets"))
-            End If
-            Return _sheets
-        End Function
+        Public ReadOnly Property Saved() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Saved")
+            End Get
+        End Property
 
         ''' <summary>
         ''' 保存する
@@ -110,6 +108,14 @@
             End If
             InvokeMethod("SaveAs", args.ToArray)
         End Sub
+
+        Private _sheets As Sheets
+        Public Function Sheets() As Sheets
+            If _sheets Is Nothing Then
+                _sheets = New Sheets(Me, InvokeGetProperty("Sheets"))
+            End If
+            Return _sheets
+        End Function
 
         Public Property UpdateRemoteReferences() As Boolean
             Get

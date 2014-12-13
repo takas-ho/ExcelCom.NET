@@ -88,6 +88,11 @@ Namespace Core
                 Assert.That(book.CreateBackup, [Is].False, "追加したbookのCreateBackupはfalse")
             End Sub
 
+            <Test()> Public Sub Saved()
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.Saved, [Is].True, "追加したbookのSavedはTrue")
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest
