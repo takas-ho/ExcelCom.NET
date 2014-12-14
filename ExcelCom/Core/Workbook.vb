@@ -79,12 +79,6 @@
             End Get
         End Property
 
-        Public ReadOnly Property Saved() As Boolean
-            Get
-                Return InvokeGetProperty(Of Boolean)("Saved")
-            End Get
-        End Property
-
         ''' <summary>
         ''' 保存する
         ''' </summary>
@@ -108,6 +102,21 @@
             End If
             InvokeMethod("SaveAs", args.ToArray)
         End Sub
+
+        Public ReadOnly Property Saved() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Saved")
+            End Get
+        End Property
+
+        Public Property SaveLinkValues() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("SaveLinkValues")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("SaveLinkValues", value)
+            End Set
+        End Property
 
         Private _sheets As Sheets
         Public Function Sheets() As Sheets

@@ -93,6 +93,13 @@ Namespace Core
                 Assert.That(book.Saved, [Is].True, "追加したbookのSavedはTrue")
             End Sub
 
+            <Test()> Public Sub SaveLinkValues(<Values(False, True)> ByVal value As Boolean)
+                Dim book As Workbook = sut.Workbooks.Add
+                Assert.That(book.SaveLinkValues, [Is].True, "追加したbookのSaveLinkValuesはtrue")
+                book.SaveLinkValues = value
+                Assert.That(book.SaveLinkValues, [Is].EqualTo(value))
+            End Sub
+
         End Class
 
         Public Class その他細かいTest : Inherits WorkbookTest
