@@ -31,6 +31,12 @@
             End If
         End Sub
 
+        Public ReadOnly Property CreateBackup() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("CreateBackup")
+            End Get
+        End Property
+
         Public ReadOnly Property HasPassword() As Boolean
             Get
                 Return InvokeGetProperty(Of Boolean)("HasPassword")
@@ -73,14 +79,6 @@
             End Get
         End Property
 
-        Private _sheets As Sheets
-        Public Function Sheets() As Sheets
-            If _sheets Is Nothing Then
-                _sheets = New Sheets(Me, InvokeGetProperty("Sheets"))
-            End If
-            Return _sheets
-        End Function
-
         ''' <summary>
         ''' 保存する
         ''' </summary>
@@ -104,6 +102,29 @@
             End If
             InvokeMethod("SaveAs", args.ToArray)
         End Sub
+
+        Public ReadOnly Property Saved() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("Saved")
+            End Get
+        End Property
+
+        Public Property SaveLinkValues() As Boolean
+            Get
+                Return InvokeGetProperty(Of Boolean)("SaveLinkValues")
+            End Get
+            Set(ByVal value As Boolean)
+                InvokeSetProperty("SaveLinkValues", value)
+            End Set
+        End Property
+
+        Private _sheets As Sheets
+        Public Function Sheets() As Sheets
+            If _sheets Is Nothing Then
+                _sheets = New Sheets(Me, InvokeGetProperty("Sheets"))
+            End If
+            Return _sheets
+        End Function
 
         Public Property UpdateRemoteReferences() As Boolean
             Get
